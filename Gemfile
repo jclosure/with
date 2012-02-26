@@ -8,11 +8,14 @@ gem 'rails', '3.2.1'
 
 group :production, :staging do
   gem "pg"
+  gem "thin"
 end
 
 group :development, :test do
   gem "sqlite3-ruby", :require => "sqlite3"
 end
+
+
 
 
 
