@@ -1,6 +1,6 @@
 // javascript:(function(){if(window.myBookmarklet !== undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://tommy.com:8888/bookmarklet.js?'+new Date().getTime();}})();
 
-var frameWindow = null;
+
 
 function initUberFrame(text) {
 	var frame = $('#uberframe iframe');
