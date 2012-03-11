@@ -1,11 +1,10 @@
 // javascript:(function(){if(window.myBookmarklet !== undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://tommy.com:8888/bookmarklet.js?'+new Date().getTime();}})();
 
-capture = { text: "pass me" };
+
 
 function initUberFrame() {
 	var frame = $('#uberframe iframe');
-	//text = unescape(text);
-	frame.get(0).contentWindow.postMessage(capture.text, '*');	
+	frame.get(0).contentWindow.postMessage(initUberFrame.capture, '*');	
 	frame.slideDown(500);
 }
 
@@ -94,16 +93,17 @@ function initUberFrame() {
 			
 			
 			if ($("#uberframe").length == 0) {
-				var s = "";
-				s = getSelText();
+				
 				
 				//s = escape(s);
-				capture.text = s;
+				capture = initUberFrame.capture = {};
+				capture.text = getSelText() || "";
+				capture.source = document.location.toString();
 			
-				if (s == "") {
+				if (!capture.text || capture.text == "") {
 					var s = prompt("What do you need to remember?");
 				}
-				if ((s != "") && (s != null)) {
+				if (!!capture.text && capture.text != "") {
 					$("body").append("\
 					<div id='uberframe'>\
 						<div id='uberframe_veil' style=''>\
