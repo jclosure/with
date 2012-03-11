@@ -4,7 +4,7 @@ var frameWindow = null;
 
 function initUberFrame(text) {
 	var frame = $('#uberframe iframe');
-	text = decodeURIComponent(text);
+	text = unescape(decodeURIComponent(text));
 	frame.get(0).contentWindow.postMessage(text, '*');	
 	frame.slideDown(500);
 }
@@ -73,12 +73,31 @@ function initUberFrame(text) {
 				return s;
 			}
 			
+			function getSelectionHtml() {
+			    var html = "";
+			    if (typeof window.getSelection != "undefined") {
+			        var sel = window.getSelection();
+			        if (sel.rangeCount) {
+			            var container = document.createElement("div");
+			            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+			                container.appendChild(sel.getRangeAt(i).cloneContents());
+			            }
+			            html = container.innerHTML;
+			        }
+			    } else if (typeof document.selection != "undefined") {
+			        if (document.selection.type == "Text") {
+			            html = document.selection.createRange().htmlText;
+			        }
+			    }
+			    return html;
+			}
+			
 			
 			if ($("#uberframe").length == 0) {
 				var s = "";
 				s = getSelText();
 				
-				s = encodeURIComponent(s);
+				s = escape(encodeURIComponent(s));
 			
 				if (s == "") {
 					var s = prompt("What do you need to remember?");
@@ -110,6 +129,45 @@ function initUberFrame(text) {
 			});
 		})();
 	}
+	
+	// document.onclick= function(event) {
+	// 	    if (event===undefined) event= window.event;                     // IE hack
+	// 	    var target= 'target' in event? event.target : event.srcElement; // another IE hack
+	// 
+	// 	    var root= document.compatMode==='CSS1Compat'? document.documentElement : document.body;
+	// 	    var mxy= [event.clientX+root.scrollLeft, event.clientY+root.scrollTop];
+	// 
+	// 	    var path= getPathTo(target);
+	// 	    var txy= getPageXY(target);
+	// 	    alert('Clicked element '+path+' offset '+(mxy[0]-txy[0])+', '+(mxy[1]-txy[1]));
+	// 	}
+	// 
+	// 	function getPathTo(element) {
+	// 	    if (element.id!=='')
+	// 	        return 'id("'+element.id+'")';
+	// 	    if (element===document.body)
+	// 	        return element.tagName;
+	// 
+	// 	    var ix= 0;
+	// 	    var siblings= element.parentNode.childNodes;
+	// 	    for (var i= 0; i<siblings.length; i++) {
+	// 	        var sibling= siblings[i];
+	// 	        if (sibling===element)
+	// 	            return getPathTo(element.parentNode)+'/'+element.tagName+'['+(ix+1)+']';
+	// 	        if (sibling.nodeType===1 && sibling.tagName===element.tagName)
+	// 	            ix++;
+	// 	    }
+	// 	}
+	// 
+	// 	function getPageXY(element) {
+	// 	    var x= 0, y= 0;
+	// 	    while (element) {
+	// 	        x+= element.offsetLeft;
+	// 	        y+= element.offsetTop;
+	// 	        element= element.offsetParent;
+	// 	    }
+	// 	    return [x, y];
+	// 	}
 
 })();
 
