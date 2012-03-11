@@ -1,4 +1,7 @@
 With::Application.routes.draw do
+  get "marklet/index"
+  get "marklet/capture"
+
   get "home/index"
 
   # The priority is based upon order of creation:

@@ -1,0 +1,78 @@
+
+<style type="text/css">
+	.rounded-box {
+		-webkit-border-radius: 10px;
+		     -moz-border-radius: 10px;
+		          border-radius: 10px;
+	}
+	.capture-ui{
+		background-color: #cccccc;
+	}
+	.capture-container {
+		margin: 6px 6px 3px 6px;
+		background-color: #FFFFFF;
+		display: inline-block;
+		padding: 5px 5px 5px 5px;
+	}
+	.capture-info {
+		margin: 3px 6px 6px 6px;
+		background-color: #FFFFFF;
+		padding: 5px 5px 5px 5px;
+	}
+	.source-info {
+		margin: 3px 6px 6px 6px;
+		background-color: #FFFFFF;
+		padding: 5px 5px 5px 5px;
+	}
+	.metadata-info {
+		margin: 3px 6px 6px 6px;
+		background-color: #FFFFFF;
+		padding: 5px 5px 5px 5px;
+	}
+</style>
+
+
+<script type="text/javascript">
+	var parent_url = decodeURIComponent(document.location.hash.replace(/^#/, ''));
+	window.addEventListener('message', receiver, false);
+	function receiver(e)
+	{
+		if (e.origin == parent_url)
+		{
+			var target = $('#uberText');
+			target.text(e.data);
+		}
+	}
+</script>
+
+	<div class="capture-ui rounded-box">
+		<div class="capture-container rounded-box">
+			<h2>Here is your text:</h2>
+			<p id="uberText"><%= @text %></p>
+		</div>
+		<table>
+			<tr>
+				<td style="vertical-align:top;">
+					<div class="capture-info rounded-box">
+						<h2>Describe This Information:</h2>
+						<textarea name="description" wrap="physical" style="width: 300px; margin-right: 6px; height: 222px"></textarea>
+					</div>
+				</td>
+				<td style="vertical-align:top;">
+					<div class = "source-info rounded-box">
+						<h2>Source Information</h2>
+						<h4>Url: <%=h @url %></h4>
+					</div>
+					<div class = "metadata-info rounded-box">
+						<h2>Add tags:</h2>
+						<textarea name="tags" wrap="physical" style="width: 300px; margin-right: 6px; height: 100px"></textarea>
+					</div>
+				</td>
+				<td style="vertical-align:top;">
+					<button name="save" onclick='save();'><h1>Save</h1></button>
+				</td>
+			</tr>
+		</table>
+		<div style="clear: both"></div>
+	</div>
+	
