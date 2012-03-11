@@ -68,7 +68,9 @@ With::Application.configure do
   # Heroku require's this..
   config.assets.compile = true
 
-  config.action_mailer.default_url_options = { :host => 'yourhost.com' }
+  #change me to something else!!!!
+  config.action_mailer.default_url_options = { :host => 'smtp.gmail.com' } 
+  
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
