@@ -1,11 +1,11 @@
 // javascript:(function(){if(window.myBookmarklet !== undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://tommy.com:8888/bookmarklet.js?'+new Date().getTime();}})();
 
+capture = { text: "pass me" };
 
-
-function initUberFrame(text) {
+function initUberFrame() {
 	var frame = $('#uberframe iframe');
-	text = unescape(decodeURIComponent(text));
-	frame.get(0).contentWindow.postMessage(text, '*');	
+	//text = unescape(text);
+	frame.get(0).contentWindow.postMessage(capture.text, '*');	
 	frame.slideDown(500);
 }
 
@@ -97,7 +97,8 @@ function initUberFrame(text) {
 				var s = "";
 				s = getSelText();
 				
-				s = escape(encodeURIComponent(s));
+				//s = escape(s);
+				capture.text = s;
 			
 				if (s == "") {
 					var s = prompt("What do you need to remember?");
@@ -108,7 +109,7 @@ function initUberFrame(text) {
 						<div id='uberframe_veil' style=''>\
 							<p>Loading...</p>\
 						</div>\
-						<iframe src='"+document.home+"/marklet/capture?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame('"+s+"')\">Enable iFrames.</iframe>\
+						<iframe src='"+document.home+"/marklet/capture?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
 						<style type='text/css'>\
 							#uberframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
 							#uberframe_veil p { color: black; font: normal normal bold 20px/20px Helvetica, sans-serif; position: absolute; top: 50%; left: 50%; width: 10em; margin: -10px auto 0 -5em; text-align: center; }\
