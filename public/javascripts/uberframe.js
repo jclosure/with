@@ -36,15 +36,40 @@ function initUberFrame(text) {
 	function initMyBookmarklet() {
 		
 		(window.myBookmarklet = function() {
+			// function getSelText() {
+			// 				var s = '';
+			// 				if (window.getSelection) {
+			// 					s = window.getSelection();
+			// 				} else if (document.getSelection) {
+			// 					s = document.getSelection();
+			// 				} else if (document.selection) {
+			// 					s = document.selection.createRange().text;
+			// 				}
+			// 				return s;
+			// 			}
+			
+			
 			function getSelText() {
-				var s = '';
+				var s = '',
+				r = null;
+			
 				if (window.getSelection) {
-					s = window.getSelection();
-				} else if (document.getSelection) {
-					s = document.getSelection();
-				} else if (document.selection) {
-					s = document.selection.createRange().text;
+					r = window.getSelection().getRangeAt(0);
 				}
+				else if (document.getSelection)
+				{
+					r = document.getSelection().getRangeAt(0);
+				}
+				else if (document.selection)
+				{
+					r = document.selection.createRange();
+				}
+			
+				var content = r.cloneContents(); 
+				span = document.createElement('SPAN');
+				span.appendChild(content);
+				var htmlContent = span.innerHTML;
+				s = "<div>" + htmlContent + "</div>";
 				return s;
 			}
 			
