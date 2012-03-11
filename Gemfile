@@ -37,6 +37,7 @@ end
 gem 'jquery-rails'
 #gem "omniauth"
 #gem "omniauth-twitter"
+gem "devise", ">= 2.0.4"
 gem 'bson_ext', '1.6.1'
 gem 'mongoid'
 
