@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>With</title>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		<%= stylesheet_link_tag :media => "all" %>
+>>>>>>> edaa1f2cbfdaa951417c305844f05972da80476a
+=======
+		<%= stylesheet_link_tag :media => "all" %>
+>>>>>>> edaa1f2cbfdaa951417c305844f05972da80476a
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<ul class="hmenu">
+			<%= render 'shared/navigation' %>
+		</ul>
+		<%- flash.each do |name, msg| -%>
+		<%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+		<%- end -%>
+		<%= yield %>
+	</body>
+</html>
