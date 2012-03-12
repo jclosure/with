@@ -4,7 +4,7 @@
 
 function initUberFrame() {
 	var frame = $('#uberframe iframe');
-	frame.get(0).contentWindow.postMessage(initUberFrame.capture, '*');	
+	frame.get(0).contentWindow.postMessage(initUberFrame.capture.text, '*');	
 	frame.slideDown(500);
 }
 
@@ -98,7 +98,7 @@ function initUberFrame() {
 				//s = escape(s);
 				capture = initUberFrame.capture = {};
 				capture.text = getSelText() || "";
-				capture.source = document.location.toString();
+				//capture.source = document.location.toString();
 			
 				if (!capture.text || capture.text == "") {
 					var s = prompt("What do you need to remember?");
