@@ -1,4 +1,8 @@
 With::Application.routes.draw do
+  get "notifications/index"
+
+  get "notifications/create"
+
   root :to => "home#index"
   devise_for :users
   resources :users, :only => :show
