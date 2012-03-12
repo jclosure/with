@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    Notifier.gmail_message #args will be passed later
+    Notifier.test_message #args will be passed later
     flash[:notice] = "Your message has been sent."
     redirect_to root_path
   end

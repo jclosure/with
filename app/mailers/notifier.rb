@@ -1,6 +1,6 @@
 class Notifier < ActionMailer::Base
   default from: "webmaster@noolog.com"
-  def gmail_message
+  def test_message
     
     mail( :subject => "Message via Gmail",
           :to => "jclosure@gmail.com",
