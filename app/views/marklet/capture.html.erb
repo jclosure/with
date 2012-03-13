@@ -35,7 +35,12 @@
 
 <script type="text/javascript">
 	var parent_url = decodeURIComponent(document.location.hash.replace(/^#/, ''));
-	window.addEventListener('message', receiver, false);
+	
+	if (!!window.addEventListener)
+		window.addEventListener('message', receiver, false);
+	else
+		window.attachEvent('onmessage', receiver);
+		
 	function receiver(e)
 	{
 		if (e.origin == parent_url)

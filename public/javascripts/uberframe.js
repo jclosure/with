@@ -4,11 +4,8 @@
 
 function initUberFrame() {
 	var frame = $('#uberframe iframe');
-	setTimeout(function(){
-		frame.get(0).contentWindow.postMessage(initUberFrame.capture.text, '*');	
-		frame.slideDown(500);
-	}, 50);
-	
+	frame.get(0).contentWindow.postMessage(initUberFrame.capture.text, '*');	
+	frame.slideDown(500);
 }
 
 (function(){
@@ -24,15 +21,36 @@ function initUberFrame() {
 		script.onload = script.onreadystatechange = function(){
 			if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
 				done = true;
-				initMyBookmarklet();
+				
+				loadSupport();
 			}
 		};
 		document.getElementsByTagName("head")[0].appendChild(script);
 	} else {
-		initMyBookmarklet();
+		loadSupport();
 	}
 	
 	
+	//todo: lazy
+
+	function loadSupport()
+	{
+		if ($.browser.msie  && parseInt($.browser.version, 10) <= 8)
+		{
+			var done = false;
+			var script = document.createElement("script");
+			script.src = document.home + "/javascripts/ierange-m2-packed.js";
+			script.onload = script.onreadystatechange = function(){
+				if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
+					done = true;
+					initMyBookmarklet();
+				}
+			};
+			document.getElementsByTagName("head")[0].appendChild(script);
+		} else {
+			initMyBookmarklet();
+		}
+	}
 	
 	
 	function initMyBookmarklet() {
