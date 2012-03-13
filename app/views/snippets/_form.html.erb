@@ -1,0 +1,24 @@
+<%= form_for(@snippet) do |f| %>
+  <% if @snippet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@snippet.errors.count, "error") %> prohibited this snippet from being saved:</h2>
+
+      <ul>
+      <% @snippet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>: <%= @user.name %>
+  </div>
+  <div class="field">
+    <%= f.label :source_url %><br />
+    <%= f.text_field :source_url %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
