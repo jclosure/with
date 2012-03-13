@@ -4,8 +4,11 @@
 
 function initUberFrame() {
 	var frame = $('#uberframe iframe');
-	frame.get(0).contentWindow.postMessage(initUberFrame.capture.text, '*');	
-	frame.slideDown(500);
+	setTimeout(function(){
+		frame.get(0).contentWindow.postMessage(initUberFrame.capture.text, '*');	
+		frame.slideDown(500);
+	}, 50);
+	
 }
 
 (function(){
