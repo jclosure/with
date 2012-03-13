@@ -1,4 +1,6 @@
 With::Application.routes.draw do
+  resources :snippets
+
   get "notifications/index"
 
   get "notifications/create"
