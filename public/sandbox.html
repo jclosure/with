@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby on Rails: Welcome aboard</title>
+	<style type="text/css">
+		.hovered {
+			background-color: black;
+		}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('*').hover(function(){
+				$(this).data('hover',1);
+				//store in that element that the mouse is over it
+			},
+			function(){
+				$(this).data('hover',0);
+				//store in that element that the mouse is no longer over it
+			});
+
+			alert('asfad');
+		});
+		
+
+	</script>
+  </head>
+  <body>
+	<div>
+		<h1>Monkye</h1>
+
+		<div id="1" style="border:solid 1px red; width:50px; height:50px;"></div>
+		<div id="2" style="border:solid 1px blue; width:50px; height:50px;"></div>
+		<div id="3" style="border:solid 1px green; width:50px; height:50px;"></div>
+
+		<input type="hidden" id="mouseTracker" />
+    </div>
+  </body>
+</html>
+

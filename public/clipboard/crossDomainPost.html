@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+	
+<!-- LOADED FROM  -->
+	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/USTORE_0.9.97.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/easyXDM_0.9.97.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/json2_0.9.97.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/sha1_0.9.97.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/data_0.9.97.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/common-shared_0.9.97.js"></script>
+<script src="//d2v1cc1dkixozt.cloudfront.net/js/common_0.9.97.js"></script>
+<script>//<![CDATA[
+(function(){
+window.CLIPBOARD.time = 1331625983592;
+window.CLIPBOARD.config = {"facebookAppId":"146920462050567","cdnThumbnail":"http://s3.amazonaws.com/thumbnailerprod/","cdnUser":"//s3.amazonaws.com/userprod/","version":"0.9.97","cdnBaseUrl":"//d2v1cc1dkixozt.cloudfront.net","staticBaseUrl":"//d2v1cc1dkixozt.cloudfront.net","baseUrl":"www.clipboard.com"};
+function handleError(packet, socket) {
+var response = {
+error: true,
+message: 'badly formed request',
+request: packet ? packet.data : null
+};
+sendPacket(response, socket);
+}
+function createCallback(packet, socket) {
+return function(error, result) {
+sendPacket({ error: error, result: result }, socket);
+};
+}
+function detect3rdPartyCookieSupport() {
+CLIPBOARD.common.setCookieValue('cookiesEnabled', true);
+var supported = !!CLIPBOARD.common.getBooleanCookieValue('cookiesEnabled');
+CLIPBOARD.common.deleteCookieValue('cookiesEnabled');
+return supported;
+}
+function sendPacket(packet, socket) {
+var message;
+try {
+message = JSON.stringify(packet);
+}
+catch (e) {
+message = '{"error": true, "message": "Unable to stringify packet"}';
+}
+socket.postMessage(message);
+}
+var xdmActions = {
+fetchUserData: function(packet, socket) {
+var guid = CLIPBOARD.data.guid();
+var secret = CLIPBOARD.data.secret();
+var userData = {
+config: window.CLIPBOARD.config,
+loggedIn: false,
+thirdPartyCookiesEnabled: detect3rdPartyCookieSupport(),
+preferences: {}
+};
+if (!guid || !secret) {
+userData.loggedIn = false;
+sendPacket(userData, socket);
+return;
+}
+CLIPBOARD.data.localSignGet(
+'/api/v1/sessions',
+function(error, sessionResult) {
+if (error || !sessionResult || sessionResult.error) {
+userData.loggedIn = false;
+sendPacket(userData, socket);
+return;
+}
+userData.loggedIn = true;
+userData.sid = CLIPBOARD.common.getCookieValue('sid');
+userData.guid = USTORE.getValue('guid');
+//retrieve preferences
+CLIPBOARD.data.localSignGet(
+'/api/v1/preferences/' + userData.guid + '?type=clipper',
+function(error, preferences) {
+if (!error) {
+userData.preferences = preferences || {};
+}
+sendPacket(userData, socket);
+}
+);
+}
+);
+},
+fetchAutocompleteDict: function(packet, socket) {
+CLIPBOARD.data.getAutocompleteDict(createCallback(packet, socket));
+},
+handleApiCall: (function() {
+function getApiFunctionName(packet) {
+if (!packet || !packet.APIpath || !packet.data) {
+return null;
+}
+switch (packet.method) {
+case 'POST':
+return 'localSignPost';
+case 'PUT':
+return 'localSignPut';
+default:
+return null;
+}
+}
+return function(packet, socket) {
+var func = CLIPBOARD.data[getApiFunctionName(packet)];
+if (!func) {
+handleError(packet, socket);
+return;
+}
+func(
+packet.APIpath,
+packet.data,
+createCallback(packet, socket)
+);
+};
+}())
+};
+$(document).ready(function(){
+var socket = new easyXDM.Socket({
+onMessage: function(message, origin) {
+var packet, action;
+try {
+packet = JSON.parse(message);
+action = xdmActions[packet.action] || xdmActions.handleApiCall;
+action(packet, socket);
+}
+catch(e) {
+handleError(packet, socket);
+}
+}
+});
+});
+}());
+//]]></script>
+</head><body></body></html>
