@@ -71,25 +71,50 @@ function initUberFrame() {
 			
 			function getSelText() {
 				var s = '',
-				r = null;
+				range = null;
+				sel = null;
 			
 				if (window.getSelection) {
-					r = window.getSelection().getRangeAt(0);
+					sel = window.getSelection();
+					if (!!sel.anchorNode && !!sel.focusNode)
+						range = sel.getRangeAt(0);
 				}
 				else if (document.getSelection)
 				{
-					r = document.getSelection().getRangeAt(0);
+					sel = document.getSelection();
+					range = sel.getRangeAt(0);
 				}
 				else if (document.selection)
 				{
-					r = document.selection.createRange();
+					sel = document.selection;
+					range = sel.createRange();
 				}
+				
 			
-				var content = r.cloneContents(); 
-				span = document.createElement('SPAN');
-				span.appendChild(content);
-				var htmlContent = span.innerHTML;
-				s = "<div>" + htmlContent + "</div>";
+				if (!!range) {
+					//range extension code - works but may not be desirable
+					//TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
+					var containerNode = range.commonAncestorContainer;
+					//to see if is TextNode
+					//containerNode.nodeName == "#text"
+					if (containerNode.nodeType == 3) { 
+						if (range.startOffset == 0) {
+							if (!containerNode.previousSibling)
+								range.setStartBefore(containerNode.parentNode); 
+						}
+						if (range.endOffset == containerNode.length) { //selected to end of node contents
+							if (!containerNode.nextSibling)
+								range.setEndAfter(containerNode.parentNode);
+						}
+					}
+				
+				
+					var content = range.cloneContents(); 
+					span = document.createElement('SPAN');
+					span.appendChild(content);
+					var htmlContent = span.innerHTML;
+					s = "<div>" + htmlContent + "</div>";
+			    }
 				return s;
 			}
 			
@@ -121,8 +146,11 @@ function initUberFrame() {
 				capture.text = getSelText() || "";
 				//capture.source = document.location.toString();
 			
-				if (!capture.text || capture.text == "") {
-					var s = prompt("What do you need to remember?");
+				
+				if (capture.text == "") {
+					capture.text = prompt("What do you need to remember?");
+					debugger;
+					capture.text = "<div>" + capture.text + "</div>";
 				}
 				if (!!capture.text && capture.text != "") {
 					$("body").append("\
@@ -152,44 +180,7 @@ function initUberFrame() {
 		})();
 	}
 	
-	// document.onclick= function(event) {
-	// 	    if (event===undefined) event= window.event;                     // IE hack
-	// 	    var target= 'target' in event? event.target : event.srcElement; // another IE hack
-	// 
-	// 	    var root= document.compatMode==='CSS1Compat'? document.documentElement : document.body;
-	// 	    var mxy= [event.clientX+root.scrollLeft, event.clientY+root.scrollTop];
-	// 
-	// 	    var path= getPathTo(target);
-	// 	    var txy= getPageXY(target);
-	// 	    alert('Clicked element '+path+' offset '+(mxy[0]-txy[0])+', '+(mxy[1]-txy[1]));
-	// 	}
-	// 
-	// 	function getPathTo(element) {
-	// 	    if (element.id!=='')
-	// 	        return 'id("'+element.id+'")';
-	// 	    if (element===document.body)
-	// 	        return element.tagName;
-	// 
-	// 	    var ix= 0;
-	// 	    var siblings= element.parentNode.childNodes;
-	// 	    for (var i= 0; i<siblings.length; i++) {
-	// 	        var sibling= siblings[i];
-	// 	        if (sibling===element)
-	// 	            return getPathTo(element.parentNode)+'/'+element.tagName+'['+(ix+1)+']';
-	// 	        if (sibling.nodeType===1 && sibling.tagName===element.tagName)
-	// 	            ix++;
-	// 	    }
-	// 	}
-	// 
-	// 	function getPageXY(element) {
-	// 	    var x= 0, y= 0;
-	// 	    while (element) {
-	// 	        x+= element.offsetLeft;
-	// 	        y+= element.offsetTop;
-	// 	        element= element.offsetParent;
-	// 	    }
-	// 	    return [x, y];
-	// 	}
+
 
 })();
 

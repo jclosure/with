@@ -21,4 +21,7 @@ class MarkletController < ApplicationController
     @url = params[:source] || "Source not sent."
     render :layout => 'marklet_uber' 
   end
+  def playground
+    @users = User.all
+  end
 end

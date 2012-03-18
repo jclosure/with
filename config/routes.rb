@@ -11,6 +11,7 @@ With::Application.routes.draw do
 
   get "marklet/index"
   get "marklet/capture"
+  get "marklet/playground"
 
   get "home/index"
 
