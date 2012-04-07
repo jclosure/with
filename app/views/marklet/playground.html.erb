@@ -99,7 +99,6 @@
 	
 	$.fn.selectText = function() {
 	    var target = $(this);
-		//target = target.parent(); //step up one level?
 		var node = target.get(0);
 		if (!!node) {
 	    	if (document.body.createTextRange) {
@@ -127,9 +126,6 @@
 			el.selectText();
 		});
 		
-		// $("body").mouseover(function(e){
-		// 			el.selectText();
-		// 		});
 
 	});
 </script>
