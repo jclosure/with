@@ -1,8 +1,8 @@
-<h1>Listing snippets</h1>
+<h1>Snippets</h1>
 
 <table>
   <tr>
-    <th>Source url</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,7 +10,7 @@
 
 <% @snippets.each do |snippet| %>
   <tr>
-    <td><%= snippet.source_url %></td>
+    <td style="width: 500px; border: 2px solid black;"><%= raw(snippet.content) %></td>
     <td><%= link_to 'Show', snippet %></td>
     <td><%= link_to 'Edit', edit_snippet_path(snippet) %></td>
     <td><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></td>
@@ -20,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Snippet', new_snippet_path %>
+

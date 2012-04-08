@@ -4,6 +4,10 @@
   <b>Source url:</b>
   <%= @snippet.source_url %>
 </p>
+<p>
+  <b>Content:</b>
+  <%=raw @snippet.content %>
+</p>
 
 
 <%= link_to 'Edit', edit_snippet_path(@snippet) %> |

@@ -1,3 +1,33 @@
 // Place all the styles related to the snippets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.rounded-box {
+	-webkit-border-radius: 10px;
+	     -moz-border-radius: 10px;
+	          border-radius: 10px;
+}
+.capture-ui{
+	background-color: #cccccc;
+}
+.capture-container {
+	margin: 6px 6px 3px 6px;
+	background-color: #FFFFFF;
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
+}
+.capture-info {
+	margin: 3px 6px 6px 6px;
+	background-color: #FFFFFF;
+	padding: 5px 5px 5px 5px;
+}
+.source-info {
+	margin: 3px 6px 6px 6px;
+	background-color: #FFFFFF;
+	padding: 5px 5px 5px 5px;
+}
+.metadata-info {
+	margin: 3px 6px 6px 6px;
+	background-color: #FFFFFF;
+	padding: 5px 5px 5px 5px;
+}

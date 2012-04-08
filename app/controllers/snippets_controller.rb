@@ -1,4 +1,7 @@
 class SnippetsController < ApplicationController
+  
+
+  
   # GET /snippets
   # GET /snippets.json
   def index
@@ -43,7 +46,7 @@ class SnippetsController < ApplicationController
   # POST /snippets.json
   def create
     @snippet = Snippet.new(params[:snippet])
-
+      
     respond_to do |format|
       if @snippet.save
         format.html { redirect_to @snippet, notice: 'Snippet was successfully created.' }

@@ -1,5 +1,29 @@
 <h1>New snippet</h1>
 
+<div class="capture-ui rounded-box">
+
 <%= render 'form' %>
 
+</div>
+
 <%= link_to 'Back', snippets_path %>
+
+<script type="text/javascript">
+	var parent_url = decodeURIComponent(document.location.hash.replace(/^#/, ''));
+	
+	if (!!window.addEventListener)
+		window.addEventListener('message', receiver, false);
+	else
+		window.attachEvent('onmessage', receiver);
+		
+	function receiver(e)
+	{
+		if (e.origin == parent_url)
+		{
+			var target_visual = $('#uberText');
+			target_visual.html(e.data);
+			var target = $('#snippet_content');
+			target.val(e.data);
+		}
+	}
+</script>
