@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- * commented out *=require_tree .
+ *=require_tree .
 */
 header nav ul {
   list-style: none;
@@ -31,4 +31,5 @@ header nav ul li {
   background-color: #FCC;
   border: solid 1px #C66;
 }
+
 
