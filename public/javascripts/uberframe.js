@@ -1,5 +1,4 @@
-// javascript:(function(){if(window.myBookmarklet !== undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://tommy.com:8888/bookmarklet.js?'+new Date().getTime();}})();
-
+(function(a){var b=document.defaultView&&document.defaultView.getComputedStyle,c=/([A-Z])/g,d=/-([a-z])/ig,e=function(a,b){return b.toUpperCase()},f=function(a){if(b){return b(a,null)}else if(a.currentStyle){return a.currentStyle}},g=/float/i,h=/^-?\d+(?:px)?$/i,i=/^-?\d/;a.curStyles=function(a,j){if(!a){return null}var k=f(a),l,m,n=a.style,o={},p=0,q,r,s,t;for(;p<j.length;p++){t=j[p];l=t.replace(d,e);if(g.test(t)){t=jQuery.support.cssFloat?"float":"styleFloat";l="cssFloat"}if(b){t=t.replace(c,"-$1").toLowerCase();m=k.getPropertyValue(t);if(t==="opacity"&&m===""){m="1"}o[l]=m}else{s=t.replace(d,e);o[l]=k[t]||k[s];if(!h.test(o[l])&&i.test(o[l])){q=n.left;r=a.runtimeStyle.left;a.runtimeStyle.left=a.currentStyle.left;n.left=s==="fontSize"?"1em":o[l]||0;o[l]=n.pixelLeft+"px";n.left=q;a.runtimeStyle.left=r}}}return o};a.fn.curStyles=function(){return a.curStyles(this[0],a.makeArray(arguments))}})(jQuery);
 
 
 function initUberFrame() {
@@ -92,6 +91,16 @@ function initUberFrame() {
 				
 			
 				if (!!range) {
+					
+					////fixup images
+					//var markup = $(range.commonAncestorContainer);
+					//markup.find('img').each(function(evt){	
+					//	var img = $(this);
+					//	var styles = img.curStyles("max-width", "width");
+					//	img.css('maxWidth', styles.maxWidth);
+					//});
+					
+					
 					//range extension code - works but may not be desirable
 					//TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
 					var containerNode = range.commonAncestorContainer;
@@ -112,30 +121,23 @@ function initUberFrame() {
 					var content = range.cloneContents(); 
 					span = document.createElement('SPAN');
 					span.appendChild(content);
+					////fixup images
+					//var markup = $(span).hide();
+					//$('body').append(markup);
+					//markup.find('img').each(function(evt){
+					//	//debugger;	
+					//	var img = $(this);
+					//	var styles = img.curStyles("max-width", "width");
+					//	img.css('maxWidth', styles.maxWidth);
+					//});
+					//markup.show();
 					var htmlContent = span.innerHTML;
 					s = "<div>" + htmlContent + "</div>";
 			    }
 				return s;
 			}
 			
-			function getSelectionHtml() {
-			    var html = "";
-			    if (typeof window.getSelection != "undefined") {
-			        var sel = window.getSelection();
-			        if (sel.rangeCount) {
-			            var container = document.createElement("div");
-			            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-			                container.appendChild(sel.getRangeAt(i).cloneContents());
-			            }
-			            html = container.innerHTML;
-			        }
-			    } else if (typeof document.selection != "undefined") {
-			        if (document.selection.type == "Text") {
-			            html = document.selection.createRange().htmlText;
-			        }
-			    }
-			    return html;
-			}
+			
 			
 			
 			if ($("#uberframe").length == 0) {
@@ -192,3 +194,5 @@ function guid()
 	}
 	return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
 }
+
+

@@ -1,14 +1,40 @@
+<%= javascript_include_tag "jquery.qrcode.min" %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Source url:</b>
-  <%= @snippet.source_url %>
-</p>
-<p>
-  <b>Content:</b>
-  <%=raw @snippet.content %>
-</p>
+<div id="sharing">
+	<a href="#">Share this snippet</a>
+</div>
 
+<div>
+  <table>
+	<tr>
+	  <td>
+		<b>Source url:</b>
+	  </td>
+	  <td>
+		  <p id="content_url">
+		    <%= @snippet.source_url %>
+		  </p>
+	  </td>
+	</tr>
+  </table>
+</div>
+
+<div>
+  <p id="content">
+    <%=raw @snippet.content %>
+  </p>
+</div>
+
+<div>
+	<div id="qrcode"></div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var codeContent = $('#content_url').text();
+		$('#qrcode').qrcode(codeContent);
+	});
+</script>
 
 <%= link_to 'Edit', edit_snippet_path(@snippet) %> |
 <%= link_to 'Back', snippets_path %>
