@@ -1,22 +1,27 @@
 <h1>Snippets</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @snippets.each do |snippet| %>
-  <tr>
-    <td style="width: 500px; border: 2px solid black;"><%= raw(snippet.content) %></td>
-    <td><%= link_to 'Show', snippet %></td>
-    <td><%= link_to 'Edit', edit_snippet_path(snippet) %></td>
-    <td><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+
+    <div style="width: 500px; border: 2px solid black;">
+		<div style="background: #cccccc; height: 25px; border-bottom: 1px solid black;">
+			<table>
+		    <tr>
+		    <td><%= link_to 'Show', snippet %></td>
+		    <td><%= link_to 'Edit', edit_snippet_path(snippet) %></td>
+		    <td><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></td>
+			</tr>
+			</table>
+		</div>
+		<div style="padding: 5px;">
+			<%= raw(snippet.content) %>
+		</div>
+	</div>
+
+	<br />
+  
 <% end %>
-</table>
+
 
 <br />
 
