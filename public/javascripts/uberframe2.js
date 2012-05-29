@@ -40,7 +40,11 @@ function getNodeText(node) {
 (function(){
 
 	// the minimum version of jQuery we want
-	var v = "1.3.2";
+	
+	
+	
+	var v = "1.4.2";
+
 
 	// check for jQuery. if it exists, verify it's not too old.
 	if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
@@ -49,10 +53,7 @@ function getNodeText(node) {
 		script.src = "http://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
 		script.onload = script.onreadystatechange = function(){
 			if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
-				done = true;
-				
-				(function(f){var i=document.defaultView&&document.defaultView.getComputedStyle,o=/([A-Z])/g,l=/-([a-z])/ig,m=function(a,g){return g.toUpperCase()},p=function(a){if(i)return i(a,null);else if(a.currentStyle)return a.currentStyle},q=/float/i,r=/^-?\d+(?:px)?$/i,s=/^-?\d/;f.curStyles=function(a,g){if(!a)return null;for(var j=p(a),c,d,h=a.style,e={},k=0,b,n;k<g.length;k++){b=g[k];c=b.replace(l,m);if(q.test(b)){b=jQuery.support.cssFloat?"float":"styleFloat";c="cssFloat"}if(i){b=b.replace(o,"-$1").toLowerCase();
-				d=j.getPropertyValue(b);if(b==="opacity"&&d==="")d="1";e[c]=d}else{d=b.replace(l,m);e[c]=j[b]||j[d];if(!r.test(e[c])&&s.test(e[c])){b=h.left;n=a.runtimeStyle.left;a.runtimeStyle.left=a.currentStyle.left;h.left=d==="fontSize"?"1em":e[c]||0;e[c]=h.pixelLeft+"px";h.left=b;a.runtimeStyle.left=n}}}return e};f.fn.curStyles=function(){return f.curStyles(this[0],f.makeArray(arguments))}})(jQuery);
+				done = true;				
 				
 				
 				loadSupport();
@@ -60,7 +61,8 @@ function getNodeText(node) {
 		};
 		document.getElementsByTagName("head")[0].appendChild(script);
 	} else {
-		loadSupport();
+
+	 	loadSupport();
 	}
 	
 	
@@ -68,6 +70,10 @@ function getNodeText(node) {
 
 	function loadSupport()
 	{
+		(function(f){var i=document.defaultView&&document.defaultView.getComputedStyle,o=/([A-Z])/g,l=/-([a-z])/ig,m=function(a,g){return g.toUpperCase()},p=function(a){if(i)return i(a,null);else if(a.currentStyle)return a.currentStyle},q=/float/i,r=/^-?\d+(?:px)?$/i,s=/^-?\d/;f.curStyles=function(a,g){if(!a)return null;for(var j=p(a),c,d,h=a.style,e={},k=0,b,n;k<g.length;k++){b=g[k];c=b.replace(l,m);if(q.test(b)){b=jQuery.support.cssFloat?"float":"styleFloat";c="cssFloat"}if(i){b=b.replace(o,"-$1").toLowerCase();
+		d=j.getPropertyValue(b);if(b==="opacity"&&d==="")d="1";e[c]=d}else{d=b.replace(l,m);e[c]=j[b]||j[d];if(!r.test(e[c])&&s.test(e[c])){b=h.left;n=a.runtimeStyle.left;a.runtimeStyle.left=a.currentStyle.left;h.left=d==="fontSize"?"1em":e[c]||0;e[c]=h.pixelLeft+"px";h.left=b;a.runtimeStyle.left=n}}}return e};f.fn.curStyles=function(){return f.curStyles(this[0],f.makeArray(arguments))}})(jQuery);
+		
+		
 		if ($.browser.msie  && parseInt($.browser.version, 10) <= 8)
 		{
 			var done = false;
@@ -115,7 +121,7 @@ function getNodeText(node) {
 			$("body").mouseover(doCapture);
 			
 			
-			key('⌘+c, ctrl+c', function(){ 			
+			key('`', function(){ 			
 				showFrame();
 			});
 			
@@ -125,7 +131,7 @@ function getNodeText(node) {
 				<div id='uberframe_veil' style=''>\
 					<p>Loading...</p>\
 				</div>\
-				<iframe src='"+document.home+"/snippets/new?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"(function() { window.initUberFrame.apply(window); })()\">Enable iFrames.</iframe>\
+				<iframe src='"+document.home+"/snippets/new?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"(function() { /* stuff */ })()\">Enable iFrames.</iframe>\
 				<style type='text/css'>\
 					#uberframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
 					#uberframe_veil p { color: black; font: normal normal bold 20px/20px Helvetica, sans-serif; position: absolute; top: 50%; left: 50%; width: 10em; margin: -10px auto 0 -5em; text-align: center; }\
