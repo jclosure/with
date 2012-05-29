@@ -1,4 +1,3 @@
-(function(a){var b=document.defaultView&&document.defaultView.getComputedStyle,c=/([A-Z])/g,d=/-([a-z])/ig,e=function(a,b){return b.toUpperCase()},f=function(a){if(b){return b(a,null)}else if(a.currentStyle){return a.currentStyle}},g=/float/i,h=/^-?\d+(?:px)?$/i,i=/^-?\d/;a.curStyles=function(a,j){if(!a){return null}var k=f(a),l,m,n=a.style,o={},p=0,q,r,s,t;for(;p<j.length;p++){t=j[p];l=t.replace(d,e);if(g.test(t)){t=jQuery.support.cssFloat?"float":"styleFloat";l="cssFloat"}if(b){t=t.replace(c,"-$1").toLowerCase();m=k.getPropertyValue(t);if(t==="opacity"&&m===""){m="1"}o[l]=m}else{s=t.replace(d,e);o[l]=k[t]||k[s];if(!h.test(o[l])&&i.test(o[l])){q=n.left;r=a.runtimeStyle.left;a.runtimeStyle.left=a.currentStyle.left;n.left=s==="fontSize"?"1em":o[l]||0;o[l]=n.pixelLeft+"px";n.left=q;a.runtimeStyle.left=r}}}return o};a.fn.curStyles=function(){return a.curStyles(this[0],a.makeArray(arguments))}})(jQuery);
 
 
 function initUberFrame() {
@@ -20,6 +19,9 @@ function initUberFrame() {
 		script.onload = script.onreadystatechange = function(){
 			if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
 				done = true;
+				
+				(function(a){var b=document.defaultView&&document.defaultView.getComputedStyle,c=/([A-Z])/g,d=/-([a-z])/ig,e=function(a,b){return b.toUpperCase()},f=function(a){if(b){return b(a,null)}else if(a.currentStyle){return a.currentStyle}},g=/float/i,h=/^-?\d+(?:px)?$/i,i=/^-?\d/;a.curStyles=function(a,j){if(!a){return null}var k=f(a),l,m,n=a.style,o={},p=0,q,r,s,t;for(;p<j.length;p++){t=j[p];l=t.replace(d,e);if(g.test(t)){t=jQuery.support.cssFloat?"float":"styleFloat";l="cssFloat"}if(b){t=t.replace(c,"-$1").toLowerCase();m=k.getPropertyValue(t);if(t==="opacity"&&m===""){m="1"}o[l]=m}else{s=t.replace(d,e);o[l]=k[t]||k[s];if(!h.test(o[l])&&i.test(o[l])){q=n.left;r=a.runtimeStyle.left;a.runtimeStyle.left=a.currentStyle.left;n.left=s==="fontSize"?"1em":o[l]||0;o[l]=n.pixelLeft+"px";n.left=q;a.runtimeStyle.left=r}}}return o};a.fn.curStyles=function(){return a.curStyles(this[0],a.makeArray(arguments))}})(jQuery);
+				
 				
 				loadSupport();
 			}

@@ -25,3 +25,9 @@ class MarkletController < ApplicationController
     @users = User.all
   end
 end
+
+
+def rc
+  @url = params[:source]
+  render :layout => 'marklet_uber'
+end

@@ -18,8 +18,8 @@
 	{
 		(window.ubermarklet = function() {
 			var system = uberSystem('/snippets/new'); //TODO: DEDICATED UI
-			var rc = uberRemoteControl('/snippets/new', system); //TODO: DEDICATED UI
-			//ctor
+			var rc = uberRemoteControl('/snippets/rc', system); //TODO: DEDICATED UI
+			
 			$("body").append(rc.element);
 			rc.frame.show();
 		})();
