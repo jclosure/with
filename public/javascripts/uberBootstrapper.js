@@ -8,8 +8,8 @@
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("http://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 		scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
-		scripts.push(document.home + "/javascripts/uberSystem.js");
-		scripts.push(document.home + "/javascripts/uberRemoteControl.js");
+		scripts.push(document.home + "/javascripts/uberSys.js");
+		scripts.push(document.home + "/javascripts/uberRC.js");
 		scripts.push(boot);
 		head.js.apply(this, scripts);
 	});
@@ -18,7 +18,7 @@
 	{
 		(window.ubermarklet = function() {
 			var system = uberSystem('/snippets/new'); //TODO: DEDICATED UI
-			var rc = uberRemoteControl('/snippets/rc', system); //TODO: DEDICATED UI
+			var rc = uberRemoteControl('/marklet/rc', system); //TODO: DEDICATED UI
 			
 			$("body").append(rc.element);
 			rc.frame.show();

@@ -1,6 +1,8 @@
 With::Application.routes.draw do
   resources :snippets
 
+
+
   get "notifications/index"
 
   get "notifications/create"
@@ -12,7 +14,7 @@ With::Application.routes.draw do
   get "marklet/index"
   get "marklet/capture"
   get "marklet/playground"
-
+  get "marklet/rc"
   get "home/index"
 
   # The priority is based upon order of creation:

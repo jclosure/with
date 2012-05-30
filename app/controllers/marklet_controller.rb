@@ -24,10 +24,12 @@ class MarkletController < ApplicationController
   def playground
     @users = User.all
   end
+  
+  def rc
+    @url = params[:source]
+    render :layout => 'marklet_uber'
+  end
+  
 end
 
 
-def rc
-  @url = params[:source]
-  render :layout => 'marklet_uber'
-end
