@@ -16,11 +16,14 @@ var uberSystem = function(ui_url) {
 	
 	var element = $(markup);
 	
+	
 	var self = {
 		element: element,
 		frame: element.find('iframe'),
 		work: function(){ alert('system online'); }
 	};
+
+
 
 	return self;
 };
