@@ -1,47 +1,78 @@
-
-<style>
-	.rc-ribbon {
+<div id="snippet_rc">
+	<style>
+		.rc-ribbon {
 		
-	}
-	.rc-ribbon li {
-		display: inline-block;
-		list-style-type: none;
-		margin-right: 20px;
-	}
-	.rc-selected-tool
-	{
-		border: 2px dashed black;
-		background: #CCCCCC;
-		padding: 2px 2px 2px 2px;
-		display: inline-block;
-	}
-</style>
-
-<ul class="rc-ribbon">
-	<li>
-		<div class='rc-selected-tool'>
-			select
-		</div>
-	</li>
-	<li>
-		<div>
-			capture
-		</div>
-	</li>
-	<li>
-		<div>
-			reset
-		</div>
-	</li>
-	<li>
-		<div>
-			targeting
-		</div>
-	</li>
-	<li>
-		<div>
-			X
-		</div>
-	</li>
-</ul>
-
+		}
+		.rc-ribbon li {
+			display: inline-block;
+			list-style-type: none;
+			margin-right: 20px;
+		}
+		.rc-selected-tool
+		{
+			border: 2px dashed black;
+			background: #CCCCCC;
+			padding: 2px 2px 2px 2px;
+			display: inline-block;
+		}
+	</style>
+	<ul class="rc-ribbon">
+		<li>
+			<div>
+				<a data-command="select" href="#">select</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a data-command="capture" href="#">capture</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a data-command="reset" href="#">reset</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a data-command="targeting" href="#">targeting</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a data-command="close" href="#">close</a>
+			</div>
+		</li>
+	</ul>
+</div>
+<script>
+	$(function(){
+		var triggers = $('.rc-ribbon').find('[data-command]');
+		triggers.click(function(evt){
+			evt.preventDefault();
+			triggers.each(function(){ $(this).parent().removeClass('rc-selected-tool'); });
+			var trigger = $(this);
+			trigger.parent().addClass('rc-selected-tool');
+			var command = trigger.data('command');
+			run(command);
+		});
+		function run(command){
+			switch(command){
+				case 'select':
+				
+				break;
+				case 'capture':
+				
+				break;
+				case 'reset':
+				
+				break;
+				case 'targeting':
+				
+				break;
+				case 'close':
+					
+				break;
+			}
+		}
+	});
+</script>
