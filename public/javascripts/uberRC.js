@@ -1,4 +1,6 @@
 
+
+
 var uberRemoteControl = function(ui_url, system){	
 
 	var markup = "\
@@ -6,7 +8,7 @@ var uberRemoteControl = function(ui_url, system){
 				<div id='rcframe_veil'>\
 					<p>Loading...</p>\
 				</div>\
-				<iframe src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"'>Enable iFrames.</iframe>\
+				<iframe src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.rc.wireCommands()\">Enable iFrames.</iframe>\
 				<style type='text/css'>\
 					#rcframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
 					#rcframe_veil p { color: black; font: normal normal bold 20px/20px Helvetica, sans-serif; position: absolute; top: 50%; left: 50%; width: 10em; margin: -10px auto 0 -5em; text-align: center; }\
@@ -19,7 +21,20 @@ var uberRemoteControl = function(ui_url, system){
 	var self = {
 		system: system,
 		element: element,
-		frame: element.find('iframe')
+		frame: element.find('iframe'),
+		wireCommands: function(){
+			
+			//consumer
+			var socket = new easyXDM.Socket({
+			    remote: document.home+ui_url,
+			    onMessage: function(message, origin){
+			        alert("Received '" + message + "' from '" + origin + "'");
+			    },
+			    onReady: function() {
+			        socket.postMessage("Yay, it works!");
+			    }
+			});
+		}
 	};
 	
 	

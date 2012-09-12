@@ -11,22 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %>: <%= @user.name %>
-  </div>
-  <div class="field">
-    <%= f.label :source_url %><br />
-    <%= f.text_field :source_url %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-	<div class="capture-container rounded-box">
-		<h2>Here is your text:</h2>
-		<p id="uberText"><%= @text %></p>
-	</div>
-    <%= f.hidden_field :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div style="padding: 10px 10px 10px 10px">
+	  <div class="field">
+	    <%= f.label :user_id %>: <%= @user.name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :source_url %><br />
+	    <%= f.text_field :source_url, { :style => "width: 80%;"} %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :content %><br />
+		<div class="capture-container rounded-box">
+			<h2>Here is your text:</h2>
+			<p id="uberText"><%= @text %></p>
+		</div>
+	    <%= f.hidden_field :content %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
   </div>
 <% end %>

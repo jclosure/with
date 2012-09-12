@@ -28,7 +28,10 @@ class SnippetsController < ApplicationController
   # GET /snippets/new.json
   def new
     @snippet = Snippet.new
-    @user = User.first
+    
+    @snippet.source_url = params[:source] || "source url not sent"
+    
+    @user = User.first #todo: complete this.
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,6 +49,8 @@ class SnippetsController < ApplicationController
   # POST /snippets.json
   def create
     @snippet = Snippet.new(params[:snippet])
+    
+    
       
     respond_to do |format|
       if @snippet.save
