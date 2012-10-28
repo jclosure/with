@@ -17,6 +17,12 @@
 
 	function boot()
 	{
+		//default jquery setup for cors
+		jQuery.ajaxSetup({
+			headers: {"X-Requested-With": "XMLHttpRequest"}
+		});
+		jQuery.support.cors = true;
+
 		//setupu xdm for json
 		head.js(document.home + "/javascripts/easyXDM/easyXDM.debug.js", function(){
 			easyXDM.DomHelper.requiresJSON(document.home + "/javascripts/json2.js");
@@ -29,6 +35,7 @@
 			window.rc = rc;	
 			
 			$("body").append(rc.element);
+			//system.frame.show();
 			rc.frame.show();
 		})();
 	}

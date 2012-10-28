@@ -1,7 +1,8 @@
 With::Application.routes.draw do
   resources :snippets
 
-
+  #picks up the cor method from application_controller.rb
+  match '*all' => 'application#cor', :constraints => {:method => 'OPTIONS'} 
 
   get "notifications/index"
 
