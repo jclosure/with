@@ -31,11 +31,10 @@
 	}
 </style>
 
-
-
 <script type="text/javascript">
+	//wiring
 	var parent_url = decodeURIComponent(document.location.hash.replace(/^#/, ''));
-	
+
 	if (!!window.addEventListener)
 		window.addEventListener('message', receiver, false);
 	else
@@ -45,16 +44,18 @@
 	{
 		if (e.origin == parent_url)
 		{
-			var target = $('#uberText');
-			target.html(e.data);
+			$('#uberText').html(e.data);
+			$('#snippet_content').val(e.data);
 		}
 	}
 </script>
 
+<form id="snippet" action="/snippets" method="post">
 	<div class="capture-ui rounded-box">
 		<div class="capture-container rounded-box">
 			<h2>Here is your text:</h2>
 			<p id="uberText"><%= @text %></p>
+			<input id="snippet_content" name="snippet[content]" type="hidden" />
 		</div>
 		<table>
 			<tr>
@@ -68,6 +69,7 @@
 					<div class = "source-info rounded-box">
 						<h2>Source Information</h2>
 						<h4>Url: <%=h @url %></h4>
+						 <input id="snippet_source_url" name="snippet[source_url]" type="hidden" value="<%=h @url %>" />
 					</div>
 					<div class = "metadata-info rounded-box">
 						<h2>Add tags:</h2>
@@ -75,10 +77,12 @@
 					</div>
 				</td>
 				<td style="vertical-align:top;">
-					<button name="save" onclick='save();'><h1>Save</h1></button>
+				  <div class="actions">
+				    <input name="commit" type="submit" value="Create Snippet" />
+				  </div>
 				</td>
 			</tr>
 		</table>
 		<div style="clear: both"></div>
 	</div>
-	
+</form>	
