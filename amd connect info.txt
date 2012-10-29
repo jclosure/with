@@ -1,4 +1,0 @@
-exchange server: https://ausrpc.amd.com/EWS/Exchange.asmx
-				 ausarray.amd.com
-vpn: aus-vpn.amd.com
-ldap: sausdc4.amd.com

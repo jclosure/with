@@ -7,7 +7,10 @@
 		var jqver = "1.3.2";
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("http://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
-		scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
+
+		if (!window.getSelection && !document.getSelection)
+		 	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
+		 
 		scripts.push(document.home + "/javascripts/json2.js");
 		scripts.push(document.home + "/javascripts/uberSys.js");
 		scripts.push(document.home + "/javascripts/uberRC.js");
@@ -23,18 +26,20 @@
 		});
 		jQuery.support.cors = true;
 
-		//setupu xdm for json
-		head.js(document.home + "/javascripts/easyXDM/easyXDM.debug.js", function(){
-			easyXDM.DomHelper.requiresJSON(document.home + "/javascripts/json2.js");
-		});
+
 		
-		
+		//stage and execute main routine
 		(window.ubermarklet = function() {
-			var system = uberSystem('/snippets/new'); //TODO: DEDICATED UI
+			var system = uberSystem('/marklet/capture'); //TODO: DEDICATED UI
 			var rc = uberRemoteControl('/marklet/rc', system); //TODO: DEDICATED UI
-			window.rc = rc;	
 			
+			window.system = system;
+			window.rc = rc;	
+
+			
+			//$("body").append(system.element);
 			$("body").append(rc.element);
+
 			//system.frame.show();
 			rc.frame.show();
 		})();

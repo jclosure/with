@@ -24,16 +24,6 @@ var uberRemoteControl = function(ui_url, system){
 		frame: element.find('iframe'),
 		wireCommands: function(){
 			
-			//consumer
-			var socket = new easyXDM.Socket({
-			    remote: document.home+ui_url,
-			    onMessage: function(message, origin){
-			        alert("Received '" + message + "' from '" + origin + "'");
-			    },
-			    onReady: function() {
-			        socket.postMessage("Yay, it works!");
-			    }
-			});
 		}
 	};
 	
