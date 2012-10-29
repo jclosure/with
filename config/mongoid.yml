@@ -9,7 +9,15 @@ test:
 # set these environment variables on your prod server
 production:
     #uri: <%= ENV['MONGOHQ_URL'] %>
-    uri: <%= "mongodb://test:test@staff.mongohq.com:10079/app3036868"  %>
+    #uri: <%= "mongodb://test:test@staff.mongohq.com:10079/app3036868"  %>
+
+    sessions:
+      default:
+        uri: <%= ENV['MONGOHQ_URL'] %>
+        options:
+          skip_version_check: true
+          safe: true
+
     #
     # 
     # host: <%= ENV['MONGOID_HOST'] %>
