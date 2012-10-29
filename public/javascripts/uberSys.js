@@ -2,7 +2,7 @@
 function initUberFrame() {
 	var frame = $('#sysframe iframe');
 	frame.get(0).contentWindow.postMessage(initUberFrame.message, '*');	
-	frame.closest('.sysframe_veil').slideDown(1000);
+	frame.closest('.sysframe_veil').show();
 }
 
 
@@ -10,26 +10,37 @@ var uberSystem = function(ui_url) {
 	
 	var self = {
 		work: function(event){ 
+			//process message
+			var message = event.data;
+			if (message == 'close') {
+				$('#sysframe').remove();
+			}
+			else if (message == 'exit') {
+				$('#sysframe').remove();
+				$('#rcframe').remove();
+			}
+			else {
+				message = "you pushed " + message + "<br />";
+				message += "<h1>TODO: capture and pass content through</h1>";
 
-			var message = "you pushed " + event.data;
+				initUberFrame.message = message;
 
-			initUberFrame.message = message;
-
-			var markup = "\
-					<div id='sysframe'>\
-						<div class='sysframe_veil'>\
-							<iframe src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
-						</div>\
-						<style type='text/css'>\
-							.sysframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
-							#sysframe_veil p { color: black; font: normal normal bold 20px/20px Helvetica, sans-serif; position: absolute; top: 50%; left: 50%; width: 10em; margin: -10px auto 0 -5em; text-align: center; }\
-							#sysframe iframe { position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; z-index: 999; border: 10px solid rgba(0,0,0,.5); margin: -5px 0 0 -5px; }\
-						</style>\
-					</div>";
+				var markup = "\
+						<div id='sysframe'>\
+							<div class='sysframe_veil'>\
+								<iframe src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
+							</div>\
+							<style type='text/css'>\
+								.sysframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
+								#sysframe_veil p { color: black; font: normal normal bold 20px/20px Helvetica, sans-serif; position: absolute; top: 50%; left: 50%; width: 10em; margin: -10px auto 0 -5em; text-align: center; }\
+								#sysframe iframe { position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; z-index: 999; border: 10px solid rgba(0,0,0,.5); margin: -5px 0 0 -5px; }\
+							</style>\
+						</div>";
 
 
-			var element = $(markup);
-			$("body").append(element);
+				var element = $(markup);
+				$("body").append(element);
+			}
 		}
 	};
 
