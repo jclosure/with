@@ -28,7 +28,7 @@ class User
   validates_uniqueness_of :name, :email, :case_sensitive => false
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-  references_many :snippets
+  references_many :snippets, :type => User
 ## Encryptable
 # field :password_salt, :type => String
 
