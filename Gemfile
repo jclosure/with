@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
+ruby "1.9.3"
+
+#required to force bundler @ heroku to use ruby 1.9.3
+gem install bundler -pre
+
 gem 'rails', '3.2.8'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -19,3 +24,5 @@ gem "devise", ">= 2.1.2"
 
 gem "pg", :group => [:production]
 gem "thin", :group => [:production]
+
+
