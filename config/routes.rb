@@ -1,7 +1,7 @@
 With::Application.routes.draw do
   resources :snippets
 
-  #picks up the cor method from application_controller.rb
+  #picks up the cor method from application_controller.rb used for preflight checks
   match '*all' => 'application#cor', :constraints => {:method => 'OPTIONS'} 
 
   get "notifications/index"
@@ -17,6 +17,10 @@ With::Application.routes.draw do
   get "marklet/playground"
   get "marklet/rc"
   get "home/index"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  match ':controller(/:action(/:id))(.:format)'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -67,7 +71,5 @@ With::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+
 end
