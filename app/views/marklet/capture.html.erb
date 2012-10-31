@@ -49,7 +49,7 @@
 		{
 			var htmlSummary = $('#uberText');
 			htmlSummary.html(e.data).fixupAllPaths(function(container){
-				var sourceUrl = 'http://deoxy.org/';
+				var sourceUrl = '<%=h @url %>';
 				return sourceUrl;
 			});
 			$('#snippet_content').val(htmlSummary.html());
