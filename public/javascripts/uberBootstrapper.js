@@ -26,7 +26,7 @@
 		});
 		jQuery.support.cors = true;
 
-
+		
 		
 		//stage and execute main routine
 		(window.ubermarklet = function() {

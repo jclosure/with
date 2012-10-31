@@ -31,6 +31,9 @@
 	}
 </style>
 
+<script type="text/javascript" src="/javascripts/fixupPath.js"></script>
+
+
 <script type="text/javascript">
 	//wiring
 	var parent_url = decodeURIComponent(document.location.hash.replace(/^#/, ''));
@@ -44,11 +47,17 @@
 	{
 		if (e.origin == parent_url)
 		{
-			$('#uberText').html(e.data);
-			$('#snippet_content').val(e.data);
+			var htmlSummary = $('#uberText');
+			htmlSummary.html(e.data).fixupAllPaths(function(container){
+				var sourceUrl = 'http://deoxy.org/';
+				return sourceUrl;
+			});
+			$('#snippet_content').val(htmlSummary.html());
 		}
 	}
 </script>
+
+
 
 <form id="snippet" action="/snippets" method="post">
 	<div class="capture-ui rounded-box">

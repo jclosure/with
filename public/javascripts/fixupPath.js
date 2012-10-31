@@ -309,6 +309,56 @@
 			url = path.makeUrlAbsolute(url, sourceUrl);
 			target.attr(urlAttribute, url);
 		});
+		return this;
 	};
+
+	$.fn.fixupAllPaths = function(resolveSourceUrl){
+			$(this).each(function() {
+			var container = $(this);
+			var sourceUrl = resolveSourceUrl(container);
+			//list of tags with urls - http://stackoverflow.com/questions/2725156/complete-list-of-html-tag-attributes-which-have-a-url-value
+			//html4
+			container.fixupPath('img','src', sourceUrl);
+			container.fixupPath('a','href', sourceUrl);
+			container.fixupPath('link','href', sourceUrl);
+
+			container.fixupPath('applet','codebase', sourceUrl);
+			container.fixupPath('area','href', sourceUrl);
+			container.fixupPath('base','href', sourceUrl);
+			container.fixupPath('blockquote','cite', sourceUrl);
+			container.fixupPath('body','background', sourceUrl);
+			container.fixupPath('del','cite', sourceUrl);
+			container.fixupPath('form','action', sourceUrl);
+			container.fixupPath('frame','longdesc', sourceUrl);
+			container.fixupPath('frame','src', sourceUrl);
+			container.fixupPath('head','profile', sourceUrl);
+			container.fixupPath('iframe','longdesc', sourceUrl);
+			container.fixupPath('iframe','src', sourceUrl);
+			container.fixupPath('img','longdesc', sourceUrl);
+			container.fixupPath('img','usemap', sourceUrl);
+			container.fixupPath('input','src', sourceUrl);
+			container.fixupPath('input','usemap', sourceUrl);
+			container.fixupPath('ins','cite', sourceUrl);
+			container.fixupPath('object','classid', sourceUrl);
+			container.fixupPath('object','codebase', sourceUrl);
+			container.fixupPath('object','data', sourceUrl);
+			container.fixupPath('object','usemap', sourceUrl);
+			container.fixupPath('q','cite', sourceUrl);
+			container.fixupPath('script','src', sourceUrl);
+			//html5
+			container.fixupPath('audio','src', sourceUrl);
+			container.fixupPath('button','formaction', sourceUrl);
+			container.fixupPath('command','icon', sourceUrl);
+			container.fixupPath('embed','src', sourceUrl);
+			container.fixupPath('html','manifest', sourceUrl);
+			container.fixupPath('input','formaction', sourceUrl);
+			container.fixupPath('source','src', sourceUrl);
+			container.fixupPath('video','poster', sourceUrl);
+			container.fixupPath('video','src', sourceUrl);
+			//css
+			//background:url()
+		});
+	
+	}
 
 })();
