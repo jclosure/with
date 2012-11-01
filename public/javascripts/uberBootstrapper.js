@@ -6,7 +6,7 @@
 		var scripts = [];
 		var jqver = "1.3.2";
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
-			scripts.push("http://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
+			scripts.push("https://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 
 		if (!window.getSelection && !document.getSelection)
 		 	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
@@ -26,7 +26,7 @@
 		});
 		jQuery.support.cors = true;
 
-		
+
 		
 		//stage and execute main routine
 		(window.ubermarklet = function() {
