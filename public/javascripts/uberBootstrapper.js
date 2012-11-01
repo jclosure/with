@@ -28,7 +28,7 @@
 
 		window.__uber = {};
 		__uber.$ = jQuery.noConflict(true);
-		window.$ = jQuery;
+		//window.$ = jQuery;
 		
 		//stage and execute main routine
 		(window.ubermarklet = function() {
