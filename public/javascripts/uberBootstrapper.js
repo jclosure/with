@@ -26,7 +26,9 @@
 		});
 		jQuery.support.cors = true;
 
-
+		window.__uber = {};
+		__uber.$ = jQuery.noConflict(true);
+		window.$ = jQuery;
 		
 		//stage and execute main routine
 		(window.ubermarklet = function() {
@@ -38,7 +40,7 @@
 
 			
 			//$("body").append(system.element);
-			$("body").append(rc.element);
+			__uber.$("body").append(rc.element);
 
 			//system.frame.show();
 			rc.frame.show();

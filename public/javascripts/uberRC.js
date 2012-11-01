@@ -18,7 +18,7 @@ var uberRemoteControl = function(ui_url, system){
 				</style>\
 			</div>";
 	
-	var element = $(markup);
+	var element = __uber.$(markup);
 	
 	var self = {
 		system: system,

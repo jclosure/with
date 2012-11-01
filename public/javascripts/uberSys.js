@@ -1,6 +1,6 @@
 
 function initUberFrame() {
-	var frame = $('#sysframe iframe');
+	var frame = __uber.$('#sysframe iframe');
 	frame.get(0).contentWindow.postMessage(initUberFrame.message, '*');	
 	frame.closest('.sysframe_veil').show();
 }
@@ -13,18 +13,18 @@ var uberSystem = function(ui_url) {
 			//process message
 			var message = event.data;
 			if (message == 'close') {
-				$('#sysframe').remove();
+				__uber.$('#sysframe').remove();
 			}
 			else if (message == 'exit') {
-				$('#sysframe').remove();
-				$('#rcframe').remove();
+				__uber.$('#sysframe').remove();
+				__uber.$('#rcframe').remove();
 			}
 			else if (message == 'targeting') {
 
 				alert('todo: hookup targeting')
 			}
 			else {
-				if ($('#sysframe').length == 0){
+				if (__uber.$('#sysframe').length == 0){
 
 					initUberFrame.message = self.getSelText();
 
@@ -41,8 +41,8 @@ var uberSystem = function(ui_url) {
 							</div>";
 
 
-					var element = $(markup);
-					$("body").append(element);
+					var element = __uber.$(markup);
+					__uber.$("body").append(element);
 				}
 			}
 		},
