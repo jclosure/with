@@ -10,6 +10,11 @@ var uberSystem = function(ui_url) {
 	
 	var self = {
 		work: function(event){ 
+
+			//disable selectorGadget if nec
+			if (window.selectorGadgetLoaded)
+					toggleSelectorGadget(document.home);
+
 			//process message
 			var message = event.data;
 			if (message == 'close') {
@@ -21,12 +26,16 @@ var uberSystem = function(ui_url) {
 			}
 			else if (message == 'targeting') {
 
-				alert('todo: hookup targeting')
+				toggleSelectorGadget(document.home);
 			}
 			else {
 				if (__uber.$('#sysframe').length == 0){
 
-					initUberFrame.message = self.getSelText();
+					//initUberFrame.message = self.getSelText();
+					
+					initUberFrame.message = __uber.$('.sg_selected').map(function(){
+						return self.getNodeText(this);
+					}).get().join('');
 
 					var markup = "\
 							<div id='sysframe'>\
@@ -113,6 +122,29 @@ var uberSystem = function(ui_url) {
 				s = "<div>" + htmlContent + "</div>";
 		    }
 			return s;
+		},
+	    getNodeText: function(node) {
+			var s = '',
+			range = null;
+
+			if (!!node) {
+		    	if (document.body.createTextRange) {
+			        range = document.body.createTextRange();
+			        range.moveToElementText(node);
+			    } else if (window.getSelection) {       
+			        var range = document.createRange();
+			        range.selectNodeContents(node);
+			    }
+			
+
+				range.setEndAfter(node); //TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
+				var content = range.cloneContents(); 
+				span = document.createElement('SPAN');
+				span.appendChild(content);
+				var htmlContent = span.innerHTML;
+				s = "<div>" + htmlContent + "</div>";
+			}
+			return s;
 		}
 	};
 
@@ -125,3 +157,55 @@ var uberSystem = function(ui_url) {
 	
 	return self;
 };
+
+
+	function toggleSelectorGadget(baseUrl){
+	  window.selectorGadgetLoaded = !window.selectorGadgetLoaded;
+	  baseUrl = baseUrl || "";
+	  importCSS(baseUrl+ '/javascripts/selectorgadget/lib/selectorgadget.css');
+	  importJS('http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js', 'jQuery', function() { // Load everything else when it is done.
+	    jQuery.noConflict();
+	    importJS(baseUrl + '/javascripts/selectorgadget/vendor/diff/diff_match_patch.js', 'diff_match_patch', function() {
+	      importJS(baseUrl + '/javascripts/selectorgadget/lib/dom.js', 'DomPredictionHelper', function() {
+	        importJS(baseUrl + '/javascripts/selectorgadget/lib/interface.js');
+	      });
+	    });
+	  });
+	}
+
+	function importJS(src, look_for, onload) {
+	  var s = document.createElement('script');
+	  s.setAttribute('type', 'text/javascript');
+	  s.setAttribute('src', src);
+	  if (onload) wait_for_script_load(look_for, onload);
+	  var head = document.getElementsByTagName('head')[0];
+	  if (head) {
+	    head.appendChild(s);
+	  } else {
+	    document.body.appendChild(s);
+	  }
+	}
+
+	function importCSS(href, look_for, onload) {
+	  var s = document.createElement('link');
+	  s.setAttribute('rel', 'stylesheet');
+	  s.setAttribute('type', 'text/css');
+	  s.setAttribute('media', 'screen');
+	  s.setAttribute('href', href);
+	  if (onload) wait_for_script_load(look_for, onload);
+	  var head = document.getElementsByTagName('head')[0];
+	  if (head) {
+	    head.appendChild(s);
+	  } else {
+	    document.body.appendChild(s);
+	  }
+	}
+
+	function wait_for_script_load(look_for, callback) {
+	  var interval = setInterval(function() {
+	    if (eval("typeof " + look_for) != 'undefined') {
+	      clearInterval(interval);
+	      callback();
+	    }
+	  }, 50);
+	}

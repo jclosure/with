@@ -48,11 +48,25 @@
 		if (e.origin == parent_url)
 		{
 			var htmlSummary = $('#uberText');
-			htmlSummary.html(e.data).fixupAllPaths(function(container){
-				var sourceUrl = '<%=h @url %>';
-				return sourceUrl;
-			});
-			$('#snippet_content').val(htmlSummary.html());
+			var snippetContent = $('#snippet_content');
+			snippetContent.val(e.data);
+			htmlSummary.html(e.data);
+			
+			try {
+		    	htmlSummary.fixupAllPaths(function(container){
+					var sourceUrl = '<%=h @url %>';
+					return sourceUrl;
+				});
+		    }
+		    catch(err) {
+		    	alert(err);
+		    }
+
+		    //note: htmlSummary.fixupAllPaths appears to be not wellformed in youtube
+		    var text = htmlSummary.html();
+		    //alert(html);
+			snippetContent.val(text);
+
 		}
 	}
 </script>

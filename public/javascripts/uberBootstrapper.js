@@ -10,6 +10,8 @@
 
 		if (!window.getSelection && !document.getSelection)
 		 	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
+
+		//scripts.push('https://raw.github.com/josscrowcroft/Simple-JavaScript-DOM-Inspector/master/inspector.js');
 		 
 		scripts.push(document.home + "/javascripts/json2.js");
 		scripts.push(document.home + "/javascripts/uberSys.js");
@@ -28,7 +30,6 @@
 
 		window.__uber = {};
 		__uber.$ = jQuery.noConflict(true);
-		//window.$ = jQuery;
 		
 		//stage and execute main routine
 		(window.ubermarklet = function() {
@@ -44,6 +45,8 @@
 
 			//system.frame.show();
 			rc.frame.show();
+
+
 		})();
 	}
 	
@@ -60,4 +63,5 @@
 		};
 		document.getElementsByTagName("head")[0].appendChild(script);
 	}
+
 })();
