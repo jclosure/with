@@ -75,8 +75,13 @@
 
 <form id="snippet" action="/snippets" method="post">
 	<div class="capture-ui rounded-box">
+		<div style="padding-top: 1px; padding-left: 5px; padding-right: 5px;">
+			<div class="actions" style="float: right;">
+		    	<input name="commit" type="submit" value="Create Snippet" />
+		    </div>
+			<h2>Your Snippet:</h2> 
+		</div>
 		<div class="capture-container rounded-box">
-			<h2>Here is your text:</h2>
 			<p id="uberText"><%= @text %></p>
 			<input id="snippet_content" name="snippet[content]" type="hidden" />
 		</div>
@@ -98,11 +103,6 @@
 						<h2>Add tags:</h2>
 						<textarea name="tags" wrap="physical" style="width: 300px; margin-right: 6px; height: 100px"></textarea>
 					</div>
-				</td>
-				<td style="vertical-align:top;">
-				  <div class="actions">
-				    <input name="commit" type="submit" value="Create Snippet" />
-				  </div>
 				</td>
 			</tr>
 		</table>
