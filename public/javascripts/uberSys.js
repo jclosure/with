@@ -26,17 +26,17 @@ var uberSystem = function(ui_url) {
 			}
 			else if (message == 'targeting') {
 
-				alert('disabled.. add forked selectorgadget repo as submodule.');
-				//toggleSelectorGadget(document.home);
+				//alert('disabled.. add forked selectorgadget repo as submodule.');
+				toggleSelectorGadget(document.home);
 			}
 			else {
 				if (__uber.$('#sysframe').length == 0){
 
-					initUberFrame.message = self.getSelText();
+					//initUberFrame.message = self.getSelText();
 					
-					// initUberFrame.message = __uber.$('.sg_selected').map(function(){
-					// 	return self.getNodeText(this);
-					// }).get().join('');
+					initUberFrame.message = __uber.$('.sg_selected').map(function(){
+						return self.getNodeText(this);
+					}).get().join('');
 
 					var markup = "\
 							<div id='sysframe'>\
