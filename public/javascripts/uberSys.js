@@ -164,7 +164,7 @@ var uberSystem = function(ui_url) {
 	  window.selectorGadgetLoaded = !window.selectorGadgetLoaded;
 	  baseUrl = baseUrl || "";
 	  importCSS(baseUrl+ '/javascripts/selectorgadget/lib/selectorgadget.css');
-	  importJS('http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js', 'jQuery', function() { // Load everything else when it is done.
+	  importJS('https://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js', 'jQuery', function() { // Load everything else when it is done.
 	    jQuery.noConflict();
 	    importJS(baseUrl + '/javascripts/selectorgadget/vendor/diff/diff_match_patch.js', 'diff_match_patch', function() {
 	      importJS(baseUrl + '/javascripts/selectorgadget/lib/dom.js', 'DomPredictionHelper', function() {
