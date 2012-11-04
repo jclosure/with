@@ -33,11 +33,15 @@ var uberSystem = function(ui_url) {
 				if (__uber.$('#sysframe').length == 0){
 
 					//initUberFrame.message = self.getSelText();
-					
-					initUberFrame.message = __uber.$('.sg_selected').map(function(){
+					var allSelected = __uber.$('.sg_selected');
+					var nonNestedSelected = allSelected.filter(function(){
+						var selected = __uber.$(this);
+						return allSelected.has(selected).length == 0;
+					});
+					initUberFrame.message = nonNestedSelected.map(function(){
 						return self.getNodeText(this);
-					}).get().join('');
-
+					}).get().join("\n\r");
+					
 					var markup = "\
 							<div id='sysframe'>\
 								<div class='sysframe_veil'>\

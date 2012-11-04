@@ -4,7 +4,7 @@
 (function(){
 	loadScript(document.home + "/javascripts/head.min.js", function(){
 		var scripts = [];
-		var jqver = "1.3.2";
+		var jqver = "1.4.4";
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("https://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 
