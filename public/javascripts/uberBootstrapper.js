@@ -29,10 +29,10 @@
 		jQuery.support.cors = true;
 
 		window.__uber = {};
-		__uber.$ = jQuery.noConflict(true);
+		__uber.$ = jQuery.noConflict();
 		
 		//stage and execute main routine
-		(window.ubermarklet = function() {
+		(__uber.marklet = function() {
 			var system = uberSystem('/marklet/capture'); //TODO: DEDICATED UI
 			var rc = uberRemoteControl('/marklet/rc', system); //TODO: DEDICATED UI
 			
