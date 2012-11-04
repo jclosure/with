@@ -1,17 +1,10 @@
 = With
 
-Collaboration site for cool kids who want to change the world and stack hella papers.
+Content collection interface for the web.  Backend Site for reading, sharing, and storing collected content.
 
-== Simple Approach
+== Driving Philosophy:
 	I hear and I forget. I see and I remember. I do and I understand.
 	- Confucius
 
 Production Site: http://with.herokuapp.com/
 
-== Next Steps
-
-	Integrate Devise
-	Integrate OmniAuth
-	Integrate Facebook
-	
-== If you'd like to join the collaborators, send a message to the maintainer.
