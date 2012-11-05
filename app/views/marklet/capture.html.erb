@@ -29,6 +29,35 @@
 		background-color: #FFFFFF;
 		padding: 5px 5px 5px 5px;
 	}
+	.big-button {
+		-moz-box-shadow:inset 0px 1px 0px 0px #d197fe;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #d197fe;
+		box-shadow:inset 0px 1px 0px 0px #d197fe;
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a53df6), color-stop(1, #7c16cb) );
+		background:-moz-linear-gradient( center top, #a53df6 5%, #7c16cb 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a53df6', endColorstr='#7c16cb');
+		background-color:#a53df6;
+		-moz-border-radius:6px;
+		-webkit-border-radius:6px;
+		border-radius:6px;
+		border:1px solid #9c33ed;
+		display:inline-block;
+		color:#ffffff;
+		font-family:arial;
+		font-size:28px;
+		font-weight:bold;
+		padding:13px 21px;
+		text-decoration:none;
+		text-shadow:1px 1px 0px #7d15cd;
+	}.big-button:hover {
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7c16cb), color-stop(1, #a53df6) );
+		background:-moz-linear-gradient( center top, #7c16cb 5%, #a53df6 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c16cb', endColorstr='#a53df6');
+		background-color:#7c16cb;
+	}.big-button:active {
+		position:relative;
+		top:1px;
+	}
 </style>
 
 <script type="text/javascript" src="/javascripts/fixupPath.js"></script>
@@ -75,12 +104,9 @@
 
 <form id="snippet" action="/snippets" method="post">
 	<div class="capture-ui rounded-box">
-		<div style="padding-top: 1px; padding-left: 5px; padding-right: 5px;">
-			<div class="actions" style="float: right;">
-		    	<input name="commit" type="submit" value="Create Snippet" />
-		    </div>
-			<h2>Your Snippet:</h2> 
-		</div>
+		<div style="padding-left: 5px; padding-top: 5px;">
+	    	<input name="commit" type="submit" class="big-button" value="Create Snippet" />
+	    </div>
 		<div class="capture-container rounded-box">
 			<p id="uberText"><%= @text %></p>
 			<input id="snippet_content" name="snippet[content]" type="hidden" />
