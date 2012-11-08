@@ -36,8 +36,8 @@
 			var system = uberSystem('/marklet/capture'); //TODO: DEDICATED UI
 			var rc = uberRemoteControl('/marklet/rc', system); //TODO: DEDICATED UI
 			
-			window.system = system;
-			window.rc = rc;	
+			__uber.system = system;
+			__uber.rc = rc;	
 
 			
 			//$("body").append(system.element);

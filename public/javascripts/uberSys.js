@@ -9,7 +9,9 @@ function initUberFrame() {
 var uberSystem = function(ui_url) {
 	
 	var self = {
+		workHistory: [],
 		work: function(event){ 
+
 
 			//disable selectorGadget if nec
 			if (window.selectorGadgetLoaded)
@@ -17,6 +19,8 @@ var uberSystem = function(ui_url) {
 
 			//process message
 			var message = event.data;
+			self.workHistory.push(message);
+
 			if (message == 'close') {
 				__uber.$('#sysframe').remove();
 			}
@@ -32,16 +36,26 @@ var uberSystem = function(ui_url) {
 			else {
 				if (__uber.$('#sysframe').length == 0){
 
-					//initUberFrame.message = self.getSelText();
-					var allSelected = __uber.$('.sg_selected');
-					var nonNestedSelected = allSelected.filter(function(){
-						var selected = __uber.$(this);
-						return allSelected.has(selected).length == 0;
-					});
-					initUberFrame.message = nonNestedSelected.map(function(){
-						return self.getNodeText(this);
-					}).get().join("\n\r");
 					
+					if (self.workHistory[self.workHistory.length - 2] == "targeting") {
+						//TARGETED CONTENT
+						var allSelected = __uber.$('.sg_selected');
+						var nonNestedSelected = allSelected.filter(function(){
+							var selected = __uber.$(this);
+							return allSelected.has(selected).length == 0;
+						});
+						initUberFrame.message = nonNestedSelected.map(function(){
+							// var bgc = getStyle(this, "background-color");
+							// alert(bgc);
+							return self.getNodeText(this);
+						}).get().join("\n\r");
+					}
+					else {
+						//SELECTED CONTENT
+						initUberFrame.message = self.getSelText();
+					}
+					
+
 					var markup = "\
 							<div id='sysframe'>\
 								<div class='sysframe_veil'>\
@@ -108,8 +122,13 @@ var uberSystem = function(ui_url) {
 							range.setEndAfter(containerNode.parentNode);
 					}
 				}
-			
-			
+
+
+				//WORKING: testing styles - CHANGE TO PLUGIN
+				// var bgc = getStyle(containerNode, "background-color");
+				// alert(bgc);
+
+
 				var content = range.cloneContents(); 
 				span = document.createElement('SPAN');
 				span.appendChild(content);
@@ -163,6 +182,17 @@ var uberSystem = function(ui_url) {
 	return self;
 };
 
+
+
+	//HELPERS
+
+	function getStyle(el,styleProp) {
+		if (el.currentStyle)
+			var setting = el.currentStyle[styleProp];
+		else if (window.getComputedStyle)
+			var setting = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+		return setting;
+	}
 
 	function toggleSelectorGadget(baseUrl){
 	  window.selectorGadgetLoaded = !window.selectorGadgetLoaded;
