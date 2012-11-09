@@ -1,5 +1,5 @@
 With::Application.routes.draw do
-  resources :snippets
+  
 
   #picks up the cor method from application_controller.rb used for preflight checks
   match '*all' => 'application#cor', :constraints => {:method => 'OPTIONS'} 
@@ -11,6 +11,8 @@ With::Application.routes.draw do
   root :to => "home#index"
   devise_for :users
   resources :users, :only => :show
+
+  resources :snippets
 
   get "marklet/index"
   get "marklet/capture"

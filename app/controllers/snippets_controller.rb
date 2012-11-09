@@ -5,7 +5,10 @@ class SnippetsController < ApplicationController
   # GET /snippets
   # GET /snippets.json
   def index
-    @snippets = Snippet.all
+    
+    #@snippets = Snippet.where(user_id: current_user._id)
+    @snippets = Snippet.where(user_id: User.first._id)
+    #@snippets = Snippet.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,7 +53,10 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(params[:snippet])
     
-    
+    @user = User.first
+
+    #@snippet.user = @user
+    @user.snippets.push(@snippet)
       
     respond_to do |format|
       if @snippet.save
