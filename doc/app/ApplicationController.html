@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class ApplicationController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/application_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActionController::Base
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-after_sign_in_path_for">#after_sign_in_path_for</a>
+    
+    <li><a href="#method-i-cor">#cor</a>
+    
+    <li><a href="#method-i-redirect_back_or_default">#redirect_back_or_default</a>
+    
+    <li><a href="#method-i-sign_in_redirect_hack">#sign_in_redirect_hack</a>
+    
+    <li><a href="#method-i-store_location">#store_location</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Users.html">Users</a>
+  
+    <li><a href="./Users/OmniauthCallbacksController.html">Users::OmniauthCallbacksController</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./HomeController.html">HomeController</a>
+  
+    <li><a href="./HomeHelper.html">HomeHelper</a>
+  
+    <li><a href="./MarkletController.html">MarkletController</a>
+  
+    <li><a href="./MarkletHelper.html">MarkletHelper</a>
+  
+    <li><a href="./NotificationsController.html">NotificationsController</a>
+  
+    <li><a href="./NotificationsHelper.html">NotificationsHelper</a>
+  
+    <li><a href="./Notifier.html">Notifier</a>
+  
+    <li><a href="./Snippet.html">Snippet</a>
+  
+    <li><a href="./SnippetsController.html">SnippetsController</a>
+  
+    <li><a href="./SnippetsHelper.html">SnippetsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class ApplicationController</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-after_sign_in_path_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">after_sign_in_path_for</span><span
+            class="method-args">(resource_or_scope)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="after_sign_in_path_for-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">after_sign_in_path_for</span>(<span class="ruby-identifier">resource_or_scope</span>)
+  <span class="ruby-identifier">redirect_back_or_default</span>(<span class="ruby-identifier">resource_or_scope</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- after_sign_in_path_for-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- after_sign_in_path_for-method -->
+
+    
+      <div id="method-i-cor" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cor</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>before_filter :<a
+href="ApplicationController.html#method-i-sign_in_redirect_hack">#sign_in_redirect_hack</a>
+before_filter :<a
+href="ApplicationController.html#method-i-store_location">#store_location</a></p>
+          
+
+          
+          <div class="method-source-code" id="cor-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cor</span>
+        <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Access-Control-Allow-Origin&quot;</span>] = <span class="ruby-string">&quot;*&quot;</span>
+        <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Access-Control-Allow-Methods&quot;</span>] = <span class="ruby-node">%w{GET POST PUT DELETE}</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;,&quot;</span>)
+        <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Access-Control-Allow-Headers&quot;</span>] = <span class="ruby-node">%w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;,&quot;</span>)
+        <span class="ruby-identifier">head</span>(<span class="ruby-value">:ok</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_method</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;OPTIONS&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cor-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- cor-method -->
+
+    
+      <div id="method-i-redirect_back_or_default" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">redirect_back_or_default</span><span
+            class="method-args">(default)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>devise methods</p>
+          
+
+          
+          <div class="method-source-code" id="redirect_back_or_default-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">redirect_back_or_default</span>(<span class="ruby-identifier">default</span>)
+  <span class="ruby-identifier">session</span>[<span class="ruby-value">:passthru</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">root_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- redirect_back_or_default-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- redirect_back_or_default-method -->
+
+    
+      <div id="method-i-sign_in_redirect_hack" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sign_in_redirect_hack</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sign_in_redirect_hack-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 16</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">sign_in_redirect_hack</span> 
+<span class="ruby-comment">#if controller_name == 'snippets' and action_name == 'new' and not current_user.blank? </span>
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-string">'snippets'</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">user_signed_in?</span>
+        <span class="ruby-comment">#redirect_to '/users/sign_in?passthru=' + request.fullpath</span>
+        <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;users&quot;</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;sign_in&quot;</span>, <span class="ruby-value">:passthru</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">fullpath</span>  
+    <span class="ruby-keyword">end</span> 
+  <span class="ruby-keyword">end</span></pre>
+          </div><!-- sign_in_redirect_hack-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- sign_in_redirect_hack-method -->
+
+    
+      <div id="method-i-store_location" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">store_location</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="store_location-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">store_location</span>
+  <span class="ruby-identifier">session</span>[<span class="ruby-value">:passthru</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:passthru</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:passthru</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- store_location-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- store_location-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

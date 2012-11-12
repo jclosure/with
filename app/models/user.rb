@@ -53,7 +53,8 @@ class User
 
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    p auth.to_yaml
+    user = User.where(:email => auth.info.email).first
     unless user
       user = User.create(name:auth.extra.raw_info.name,
                            provider:auth.provider,
@@ -63,6 +64,10 @@ class User
                            )
     end
     user
+  end
+
+  def self.persisted?
+    return if User.where(:email => auth.info.email).first
   end
 
 end
