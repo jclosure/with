@@ -24,10 +24,13 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
-  field :name
-  validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  field :name, :type => String
+  field :uid, :type => String
+  field :provider, :type => String
+
+  validates_presence_of :name, :email
+  validates_uniqueness_of :email, :case_sensitive => false
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid
 
   has_many :snippets, :class_name => "Snippet", :inverse_of => :user, :validate => false
 
@@ -48,8 +51,7 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
-  field :uid, :type => String
-  field :provider, :type => String
+
 
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -64,7 +66,6 @@ class User
                            email:auth.info.email,
                            password:Devise.friendly_token[0,20]
                            )
-      user.save!
       p "created new User with _id=" + user._id
     end
     user
