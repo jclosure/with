@@ -71,9 +71,8 @@ class User
     user
   end
 
-  def self.persisted?
-    #return if User.where(:email => auth.info.email).first
-    return true
-  end
+  # def self.persisted?
+  #   return if User.where(:email => auth.info.email).first
+  # end
 
 end
