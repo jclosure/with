@@ -6,9 +6,12 @@ class SnippetsController < ApplicationController
   # GET /snippets.json
   def index
     
-    #@snippets = Snippet.where(user_id: current_user._id)
-    @snippets = Snippet.where(user_id: User.first._id)
-    #@snippets = Snippet.all
+    ## per user
+    # @user = User.where(email: current_user.email).first
+    # @snippets = @user.snippets
+
+    ## all
+    @snippets = Snippet.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,7 +37,7 @@ class SnippetsController < ApplicationController
     
     @snippet.source_url = params[:source] || "source url not sent"
     
-    @user = User.first #todo: complete this.
+    #@user = User.first #todo: complete this.
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,9 +56,12 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(params[:snippet])
     
-    @user = User.first
+    ## per user
+    # @user = User.where(:email => current_user.email)
+    # @snippet.user = @user
 
-    #@snippet.user = @user
+    ## hack to assoc with first (maybe use an annon user for this)
+    @user = User.first
     @user.snippets.push(@snippet)
       
     respond_to do |format|
