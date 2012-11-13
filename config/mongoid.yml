@@ -3,8 +3,8 @@ production:
     default:
       uri: <%= "mongodb://test:test@staff.mongohq.com:10079/app3036868"  %>
       options:
-        skip_version_check: true
-        safe: true
+        #skip_version_check: true
+        #safe: true
 development:
   # Configure available database sessions. (required)
   sessions:
