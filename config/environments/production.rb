@@ -2,7 +2,8 @@ With::Application.configure do
 # Settings specified here will take precedence over those in config/application.rb
 
 # Code is not reloaded between requests
-  config.cache_classes = true
+#IMPORTANT!!!!! TURN THIS BACK TO true
+  config.cache_classes = false
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
