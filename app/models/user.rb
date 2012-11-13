@@ -55,22 +55,24 @@ class User
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     #p auth.to_yaml
     user = User.where(:email => auth.info.email).first
-    p user.to_yaml
+
     unless user
       p "creating new User"
-      user = User.create(name:auth.extra.raw_info.name,
+      user = User.create!(name:auth.extra.raw_info.name,
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
                            password:Devise.friendly_token[0,20]
                            )
+      user.save!
       p "created new User with _id=" + user._id
     end
     user
   end
 
   def self.persisted?
-    return if User.where(:email => auth.info.email).first
+    #return if User.where(:email => auth.info.email).first
+    return true
   end
 
 end
