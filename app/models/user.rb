@@ -4,7 +4,7 @@ class User
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable
+         :omniauthable, :token_authenticatable
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -30,7 +30,7 @@ class User
 
   validates_presence_of :name, :email
   validates_uniqueness_of :email, :case_sensitive => false
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :authentication_token, :remember_me
 
   has_many :snippets, :class_name => "Snippet", :inverse_of => :user, :validate => false
 
@@ -49,7 +49,7 @@ class User
   # field :locked_at,       :type => Time
 
   ## Token authenticatable
-  # field :authentication_token, :type => String
+  field :authentication_token, :type => String
 
 
 
@@ -68,6 +68,8 @@ class User
                            )
       p "created new User with _id=" + user._id
     end
+    user.authentication_token = auth.credentials.token
+    user.save!
     user
   end
 
