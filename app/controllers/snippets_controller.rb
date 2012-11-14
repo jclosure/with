@@ -7,11 +7,13 @@ class SnippetsController < ApplicationController
   def index
     
     ## per user
-    # @user = User.where(email: current_user.email).first
-    # @snippets = @user.snippets
-
+    if (user_signed_in?)
+      @user = User.where(email: current_user.email).first
+      @snippets = @user.snippets
+    else
     ## all
-    @snippets = Snippet.all
+      @snippets = Snippet.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,8 +63,10 @@ class SnippetsController < ApplicationController
     # @snippet.user = @user
 
     ## hack to assoc with first (maybe use an annon user for this)
-    @user = User.first
-    @user.snippets.push(@snippet)
+    if (user_signed_in?)
+      @user = User.where(email: current_user.email).first
+      @user.snippets.push(@snippet)
+    end
       
     respond_to do |format|
       if @snippet.save

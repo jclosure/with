@@ -38,7 +38,13 @@
 				<a data-command="exit" href="#">Exit</a>
 			</div>
 		</li>
+		<li>
+			<div>
+				<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+			</div>
+		</li>
 	</ul>
+
 </div>
 <script>
 	$(function(){
