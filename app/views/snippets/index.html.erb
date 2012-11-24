@@ -1,10 +1,4 @@
 
-
-
-<div id="search" style="text-align: center; width: 100%;">
-
-	<h1 class="center" style="font-size: 48px">Breadcrumbs</h1>
-	<br />
 	<style>
 		#search_box {
 			background:-moz-linear-gradient(top, #ffd73a, #ffa500);
@@ -43,10 +37,14 @@
 			top:2px;
 			width:54px;
 		}
-		#search {
-			background-image: url('/images/crumb_pile.jpg');
-		}
+		
 	</style>
+
+
+
+
+
+<div id="search" style="display: inline-block; vertical-align: middle; text-align: center;">
 
 	<form action="#" id="search_box" class="center">
 		<div class="wrapper">
@@ -101,7 +99,7 @@
 		    <td><%= link_to 'Show', snippet %></td>
 		    <td><%= link_to 'Edit', edit_snippet_path(snippet) %></td>
 		    <td><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></td>
-		    <td>&nbsp;&nbsp;&nbsp;<span style="font-weight: bold"><%=h snippet.source_url %></span></td>
+		    <td>&nbsp;<img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' />&nbsp;<div style="display: inline-block; font-weight: bold"><a href='<%= snippet.source_url %>'><%=h snippet.source_url %></a></div></td>
 			</tr>
 			</table>
 		</div>
