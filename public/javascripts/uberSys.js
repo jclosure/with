@@ -36,11 +36,6 @@ var uberSystem = function(ui_url) {
 			else if (message == 'capture') {
 				if (__uber.$('#sysframe').length == 0){
 
-					var styles = [
-						'background-color',
-						'color'
-					];
-
 							
 					if (self.workHistory[self.workHistory.length - 2] == "targeting") {
 						//TARGETED CONTENT
@@ -57,7 +52,6 @@ var uberSystem = function(ui_url) {
 					else {
 						//SELECTED CONTENT
 						var html =  self.getSelText();
-						html = ensureComputedStyles(__uber.$(html), html, styles);
 						initUberFrame.message = html;
 					}
 					
@@ -132,25 +126,20 @@ var uberSystem = function(ui_url) {
 					}
 				}
 
-
-				//WORKING: testing styles - CHANGE TO PLUGIN
-				// var bgc = getStyle(containerNode, "background-color");
-				// alert(bgc);
-
-
 				var content = range.cloneContents(); 
+
+
+				//set styles
+				$node = __uber.$(containerNode);
+				$node.removeClass('sg_selected');
+				var content = range.cloneContents(); 
+				setStylesRecursive(containerNode.parentNode, content.firstChild);
+				$node.addClass('sg_selected');
+
+
 				span = document.createElement('SPAN');
 				span.appendChild(content);
-				////fixup images
-				//var markup = $(span).hide();
-				//$('body').append(markup);
-				//markup.find('img').each(function(evt){
-				//	//debugger;	
-				//	var img = $(this);
-				//	var styles = img.curStyles("max-width", "width");
-				//	img.css('maxWidth', styles.maxWidth);
-				//});
-				//markup.show();
+				
 				var htmlContent = __uber.$(span).html();//.innerHTML;
 				s = "<div>" + htmlContent + "</div>";
 		    }
@@ -172,16 +161,13 @@ var uberSystem = function(ui_url) {
 
 				range.setEndAfter(node); //TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
 				
+				//set styles
 				$node = __uber.$(node);
 				$node.removeClass('sg_selected');
-
 				var content = range.cloneContents(); 
-
 				setStylesRecursive(node, content.firstChild);
-
 				$node.addClass('sg_selected');
 
-				debugger;
 				span = document.createElement('SPAN');
 				span.appendChild(content);
 				var htmlContent = __uber.$(span).html();//.innerHTML;
@@ -209,13 +195,16 @@ var uberSystem = function(ui_url) {
 	function setStylesRecursive(node, content){
 		if (!!node.childNodes && node.childNodes.length > 0){
 			for(var i=0; i<node.childNodes.length; i++){
-				var nodeChild = node.childNodes[i];
-				var contentChild = content.childNodes[i];
-				setStylesRecursive(nodeChild, contentChild);
+				var set = {};
+				set.nodeChild = node.childNodes[i];
+				set.contentChild = content.childNodes[i];
+				if (set.nodeChild && set.contentChild)
+				setStylesRecursive(set.nodeChild, set.contentChild);
 			}
 		}
 		if (content.setAttribute){
 			var styles = __uber.$(node).getStyleObject();
+			//transparent background workaround
 			if (styles['background-color'] == "rgba(0, 0, 0, 0)" || styles['background-color'] == 'transparent') {
 				var body = __uber.$(node).closest('body').get(0);
 				styles['background-color'] = getStyle(body, 'background-color');
@@ -225,7 +214,6 @@ var uberSystem = function(ui_url) {
 				var style = styles[name];
 				strStyles += name + ":" + style + ";" 
 			}
-			debugger;
 			content.setAttribute('style', strStyles);
 		}
 	}
@@ -259,7 +247,6 @@ var uberSystem = function(ui_url) {
 	                } catch (e) {}
 	        }
 	    }
-	   debugger;
 	   $dest = $(dest);
 	   var s = $dest.prop('style');
 	   $dest.attr('style', s);

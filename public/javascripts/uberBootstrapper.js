@@ -35,8 +35,7 @@
 
 		//jQuery extensions
 		__uber.$.fn.getStyleObject = function(evt){
-			debugger;
-		    var dom = $(this).get(0);
+		    var dom = __uber.$(this).get(0);
 		    var style;
 		    var returns = {};
 		    if(win.getComputedStyle){
