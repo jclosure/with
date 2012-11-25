@@ -4,7 +4,7 @@
 (function(){
 	loadScript(document.home + "/javascripts/head.min.js", function(){
 		var scripts = [];
-		var jqver = "1.4.4";
+		var jqver = "1.7.2";
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("https://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 
@@ -28,8 +28,50 @@
 		});
 		jQuery.support.cors = true;
 
-		window.__uber = {};
+		var win = window;
+
+		win.__uber = {};
 		__uber.$ = jQuery.noConflict();
+
+		//jQuery extensions
+		__uber.$.fn.getStyleObject = function(evt){
+			debugger;
+		    var dom = $(this).get(0);
+		    var style;
+		    var returns = {};
+		    if(win.getComputedStyle){
+		        var camelize = function(a,b){
+		            return b.toUpperCase();
+		        }
+		        style = win.getComputedStyle(dom, null);
+		        if (style) {
+			        for(var i = 0, l = style.length; i < l; i++){
+			            var prop = style[i];
+			            //var camel = prop.replace(/\-([a-z])/, camelize);
+			            var val = style.getPropertyValue(prop);
+			            //returns[camel] = val;
+			            returns[prop] = val;
+			        }
+			    }
+		        return returns;
+		    }
+		    if(dom.currentStyle){
+		        style = dom.currentStyle;
+		        for(var prop in style){
+		            returns[prop] = style[prop];
+		        }
+		        return returns;
+		    }
+		    if(style = dom.style){
+		        for(var prop in style){
+		            if(typeof style[prop] != 'function'){
+		                returns[prop] = style[prop];
+		            }
+		        }
+		        return returns;
+		    }
+		    return returns;
+		};
 		
 		//stage and execute main routine
 		(__uber.marklet = function() {

@@ -36,7 +36,12 @@ var uberSystem = function(ui_url) {
 			else if (message == 'capture') {
 				if (__uber.$('#sysframe').length == 0){
 
-					
+					var styles = [
+						'background-color',
+						'color'
+					];
+
+							
 					if (self.workHistory[self.workHistory.length - 2] == "targeting") {
 						//TARGETED CONTENT
 						var allSelected = __uber.$('.sg_selected');
@@ -45,14 +50,15 @@ var uberSystem = function(ui_url) {
 							return allSelected.has(selected).length == 0;
 						});
 						initUberFrame.message = nonNestedSelected.map(function(){
-							// var bgc = getStyle(this, "background-color");
-							// alert(bgc);
-							return self.getNodeText(this);
+							var html = self.getNodeText(this);
+							return html;
 						}).get().join("\n\r");
 					}
 					else {
 						//SELECTED CONTENT
-						initUberFrame.message = self.getSelText();
+						var html =  self.getSelText();
+						html = ensureComputedStyles(__uber.$(html), html, styles);
+						initUberFrame.message = html;
 					}
 					
 
@@ -145,7 +151,7 @@ var uberSystem = function(ui_url) {
 				//	img.css('maxWidth', styles.maxWidth);
 				//});
 				//markup.show();
-				var htmlContent = span.innerHTML;
+				var htmlContent = __uber.$(span).html();//.innerHTML;
 				s = "<div>" + htmlContent + "</div>";
 		    }
 			return s;
@@ -165,11 +171,23 @@ var uberSystem = function(ui_url) {
 			
 
 				range.setEndAfter(node); //TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
+				
+				$node = __uber.$(node);
+				$node.removeClass('sg_selected');
+
 				var content = range.cloneContents(); 
+
+				setStylesRecursive(node, content.firstChild);
+
+				$node.addClass('sg_selected');
+
+				debugger;
 				span = document.createElement('SPAN');
 				span.appendChild(content);
-				var htmlContent = span.innerHTML;
+				var htmlContent = __uber.$(span).html();//.innerHTML;
+
 				s = "<div>" + htmlContent + "</div>";
+
 			}
 			return s;
 		}
@@ -188,6 +206,29 @@ var uberSystem = function(ui_url) {
 
 
 	//HELPERS
+	function setStylesRecursive(node, content){
+		if (!!node.childNodes && node.childNodes.length > 0){
+			for(var i=0; i<node.childNodes.length; i++){
+				var nodeChild = node.childNodes[i];
+				var contentChild = content.childNodes[i];
+				setStylesRecursive(nodeChild, contentChild);
+			}
+		}
+		if (content.setAttribute){
+			var styles = __uber.$(node).getStyleObject();
+			if (styles['background-color'] == "rgba(0, 0, 0, 0)" || styles['background-color'] == 'transparent') {
+				var body = __uber.$(node).closest('body').get(0);
+				styles['background-color'] = getStyle(body, 'background-color');
+			}
+			var strStyles = "";
+			for (name in styles){
+				var style = styles[name];
+				strStyles += name + ":" + style + ";" 
+			}
+			debugger;
+			content.setAttribute('style', strStyles);
+		}
+	}
 
 	function getStyle(el,styleProp) {
 		if (el.currentStyle)
@@ -195,6 +236,34 @@ var uberSystem = function(ui_url) {
 		else if (window.getComputedStyle)
 			var setting = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
 		return setting;
+	}
+
+	function ensureComputedStyles(src, dest, styles){
+		if (dest == "string")
+			dest = __uber.$(dest).get(0);
+
+	    for (var i=0;i<styles.length;i++) {
+	    	var style = getStyle(src, styles[i]);
+	        // Do not use `hasOwnProperty`, nothing will get copied
+	        //if ( typeof style == "string" && style != "cssText" && !/\d/.test(style) ) {
+	        if ( typeof style == "string" && style != "cssText" ) {
+	                // The try is for setter only properties
+	                try {
+	                        dest.style[styles[i]] = style;
+	                        // `fontSize` comes before `font` If `font` is empty, `fontSize` gets
+	                        // overwritten.  So make sure to reset this property. (hackyhackhack)
+	                        // Other properties may need similar treatment
+	                        if ( i == "font" ) {
+	                                dest.style.fontSize = style.fontSize;
+	                        }
+	                } catch (e) {}
+	        }
+	    }
+	   debugger;
+	   $dest = $(dest);
+	   var s = $dest.prop('style');
+	   $dest.attr('style', s);
+	    return __uber.$dest.html();
 	}
 
 	function toggleSelectorGadget(baseUrl){
