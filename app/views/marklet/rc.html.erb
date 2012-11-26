@@ -19,6 +19,12 @@
 	</style>
 	<ul class="rc-ribbon">
 		<li>
+			<div style="border: 1px solid #cccccc; padding-left: 2px;">
+				<span>include style?</span>
+				<input type=checkbox name="toggleStyles" data-command="toggleStyles" />
+			</div>
+		</li>
+		<li>
 			<div>
 				<a data-command="capture" href="#">Capture</a>
 			</div>
@@ -47,11 +53,15 @@
 
 </div>
 <script>
+	
+</script>
+<script>
 	$(function(){
 		
 		var triggers = $('.rc-ribbon').find('[data-command]');
 		triggers.click(function(evt){
-			evt.preventDefault();
+			if (this.tagName.toUpperCase() == "A")
+				evt.preventDefault();
 			triggers.each(function(){ $(this).parent().removeClass('rc-selected-tool'); });
 			var trigger = $(this);
 			trigger.parent().addClass('rc-selected-tool');

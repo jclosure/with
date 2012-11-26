@@ -12,16 +12,24 @@ var uberSystem = function(ui_url) {
 		workHistory: [],
 		work: function(event){ 
 
+			var message = event.data;
+
+
+			//configurator commands
+			if (message == 'toggleStyles') {
+				self.options.withStyle = !self.options.withStyle;
+				return; //bail out
+			}
 
 			//disable selectorGadget if nec
 			if (window.selectorGadgetLoaded)
 					toggleSelectorGadget(document.home);
 
-			//process message
-			var message = event.data;
-			self.workHistory.push(message);
 
-			if (message == 'close') {
+			//work commands
+			self.workHistory.push(message);
+			
+		    if (message == 'close') {
 				__uber.$('#sysframe').remove();
 			}
 			else if (message == 'exit') {
@@ -101,15 +109,6 @@ var uberSystem = function(ui_url) {
 		
 			if (!!range) {
 				
-				////fixup images
-				//var markup = $(range.commonAncestorContainer);
-				//markup.find('img').each(function(evt){	
-				//	var img = $(this);
-				//	var styles = img.curStyles("max-width", "width");
-				//	img.css('maxWidth', styles.maxWidth);
-				//});
-				
-				
 				//range extension code - works but may not be desirable
 				//TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
 				var containerNode = range.commonAncestorContainer;
@@ -130,11 +129,17 @@ var uberSystem = function(ui_url) {
 
 
 				//set styles
-				$node = __uber.$(containerNode);
-				$node.removeClass('sg_selected');
-				var content = range.cloneContents(); 
-				setStylesRecursive(containerNode.parentNode, content.firstChild);
-				$node.addClass('sg_selected');
+				var content;
+				if (!!self.options.withStyle) {
+					$node = __uber.$(containerNode);
+					$node.removeClass('sg_selected');
+					content = range.cloneContents(); 
+					setStylesRecursive(containerNode.parentNode, content.firstChild);
+					$node.addClass('sg_selected');
+				}
+				else {
+					content = range.cloneContents();
+				}
 
 
 				span = document.createElement('SPAN');
@@ -162,11 +167,17 @@ var uberSystem = function(ui_url) {
 				range.setEndAfter(node); //TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
 				
 				//set styles
-				$node = __uber.$(node);
-				$node.removeClass('sg_selected');
-				var content = range.cloneContents(); 
-				setStylesRecursive(node, content.firstChild);
-				$node.addClass('sg_selected');
+				var content;
+				if (!!self.options.withStyle) {
+					$node = __uber.$(node);
+					$node.removeClass('sg_selected');
+					content = range.cloneContents(); 
+					setStylesRecursive(node, content.firstChild);
+					$node.addClass('sg_selected');
+				}
+				else {
+					content = range.cloneContents();
+				}
 
 				span = document.createElement('SPAN');
 				span.appendChild(content);
@@ -176,6 +187,9 @@ var uberSystem = function(ui_url) {
 
 			}
 			return s;
+		},
+		options: {
+			withStyle: false
 		}
 	};
 
@@ -226,32 +240,7 @@ var uberSystem = function(ui_url) {
 		return setting;
 	}
 
-	function ensureComputedStyles(src, dest, styles){
-		if (dest == "string")
-			dest = __uber.$(dest).get(0);
 
-	    for (var i=0;i<styles.length;i++) {
-	    	var style = getStyle(src, styles[i]);
-	        // Do not use `hasOwnProperty`, nothing will get copied
-	        //if ( typeof style == "string" && style != "cssText" && !/\d/.test(style) ) {
-	        if ( typeof style == "string" && style != "cssText" ) {
-	                // The try is for setter only properties
-	                try {
-	                        dest.style[styles[i]] = style;
-	                        // `fontSize` comes before `font` If `font` is empty, `fontSize` gets
-	                        // overwritten.  So make sure to reset this property. (hackyhackhack)
-	                        // Other properties may need similar treatment
-	                        if ( i == "font" ) {
-	                                dest.style.fontSize = style.fontSize;
-	                        }
-	                } catch (e) {}
-	        }
-	    }
-	   $dest = $(dest);
-	   var s = $dest.prop('style');
-	   $dest.attr('style', s);
-	    return __uber.$dest.html();
-	}
 
 	function toggleSelectorGadget(baseUrl){
 	  window.selectorGadgetLoaded = !window.selectorGadgetLoaded;
