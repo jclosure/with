@@ -59,7 +59,7 @@ var uberSystem = function(ui_url) {
 					var markup = "\
 							<div id='sysframe'>\
 								<div class='sysframe_veil'>\
-									<iframe style='z-index:9998!important;' src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
+									<iframe style='z-index:99999!important;' src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
 								</div>\
 								<style type='text/css'>\
 									.sysframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
