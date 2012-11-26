@@ -12,16 +12,24 @@ var uberSystem = function(ui_url) {
 		workHistory: [],
 		work: function(event){ 
 
+			var message = event.data;
+
+
+			//configurator commands
+			if (message == 'toggleStyles') {
+				self.options.withStyle = !self.options.withStyle;
+				return; //bail out
+			}
 
 			//disable selectorGadget if nec
 			if (window.selectorGadgetLoaded)
 					toggleSelectorGadget(document.home);
 
-			//process message
-			var message = event.data;
+
+			//work commands
 			self.workHistory.push(message);
 
-			if (message == 'close') {
+		    if (message == 'close') {
 				__uber.$('#sysframe').remove();
 			}
 			else if (message == 'exit') {
@@ -36,7 +44,7 @@ var uberSystem = function(ui_url) {
 			else if (message == 'capture') {
 				if (__uber.$('#sysframe').length == 0){
 
-					
+							
 					if (self.workHistory[self.workHistory.length - 2] == "targeting") {
 						//TARGETED CONTENT
 						var allSelected = __uber.$('.sg_selected');
@@ -45,21 +53,21 @@ var uberSystem = function(ui_url) {
 							return allSelected.has(selected).length == 0;
 						});
 						initUberFrame.message = nonNestedSelected.map(function(){
-							// var bgc = getStyle(this, "background-color");
-							// alert(bgc);
-							return self.getNodeText(this);
+							var html = self.getNodeText(this);
+							return html;
 						}).get().join("\n\r");
 					}
 					else {
 						//SELECTED CONTENT
-						initUberFrame.message = self.getSelText();
+						var html =  self.getSelText();
+						initUberFrame.message = html;
 					}
 					
 
 					var markup = "\
 							<div id='sysframe'>\
 								<div class='sysframe_veil'>\
-									<iframe style='z-index:9998!important;' src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
+									<iframe style='z-index:99999!important;' src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
 								</div>\
 								<style type='text/css'>\
 									.sysframe_veil { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
@@ -101,15 +109,6 @@ var uberSystem = function(ui_url) {
 		
 			if (!!range) {
 				
-				////fixup images
-				//var markup = $(range.commonAncestorContainer);
-				//markup.find('img').each(function(evt){	
-				//	var img = $(this);
-				//	var styles = img.curStyles("max-width", "width");
-				//	img.css('maxWidth', styles.maxWidth);
-				//});
-				
-				
 				//range extension code - works but may not be desirable
 				//TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
 				var containerNode = range.commonAncestorContainer;
@@ -126,26 +125,27 @@ var uberSystem = function(ui_url) {
 					}
 				}
 
-
-				//WORKING: testing styles - CHANGE TO PLUGIN
-				// var bgc = getStyle(containerNode, "background-color");
-				// alert(bgc);
-
-
 				var content = range.cloneContents(); 
+
+
+				//set styles
+				var content;
+				if (!!self.options.withStyle) {
+					$node = __uber.$(containerNode);
+					$node.removeClass('sg_selected');
+					content = range.cloneContents(); 
+					setStylesRecursive(containerNode.parentNode, content.firstChild);
+					$node.addClass('sg_selected');
+				}
+				else {
+					content = range.cloneContents();
+				}
+
+
 				span = document.createElement('SPAN');
 				span.appendChild(content);
-				////fixup images
-				//var markup = $(span).hide();
-				//$('body').append(markup);
-				//markup.find('img').each(function(evt){
-				//	//debugger;	
-				//	var img = $(this);
-				//	var styles = img.curStyles("max-width", "width");
-				//	img.css('maxWidth', styles.maxWidth);
-				//});
-				//markup.show();
-				var htmlContent = span.innerHTML;
+				
+				var htmlContent = __uber.$(span).html();//.innerHTML;
 				s = "<div>" + htmlContent + "</div>";
 		    }
 			return s;
@@ -165,13 +165,31 @@ var uberSystem = function(ui_url) {
 			
 
 				range.setEndAfter(node); //TODO: MAKE SURE THIS WORKS IN NONHTML5 BROWSERS
-				var content = range.cloneContents(); 
+				
+				//set styles
+				var content;
+				if (!!self.options.withStyle) {
+					$node = __uber.$(node);
+					$node.removeClass('sg_selected');
+					content = range.cloneContents(); 
+					setStylesRecursive(node, content.firstChild);
+					$node.addClass('sg_selected');
+				}
+				else {
+					content = range.cloneContents();
+				}
+
 				span = document.createElement('SPAN');
 				span.appendChild(content);
-				var htmlContent = span.innerHTML;
+				var htmlContent = __uber.$(span).html();//.innerHTML;
+
 				s = "<div>" + htmlContent + "</div>";
+
 			}
 			return s;
+		},
+		options: {
+			withStyle: false
 		}
 	};
 
@@ -188,6 +206,40 @@ var uberSystem = function(ui_url) {
 
 
 	//HELPERS
+	function setStylesRecursive(node, content){
+		if (!!node.childNodes && node.childNodes.length > 0){
+			for(var i=0; i<node.childNodes.length; i++){
+				var set = {};
+				set.nodeChild = node.childNodes[i];
+				set.contentChild = content.childNodes[i];
+				if (set.nodeChild && set.contentChild)
+				setStylesRecursive(set.nodeChild, set.contentChild);
+			}
+		}
+		if (content.setAttribute){
+			var styles = __uber.$(node).getStyleObject();
+
+			//transparent background workaround
+			//todo: make more efficient
+			this.current = node;
+			var exit = false;
+			while (!exit && this.current.tagName.toUpperCase() != "HTML"){
+				var bgColor = getStyle(this.current, 'background-color');
+				if (bgColor != "rgba(0, 0, 0, 0)" && bgColor != "transparent"){
+					styles['background-color'] = bgColor;
+					exit = true;
+				}
+				this.current = this.current.parentNode;
+			}
+
+			var strStyles = "";
+			for (name in styles){
+				var style = styles[name];
+				strStyles += name + ":" + style + ";" 
+			}
+			content.setAttribute('style', strStyles);
+		}
+	}
 
 	function getStyle(el,styleProp) {
 		if (el.currentStyle)
@@ -196,6 +248,8 @@ var uberSystem = function(ui_url) {
 			var setting = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
 		return setting;
 	}
+
+
 
 	function toggleSelectorGadget(baseUrl){
 	  window.selectorGadgetLoaded = !window.selectorGadgetLoaded;
