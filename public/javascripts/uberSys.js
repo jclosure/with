@@ -28,7 +28,7 @@ var uberSystem = function(ui_url) {
 
 			//work commands
 			self.workHistory.push(message);
-			
+
 		    if (message == 'close') {
 				__uber.$('#sysframe').remove();
 			}
@@ -218,11 +218,20 @@ var uberSystem = function(ui_url) {
 		}
 		if (content.setAttribute){
 			var styles = __uber.$(node).getStyleObject();
+
 			//transparent background workaround
-			if (styles['background-color'] == "rgba(0, 0, 0, 0)" || styles['background-color'] == 'transparent') {
-				var body = __uber.$(node).closest('body').get(0);
-				styles['background-color'] = getStyle(body, 'background-color');
+			//todo: make more efficient
+			this.current = node;
+			var exit = false;
+			while (!exit && this.current.tagName.toUpperCase() != "HTML"){
+				var bgColor = getStyle(this.current, 'background-color');
+				if (bgColor != "rgba(0, 0, 0, 0)" && bgColor != "transparent"){
+					styles['background-color'] = bgColor;
+					exit = true;
+				}
+				this.current = this.current.parentNode;
 			}
+
 			var strStyles = "";
 			for (name in styles){
 				var style = styles[name];
