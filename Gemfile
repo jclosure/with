@@ -13,7 +13,6 @@ end
 gem 'jquery-rails'
 gem "mongoid", ">= 3.0.3"
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
-gem "capybara", ">= 1.1.2", :group => :test
 gem "database_cleaner", ">= 0.8.0", :group => :test
 gem "mongoid-rspec", ">= 1.4.6", :group => :test
 gem "email_spec", ">= 1.2.1", :group => :test
@@ -29,4 +28,17 @@ gem 'omniauth-facebook'
 gem "pg", :group => [:production]
 gem "thin", :group => [:production]
 
+group :test, :development do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'growl_notify'
+end
+
+group :test do
+  gem 'capybara', '1.1.2'
+  gem 'growl', '1.0.3'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+end
 
