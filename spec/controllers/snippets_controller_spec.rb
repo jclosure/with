@@ -20,6 +20,9 @@ require 'spec_helper'
 
 describe SnippetsController do
 
+  #login user from devise
+  login_user
+
   # This should return the minimal set of attributes required to create a valid
   # Snippet. As you add validations to Snippet, be sure to
   # update the return value of this method accordingly.
