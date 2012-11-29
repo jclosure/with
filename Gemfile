@@ -31,14 +31,15 @@ gem "thin", :group => [:production]
 group :test, :development do
   gem 'guard'
   gem 'guard-rspec'
-  gem 'growl_notify'
+  gem 'growl'
+  gem 'capybara', '1.1.2'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fchange', :require => false
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'rb-readline'
 end
 
-group :test do
-  gem 'capybara', '1.1.2'
-  gem 'growl', '1.0.3'
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
-end
+
 
