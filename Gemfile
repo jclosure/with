@@ -39,6 +39,8 @@ group :test, :development do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'rb-readline'
+  gem 'guard-spork', '1.2.0'
+  gem 'spork', '0.9.2'
 end
 
 
