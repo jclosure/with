@@ -34,7 +34,8 @@ group :test, :development do
   gem 'growl'
   gem 'capybara', '1.1.2'
   gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
   gem 'guard-rspec'
   gem 'guard-livereload'
