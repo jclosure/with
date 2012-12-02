@@ -12,9 +12,9 @@ class Snippet
   belongs_to :user, :class_name => "User", :inverse_of => :snippets, :autosave => true, :validate => false
 
 
-
-  searchable do
-    text :content
-  end
+  #solr setup
+  # searchable do
+  #   text :content
+  # end
 end
 
