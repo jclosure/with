@@ -1,6 +1,18 @@
 class SnippetsController < ApplicationController
   
+ def search
+    search=Snippet.solr_search do
+      fulltext params[:search]
+    end
+    @snippets = search.results
+    #@snippets = Snippet.all
 
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @posts }
+    end
+  end
   
   # GET /snippets
   # GET /snippets.json
