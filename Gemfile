@@ -25,6 +25,11 @@ gem 'omniauth'
 gem 'oauth2'
 gem 'omniauth-facebook'
 
+#solr mongo
+gem 'moped'
+gem "sunspot_mongo", :git => "git@github.com:jclosure/sunspot_mongo.git"
+gem 'sunspot_solr'
+
 gem "pg", :group => [:production]
 gem "thin", :group => [:production]
 
