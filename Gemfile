@@ -26,8 +26,8 @@ gem 'oauth2'
 gem 'omniauth-facebook'
 
 #solr mongo
-gem 'bson_ext'
-gem "sunspot_mongo", :git => "git://github.com/balexand/sunspot_mongo.git", :branch => "fix_rake_sunspot_reindex"
+gem 'moped'
+gem "sunspot_mongo", :git => "git@github.com:jclosure/sunspot_mongo.git"
 gem 'sunspot_solr'
 
 gem "pg", :group => [:production]
