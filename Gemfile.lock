@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:jclosure/sunspot_mongo.git
+  remote: git://github.com/jclosure/sunspot_mongo.git
   revision: b613b9d2bca1e7fcec9a2dbecc8a7a4adba81dd9
   specs:
     sunspot_mongo (1.0.1)
