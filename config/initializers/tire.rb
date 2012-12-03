@@ -5,7 +5,7 @@ ENV['ELASTICSEARCH_URL'] = ENV['BONSAI_URL']
 
 if ENV['BONSAI_URL']
   Tire.configure do
-    url "http://index.bonsai.io/"
+    url ENV['BONSAI_URL']
   end
 end
 
