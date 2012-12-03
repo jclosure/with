@@ -15,12 +15,6 @@ class SnippetsController < ApplicationController
 
  ## tire setup
  def search
-    # unless params[:query].present? # is there a search query given?
-    #   @snippets = Snippet.all
-    # else
-    #   # Yes, only get those who match the query
-    #   @snippets = Snippet.tire.search params[:query]
-    # end
     @snippets = Snippet.search(params)
     respond_to do |format|
       format.html { render :index }

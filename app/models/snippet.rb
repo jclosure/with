@@ -23,7 +23,9 @@ class Snippet
   #tire for elasticsearch setup
   include Tire::Model::Search
   include Tire::Model::Callbacks
+
   #index_name BONSAI_INDEX_NAME
+
   mapping do
     indexes :url
     indexes :content
@@ -36,10 +38,7 @@ class Snippet
     end
   end
 
-  # def self.paginate(options = {})
-  #    #Snippet.all.paginate :page => options[:page], :per_page => options[:per_page]
-  #    Snippet.all
-  # end
+
 
 end
 
