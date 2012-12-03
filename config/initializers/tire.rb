@@ -3,11 +3,7 @@
 
 ENV['ELASTICSEARCH_URL'] = ENV['BONSAI_URL']
 
-if ENV['BONSAI_URL']
-  Tire.configure do
-    url ENV['BONSAI_URL']
-  end
-end
-
+# Optional, but recommended: use a single index per application per environment
 app_name = Rails.application.class.parent_name.underscore.dasherize
-ENV['BONSAI_INDEX_NAME'] = "#{app_name}-#{Rails.env}"
+app_env = Rails.env
+INDEX_NAME = "#{app_name}-#{app_env}"
