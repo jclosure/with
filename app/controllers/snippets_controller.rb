@@ -3,15 +3,31 @@ class SnippetsController < ApplicationController
  ## solr setup
  # def search
  #    search=Snippet.solr_search do
- #      fulltext params[:search]
+ #      fulltext params[:query]
  #    end
  #    @snippets = search.results
  #    #@snippets = Snippet.all
  #    respond_to do |format|
  #      format.html { render :index }
- #      format.json { render json: @posts }
+ #      format.json { render json: @snippets }
  #    end
  #  end
+
+ ## tire setup
+ def search
+    # unless params[:query].present? # is there a search query given?
+    #   @snippets = Snippet.all
+    # else
+    #   # Yes, only get those who match the query
+    #   @snippets = Snippet.tire.search params[:query]
+    # end
+    @snippets = Snippet.search(params)
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @snippets }
+    end
+  end
+ 
   
   # GET /snippets
   # GET /snippets.json

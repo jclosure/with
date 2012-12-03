@@ -30,6 +30,13 @@ gem 'omniauth-facebook'
 # gem "sunspot_mongo", :git => "git://github.com/jclosure/sunspot_mongo.git"
 # gem 'sunspot_solr'
 
+#tire for elastic search
+gem 'tire'
+gem 'rake' , '>= 0.9.2'
+
+gem "will_paginate_mongoid"
+
+
 gem "pg", :group => [:production]
 gem "thin", :group => [:production]
 

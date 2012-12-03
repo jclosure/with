@@ -4,7 +4,7 @@
 class Snippet
   include Mongoid::Document
   
-  
+
  
 
   field :source_url, :type => String
@@ -18,5 +18,28 @@ class Snippet
   # searchable do
   #   text :content
   # end
+
+
+  #tire for elasticsearch setup
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+  #index_name BONSAI_INDEX_NAME
+  mapping do
+    indexes :url
+    indexes :content
+  end
+
+  def self.search(params)
+    tire.search(load: true) do
+      query { string params[:query], default_operator: "AND" } if params[:query].present?
+      #filter :range, published_at: {lte: Time.zone.now}
+    end
+  end
+
+  # def self.paginate(options = {})
+  #    #Snippet.all.paginate :page => options[:page], :per_page => options[:per_page]
+  #    Snippet.all
+  # end
+
 end
 
