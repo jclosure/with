@@ -1,8 +1,9 @@
-require 'sunspot_mongo'
+#solr setup
+#require 'sunspot_mongo'
 
 class Snippet
   include Mongoid::Document
-  include Sunspot::Mongo
+  
   
  
 
@@ -13,6 +14,7 @@ class Snippet
 
 
   #solr setup
+  #include Sunspot::Mongo
   # searchable do
   #   text :content
   # end
