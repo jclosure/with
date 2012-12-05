@@ -24,7 +24,7 @@ class Snippet
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  index_name INDEX_NAME
+  #index_name ELASTISTICSEARCH_INDEX_NAME_PREFIX + "-Snippets"
 
   mapping do
     indexes :url
