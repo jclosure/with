@@ -78,7 +78,7 @@ class SnippetsController < ApplicationController
   # POST /snippets.json
   def create
     @snippet = Snippet.new(params[:snippet])
-    
+    @snippet.text = ActionView::Base.full_sanitizer.sanitize(@snippet.content)
     ## per user
     # @user = User.where(:email => current_user.email)
     # @snippet.user = @user
@@ -107,6 +107,7 @@ class SnippetsController < ApplicationController
 
     respond_to do |format|
       if @snippet.update_attributes(params[:snippet])
+        @snippet.text = ActionView::Base.full_sanitizer.sanitize(@snippet.content)
         format.html { redirect_to @snippet, notice: 'Snippet was successfully updated.' }
         format.json { head :no_content }
       else

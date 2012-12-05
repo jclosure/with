@@ -8,7 +8,10 @@ class Snippet
  
 
   field :source_url, :type => String
+  field :tags, :type => String
+  field :description, :type => String
   field :content, :type => String
+  field :text, :type => String
   field :user_id, :type => String
   belongs_to :user, :class_name => "User", :inverse_of => :snippets, :autosave => true, :validate => false
 
@@ -26,9 +29,13 @@ class Snippet
 
   #index_name ELASTISTICSEARCH_INDEX_NAME_PREFIX + "-Snippets"
 
+  def to_indexed_json
+    self.to_json
+  end
+
   mapping do
     indexes :url
-    indexes :content
+    indexes :text
   end
 
   def self.search(params)
