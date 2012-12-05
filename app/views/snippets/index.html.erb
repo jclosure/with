@@ -42,13 +42,22 @@
 		#search_box img {
 			margin-top: 10px 
 		}
+
+		#snippets-container {
+background: #848D8E;
+
+
+
+
+			padding: 20px 20px 20px 20px;
+		}
 		
 	</style>
 
+<div id="snippets-container">
 
 
-
-<div style="display: inline-block; vertical-align: middle; text-align: center;">
+<div style="display: inline-block; vertical-align: middle; text-align: center; ">
 
 	<div id="search_box" class="center">
 		<div class="wrapper">
@@ -115,6 +124,8 @@
 
 </div>
 
+
+
 <div style='height: 15px'></div>
 
 <% end %>
@@ -126,7 +137,7 @@
 			<span style="vertical-align: middle; font-weight: bold"><%= link_to 'Show', snippet %></span>
 		    <span style="vertical-align: middle; font-weight: bold"><%= link_to 'Edit', edit_snippet_path(snippet) %></span>
 		    <span style="vertical-align: middle; font-weight: bold"><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></span>
-		    <span style="vertical-align: middle;">&nbsp;<img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' />&nbsp;<span>
+		    <span style="vertical-align: middle;"><img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' /><span>
 		   	<span style="vertical-align: middle;"><a href='<%= snippet.source_url %>'><%=h snippet.source_url %></a></span>
 		</div>
 		<div class="snippet-container" style="padding: 5px;" data-sourceurl="<%=h snippet.source_url %>">
@@ -142,6 +153,7 @@
 
 <br />
 
+</div>
 
 <script type="text/javascript" src="/javascripts/fixupPath.js"></script>
 <script type="text/javascript">
