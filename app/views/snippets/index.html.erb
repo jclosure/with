@@ -1,4 +1,4 @@
-
+<% if @searching %>
 	<style>
 		#search_box {
 			background:-moz-linear-gradient(top, #ffd73a, #ffa500);
@@ -115,14 +115,14 @@
 
 </div>
 
-<br />
+<div style='height: 15px'></div>
 
-<br />
+<% end %>
 
 <% @snippets.each do |snippet| %>
 
     <div class="box shadow">
-		<div style="background: #cccccc; height: 25px; border-bottom: 1px solid black;">
+		<div style="background: #cccccc; min-height: 25px; border-bottom: 1px solid black; vertical-align: middle">
 			<table>
 		    <tr>
 		    <td><%= link_to 'Show', snippet %></td>

@@ -15,6 +15,7 @@ class SnippetsController < ApplicationController
 
  ## tire setup
  def search
+    @searching = true;
     @snippets = Snippet.search(params)
     respond_to do |format|
       format.html { render :index }
@@ -26,7 +27,6 @@ class SnippetsController < ApplicationController
   # GET /snippets
   # GET /snippets.json
   def index
-    
     ## per user
     if (user_signed_in?)
       @user = User.where(email: current_user.email).first
