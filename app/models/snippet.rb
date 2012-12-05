@@ -9,6 +9,7 @@ class Snippet
 
   field :source_url, :type => String
   field :tags, :type => String
+  #property :tags,         :default => [], :analyzer => 'keyword'
   field :description, :type => String
   field :content, :type => String
   field :text, :type => String
@@ -33,8 +34,14 @@ class Snippet
     self.to_json
   end
 
+  settings :analyzer => {
+            :url_analyzer => {
+              'tokenizer' => 'uax_url_email'
+            }
+    }
+
   mapping do
-    indexes :url
+    indexes :source_url, :analyzer => :url_analyzer #, :boost => 50
     indexes :text
   end
 

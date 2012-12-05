@@ -16,3 +16,5 @@ heroku addons:open bonsai
 #elastic search
 #index locally
 rake environment tire:import CLASS='Snippet'
+#drop index
+rake environment tire:index:drop INDEX=snippets
