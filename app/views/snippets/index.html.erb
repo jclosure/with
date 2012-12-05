@@ -122,15 +122,12 @@
 <% @snippets.each do |snippet| %>
 
     <div class="box shadow">
-		<div style="background: #cccccc; min-height: 25px; border-bottom: 1px solid black; vertical-align: middle">
-			<table>
-		    <tr>
-		    <td><%= link_to 'Show', snippet %></td>
-		    <td><%= link_to 'Edit', edit_snippet_path(snippet) %></td>
-		    <td><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></td>
-		    <td>&nbsp;<img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' />&nbsp;<div style="display: inline-block; font-weight: bold"><a href='<%= snippet.source_url %>'><%=h snippet.source_url %></a></div></td>
-			</tr>
-			</table>
+		<div style="background: #cccccc; min-height: 25px; border-bottom: 1px solid black; padding: 10px 10px">
+			<span style="vertical-align: middle; font-weight: bold"><%= link_to 'Show', snippet %></span>
+		    <span style="vertical-align: middle; font-weight: bold"><%= link_to 'Edit', edit_snippet_path(snippet) %></span>
+		    <span style="vertical-align: middle; font-weight: bold"><%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %></span>
+		    <span style="vertical-align: middle;">&nbsp;<img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' />&nbsp;<span>
+		   	<span style="vertical-align: middle;"><a href='<%= snippet.source_url %>'><%=h snippet.source_url %></a></span>
 		</div>
 		<div class="snippet-container" style="padding: 5px;" data-sourceurl="<%=h snippet.source_url %>">
 			<%= raw(snippet.content) %>
