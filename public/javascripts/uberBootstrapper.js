@@ -2,16 +2,20 @@
 
 
 (function(){
+
+
+
 	loadScript(document.home + "/javascripts/head.min.js", function(){
 		var scripts = [];
 		var jqver = "1.7.2";
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("https://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 
-		if (!window.getSelection && !document.getSelection)
-		 	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
+		if(navigator.userAgent.toLowerCase().indexOf("msie") > -1)
+			if (getInternetExplorerVersion() <= 8)
+				scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
 
-		//scripts.push('https://raw.github.com/josscrowcroft/Simple-JavaScript-DOM-Inspector/master/inspector.js');
+		
 		 
 		scripts.push(document.home + "/javascripts/json2.js");
 		scripts.push(document.home + "/javascripts/uberSys.js");
@@ -103,6 +107,17 @@
 			}
 		};
 		document.getElementsByTagName("head")[0].appendChild(script);
+	}
+
+	function getInternetExplorerVersion() {
+	    var rv = -1; // Return value assumes failure.
+	    if (navigator.appName == 'Microsoft Internet Explorer') {
+	        var ua = navigator.userAgent;
+	        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+	        if (re.exec(ua) != null)
+	            rv = parseFloat(RegExp.$1);
+	    }
+	    return rv;
 	}
 
 })();
