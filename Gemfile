@@ -28,6 +28,8 @@ gem 'oauth2'
 gem 'omniauth-facebook'
 
 gem "mongoid", ">= 3.0.3"
+#gem 'voteable_mongo'
+gem 'voteable_mongo', :git => 'https://github.com/dementrock/voteable_mongo.git'
 gem "will_paginate_mongoid"
 gem "mongoid-rspec", ">= 1.4.6", :group => :test
 

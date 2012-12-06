@@ -3,9 +3,10 @@
 
 class Snippet
   include Mongoid::Document
-  
+  include Mongo::Voteable
 
- 
+ # set points for each vote
+  voteable self, :up => +1, :down => -1
 
   field :source_url, :type => String
   field :tags, :type => String
@@ -43,11 +44,13 @@ class Snippet
   mapping do
     indexes :source_url, :analyzer => :url_analyzer #, :boost => 50
     indexes :text
+    indexes :user_id, :index => :not_analyzed
   end
 
   def self.search(params)
     tire.search(load: true) do
       query { string params[:query], default_operator: "AND" } if params[:query].present?
+      filter :term, { user_id: params[:user_id] } if params[:user_id].present?
       #filter :range, published_at: {lte: Time.zone.now}
     end
   end

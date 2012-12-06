@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/dementrock/voteable_mongo.git
+  revision: 538e86856daa1c180ba80b7c6f2805e531ba420c
+  specs:
+    voteable_mongo (0.9.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -295,4 +301,5 @@ DEPENDENCIES
   thin
   tire
   uglifier (>= 1.0.3)
+  voteable_mongo!
   will_paginate_mongoid
