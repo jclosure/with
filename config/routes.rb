@@ -19,8 +19,11 @@ With::Application.routes.draw do
 
   resources :users, :only => :show
 
-get "snippets/search"
-  resources :snippets
+  get "snippets/search"
+  resources :snippets do
+    member { post :vote }
+  end
+
 
   get "marklet/index"
   get "marklet/capture"

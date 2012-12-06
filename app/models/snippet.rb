@@ -51,6 +51,7 @@ class Snippet
     tire.search(load: true) do
       query { string params[:query], default_operator: "AND" } if params[:query].present?
       filter :term, { user_id: params[:user_id] } if params[:user_id].present?
+      #sort   { by "votes.point", 'desc' }
       #filter :range, published_at: {lte: Time.zone.now}
     end
   end

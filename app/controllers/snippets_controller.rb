@@ -46,6 +46,8 @@ class SnippetsController < ApplicationController
       @snippets = Snippet.all
     end
 
+    @snippets = @snippets.order_by([['votes.point', :desc]])
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @snippets }
@@ -90,12 +92,12 @@ class SnippetsController < ApplicationController
     @snippet = Snippet.new(params[:snippet])
     @snippet.text = ActionView::Base.full_sanitizer.sanitize(@snippet.content)
     ## per user
-    # @user = User.where(:email => current_user.email)
+    # @user = current_user
     # @snippet.user = @user
 
     ## hack to assoc with first (maybe use an annon user for this)
     if (user_signed_in?)
-      @user = User.where(email: current_user.email).first
+      @user = current_user
       @user.snippets.push(@snippet)
     end
       
@@ -138,4 +140,12 @@ class SnippetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def vote
+    @snippet = Snippet.find(params[:id])
+    current_user.vote(@snippet, params[:type].to_sym)
+    redirect_to :back, notice: "Thank you for voting"
+  end
+
 end
