@@ -144,7 +144,7 @@ background: #848D8E;
 		      | <%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %>
 			<% end %>
 		    <span><img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' /><span>
-		   	<span style="font-weight: normal"><a href='<%= snippet.source_url %>'><%=h snippet.source_url %></a></span>
+		   	<span style="font-weight: normal"><a href='<%= snippet.source_url %>' style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
 		   </span>
 		</div>
 		<div class="snippet-container" style="padding: 5px;" data-sourceurl="<%=h snippet.source_url %>">
