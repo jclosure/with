@@ -12,8 +12,8 @@
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("https://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 
-		if (!window.getSelection && !document.getSelection)
-		 	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
+		// if (!window.getSelection && !document.getSelection)
+		//  	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
 		 
 		scripts.push(document.home + "/javascripts/json2.js");
 		
