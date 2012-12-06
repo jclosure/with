@@ -155,12 +155,16 @@ var uberSystem = function(ui_url) {
 			range = null;
 
 			if (!!node) {
-		    	if (document.body.createTextRange) {
-			        range = document.body.createTextRange();
-			        range.moveToElementText(node);
-			    } else if (window.getSelection) {       
+				if (window.getSelection) {       
 			        var range = document.createRange();
 			        range.selectNodeContents(node);
+			    }
+		    	else if (document.body.createTextRange) {
+			        range = document.body.createTextRange();
+			        range.moveToElementText(node);
+			    }
+			    else {
+			    	alert('range api unknown');
 			    }
 			
 

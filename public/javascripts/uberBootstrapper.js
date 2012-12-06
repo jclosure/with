@@ -12,8 +12,8 @@
 		if (window.jQuery === undefined || window.jQuery.fn.jquery < jqver)
 			scripts.push("https://ajax.googleapis.com/ajax/libs/jquery/" + jqver + "/jquery.min.js");
 
-		// if (!window.getSelection && !document.getSelection)
-		//  	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
+		if (!window.getSelection && !document.getSelection)
+		 	scripts.push(document.home + "/javascripts/ierange-m2-packed.js");
 		 
 		scripts.push(document.home + "/javascripts/json2.js");
 		
@@ -24,20 +24,12 @@
 	function stage2(){
 		var scripts = [];
 		scripts.push(document.home + "/javascripts/uberSys.js");
-		scripts.push(stage3);
-		head.js.apply(this, scripts);
-	}
-
-	function stage3(){
-		var scripts = [];
 		scripts.push(document.home + "/javascripts/uberRC.js");
-		scripts.push(stage4);
+		scripts.push(boot);
 		head.js.apply(this, scripts);
 	}
 
-	function stage4(){
-		boot();
-	}
+
 
 	function boot()
 	{
