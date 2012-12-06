@@ -24,9 +24,19 @@
 	function stage2(){
 		var scripts = [];
 		scripts.push(document.home + "/javascripts/uberSys.js");
-		scripts.push(document.home + "/javascripts/uberRC.js");
-		scripts.push(boot);
+		scripts.push(stage3);
 		head.js.apply(this, scripts);
+	}
+
+	function stage3(){
+		var scripts = [];
+		scripts.push(document.home + "/javascripts/uberRC.js");
+		scripts.push(stage4);
+		head.js.apply(this, scripts);
+	}
+
+	function stage4(){
+		boot();
 	}
 
 	function boot()
