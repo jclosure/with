@@ -1,0 +1,20 @@
+
+#solr setup
+start server (from cli run) - rake sunspot:solr:start
+see commented code in - Gemfile, snippet.rb, snippet_controller.rb
+
+#solr reindex
+from cli - rake sunspot:mongo:reindex
+
+#elastic search
+#heroku
+#index
+heroku run:detached rake environment tire:import CLASS='Snippet'
+#view indexes
+heroku addons:open bonsai
+
+#elastic search
+#index locally
+rake environment tire:import CLASS='Snippet'
+#drop index
+rake environment tire:index:drop INDEX=snippets

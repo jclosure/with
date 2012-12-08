@@ -19,13 +19,20 @@ With::Application.routes.draw do
 
   resources :users, :only => :show
 
-  resources :snippets
+  get "snippets/search"
+  resources :snippets do
+    member { post :vote }
+  end
+
 
   get "marklet/index"
   get "marklet/capture"
   get "marklet/playground"
   get "marklet/rc"
   get "home/index"
+
+
+
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

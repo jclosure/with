@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+  include Mongo::Voter
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -76,5 +78,10 @@ class User
   # def self.persisted?
   #   return if User.where(:email => auth.info.email).first
   # end
+
+
+  def send_instructions
+    Notifier.instructions(self).deliver
+  end
 
 end

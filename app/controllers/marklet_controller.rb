@@ -22,5 +22,3 @@ class MarkletController < ApplicationController
 
 
 end
-
-
