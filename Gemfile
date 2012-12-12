@@ -43,8 +43,6 @@ gem 'tire'
 gem 'rake' , '>= 0.9.2'
 
 
-
-
 gem "pg", :group => [:production]
 gem "thin", :group => [:production]
 
@@ -54,7 +52,6 @@ group :test, :development do
   gem 'growl'
   gem 'capybara', '1.1.2'
   gem 'rb-inotify', :require => false
-  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
   gem 'guard-rspec'
@@ -63,6 +60,8 @@ group :test, :development do
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
 end
+
+gem "debugger", :group => [:development]
 
 
 

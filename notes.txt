@@ -13,6 +13,7 @@ heroku run:detached rake environment tire:import CLASS='Snippet'
 #view indexes
 heroku addons:open bonsai
 
+
 #elastic search
 #index locally
 rake environment tire:import CLASS='Snippet'
