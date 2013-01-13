@@ -1,30 +1,30 @@
 class SnippetsController < ApplicationController
-  
- ## solr setup
- # def search
- #    search=Snippet.solr_search do
- #      fulltext params[:query]
- #    end
- #    @snippets = search.results
- #    #@snippets = Snippet.all
- #    respond_to do |format|
- #      format.html { render :index }
- #      format.json { render json: @snippets }
- #    end
- #  end
 
- ## tire setup
- def search
+  ## solr setup
+  # def search
+  #    search=Snippet.solr_search do
+  #      fulltext params[:query]
+  #    end
+  #    @snippets = search.results
+  #    #@snippets = Snippet.all
+  #    respond_to do |format|
+  #      format.html { render :index }
+  #      format.json { render json: @snippets }
+  #    end
+  #  end
+
+  ## tire setup
+  def search
     @searching = true;
-    
+
     if (params[:user].present?)
       @user = User.where(email: params[:user]).first
       unless @user
         @snippets = []
       end
       params[:user_id] = @user.id if @user
-    # elsif (user_signed_in?)
-    #   params[:user_id] = current_user.id
+      # elsif (user_signed_in?)
+      #   params[:user_id] = current_user.id
     end
     @snippets = @snippets || Snippet.search(params)
     respond_to do |format|
@@ -32,8 +32,8 @@ class SnippetsController < ApplicationController
       format.json { render json: @snippets }
     end
   end
- 
-  
+
+
   # GET /snippets
   # GET /snippets.json
   def index
@@ -42,11 +42,12 @@ class SnippetsController < ApplicationController
       @user = current_user
       @snippets = @user.snippets
     else
-    ## all
+      ## all
       @snippets = Snippet.all
     end
 
     @snippets = @snippets.order_by([['votes.point', :desc]])
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,9 +70,9 @@ class SnippetsController < ApplicationController
   # GET /snippets/new.json
   def new
     @snippet = Snippet.new
-    
+
     @snippet.source_url = params[:source] || "source url not sent"
-    
+
     #@user = User.first #todo: complete this.
 
     respond_to do |format|
@@ -100,7 +101,7 @@ class SnippetsController < ApplicationController
       @user = current_user
       @user.snippets.push(@snippet)
     end
-      
+
     respond_to do |format|
       if @snippet.save
         format.html { redirect_to @snippet, notice: 'Snippet was successfully created.' }

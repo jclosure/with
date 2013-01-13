@@ -4,7 +4,7 @@ ruby "1.9.3"
 #required to force bundler @ heroku to use ruby 1.9.3
 #gem install bundler -pre
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 gem 'jquery-rails'
 
 
