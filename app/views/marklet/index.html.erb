@@ -13,37 +13,42 @@
 
 <br />
 <br />
+<br />
+<br />
+<br />
 <hr />
-<p>Instructions: drag the "Capture Content" link into the toolbar of your browser.  navigate to an other site that has content that you are interested in capturing.
-</p>
-<p>Instructions for Capture</p>
-<ul>
-	<li>click the bookmarklet from your toolbar</li>
-	<li>select "Include Styles" checkbox</li>
-	<li>click "Target Content" link</li>
-	<li>hover over content to be captured and click it.  its background will turn green, indicated it has been selected.</li>
-	<li>on the heads up display, click capture.</li>
-	<li>fill out the form to extent desired, and submit it.</li>
-	<li>your content will now be available in the spool.</li>
-</ul>
-<!--
-<div id=playgroundLink>
-	<a href="/marklet/playground">playground</playground>
+<div>
+	<h2>Instructions To Get Marklet</h2>
+	<p>drag the "Capture Content" link into the toolbar of your browser.  navigate to an other site that has content that you are interested in capturing.
+	</p>
+	<h2>Instructions for Capture</h2>
+	<ul>
+		<li>click the bookmarklet from your toolbar</li>
+		<li>select "Include Styles" checkbox</li>
+		<li>click "Target Content" link</li>
+		<li>hover over content to be captured and click it.  its background will turn green, indicated it has been selected.</li>
+		<li>on the heads up display, click capture.</li>
+		<li>fill out the form to extent desired, and submit it.</li>
+		<li>your content will now be available in the spool.</li>
+	</ul>
+	<!--
+	<div id=playgroundLink>
+		<a href="/marklet/playground">playground</playground>
+	</div>
+	<div id="wayContainer">
+		<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/way.js?';}})();">Way</a>
+	</div>
+	<div id="markletContainer">
+		<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberframe.js?';}})();">UberFrame</a>
+	</div>
+	<div id="markletContainer2">
+		<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberframe2.js?';}})();">UberFrame2</a>
+	</div>
+	-->
+	<div id="markletContainer3">
+		<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">Capture Content</a>
+	</div>
 </div>
-<div id="wayContainer">
-	<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/way.js?';}})();">Way</a>
-</div>
-<div id="markletContainer">
-	<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberframe.js?';}})();">UberFrame</a>
-</div>
-<div id="markletContainer2">
-	<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberframe2.js?';}})();">UberFrame2</a>
-</div>
--->
-<div id="markletContainer3">
-	<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">Capture Content</a>
-</div>
-
 
 
 
