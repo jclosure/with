@@ -91,6 +91,8 @@
 			__uber.system = system;
 			__uber.rc = rc;	
 
+			//load site specific adapter if nec
+			loadSiteAdapter();
 			
 			//$("body").append(system.element);
 			__uber.$("body").append(rc.element);
@@ -103,6 +105,13 @@
 	}
 	
 	//support
+	function loadSiteAdapter(){
+		window.adapters = window.adapters || {};
+		var fqdn = document.location.host;
+		if (fqdn.match('youtube.com')){
+			head.js(document.home + '/javascripts/adapters/youtube.js', function(){});
+		}
+	}
 	function loadScript(url, callback) {
 		var done = false;
 		var script = document.createElement("script");
@@ -115,5 +124,7 @@
 		};
 		document.getElementsByTagName("head")[0].appendChild(script);
 	}
+
+	
 
 })();
