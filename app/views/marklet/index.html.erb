@@ -8,6 +8,9 @@
   .image {
 	max-width: 610px;
   }
+  #instructions {
+  	padding: 10px 10px 10px 10px;
+  }
 
 </style>
 
@@ -17,8 +20,9 @@
 <br />
 <br />
 <br />
+<%= image_tag('cut-and-paste1.jpg', :alt => 'Splash Image2') %> 
 <hr />
-<div>
+<div id="instructions">
 	<h2>Instructions To Get Marklet</h2>
 	<p>drag the <strong>
 		<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">Capture Content</a>
