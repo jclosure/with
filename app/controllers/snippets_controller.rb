@@ -40,14 +40,10 @@ class SnippetsController < ApplicationController
     ## per user
     if (user_signed_in?)
       @user = current_user
-      @snippets = @user.snippets
-    else
-      ## all
-      @snippets = Snippet.all
+      #@snippets = @user.snippets #constrain to my snippets
     end
 
-    @snippets = @snippets.order_by([['votes.point', :desc]])
-
+    @snippets = Snippet.all.order_by([['votes.point', :desc]])
 
     respond_to do |format|
       format.html # index.html.erb

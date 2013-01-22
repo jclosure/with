@@ -8,6 +8,7 @@
   .image {
 	max-width: 610px;
   }
+
 </style>
 
 
@@ -19,8 +20,12 @@
 <hr />
 <div>
 	<h2>Instructions To Get Marklet</h2>
-	<p>drag the "Capture Content" link into the toolbar of your browser.  navigate to an other site that has content that you are interested in capturing.
+	<p>drag the <strong>
+		<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">Capture Content</a>
+		</strong> link into the toolbar of your browser.  navigate to an other site that has content that you are interested in capturing.
 	</p>
+
+	<br />
 	<h2>Instructions for Capture</h2>
 	<ul>
 		<li>click the bookmarklet from your toolbar</li>
@@ -45,9 +50,7 @@
 		<a href="javascript:(function(){document.home='<%= @url_base %>'; if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberframe2.js?';}})();">UberFrame2</a>
 	</div>
 	-->
-	<div id="markletContainer3">
-		<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">Capture Content</a>
-	</div>
+	
 </div>
 
 

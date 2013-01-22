@@ -139,9 +139,11 @@ background: #848D8E;
 		    <% if current_user %>
 			  <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Up.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "up"), method: "post" %>
 			  | <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Down.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "down"), method: "post" %>
+			  <% if current_user.id == snippet.user_id %>
 			  | <%= link_to "Show", snippet %>
 			  | <%= link_to 'Edit', edit_snippet_path(snippet) %>
 		      | <%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %>
+			  <% end %>
 			<% end %>
 		    <span><img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' /><span>
 		   	<span style="font-weight: normal"><a href='<%= snippet.source_url %>' style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
