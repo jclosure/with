@@ -1,5 +1,12 @@
 class SnippetsController < ApplicationController
 
+  before_filter :detect_mode
+
+  def detect_mode
+    @mode = params['mode'] || 'normal'
+    Rails.logger.debug("debug::" + "mode is " + @mode) 
+  end
+
   ## solr setup
   # def search
   #    search=Snippet.solr_search do
