@@ -59,9 +59,9 @@ group :test, :development do
   gem 'rb-readline'
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
+  gem "debugger"
 end
 
-gem "debugger", :group => [:development]
 
 
 

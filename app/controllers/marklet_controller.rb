@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 class MarkletController < ApplicationController
   
 
@@ -15,10 +18,21 @@ class MarkletController < ApplicationController
     render :layout => 'marklet_uber'
   end
   def capture
-    @text = params[:text] || "Text not sent."
+    @text = params[:text] || "<div>Text not sent.</div>"
+    @text = strip_script_tags(@text)
+
     @url = params[:source] || "Source not sent."
     render :layout => 'marklet_uber' 
   end
 
+  private
+
+  def strip_script_tags(text)
+    doc = Nokogiri::HTML(text)
+    doc.xpath("//script").remove
+    text = doc.xpath("//body/*[1]")[0].serialize(:encoding => 'UTF-8') do |config|
+      config.format.as_xml
+    end
+  end
 
 end

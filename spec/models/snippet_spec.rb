@@ -5,9 +5,9 @@ describe Snippet do
   	s1 = FactoryGirl.create(:snippet)
   	s1.content = "abc"
     Snippet.stub(:find).and_return(s1)
-
-  	Snippet.search do
-	  fulltext 'a'
+    needle = 'a'
+  	Snippet.search({arg: needle}) do
+	  fulltext needle
 
 	  # with :blog_id, 1
 	  # with(:published_at).less_than Time.now

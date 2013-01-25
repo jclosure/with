@@ -10,7 +10,7 @@ FactoryGirl.define do
   end
 
   factory :snippet do
-    url
+    source_url
     content
   end
 end
