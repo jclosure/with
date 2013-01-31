@@ -50,7 +50,19 @@ class SnippetsController < ApplicationController
       #@snippets = @user.snippets #constrain to my snippets
     end
 
-    @snippets = Snippet.all.order_by([['votes.point', :desc]])
+    #filter by user
+    if (params[:user].present?)
+      @filter_user = User.where(email: params[:user]).first
+      if @filter_user
+        @snippets = Snippet.where(user_id: @filter_user.id)
+      else
+        @snippets = []
+      end
+    end
+
+
+    @snippets = @snippets || Snippet.all
+    @snippets = @snippets.order_by([['votes.point', :desc]]) if @snippets.respond_to? :order_by
 
     respond_to do |format|
       format.html # index.html.erb

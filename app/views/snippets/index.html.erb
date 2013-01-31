@@ -130,6 +130,16 @@ background: #848D8E;
 
 <% end %>
 
+
+
+<% if @filter_user %>
+	<h3><%= "#{@filter_user.name}'s Snippet Timeline" %></h3>
+<% else %>
+	<h3><%= "Public Snippet Timeline" %></h3>
+<% end %>
+
+
+
 <% @snippets.each do |snippet| %>
 
     <div class="box shadow">
