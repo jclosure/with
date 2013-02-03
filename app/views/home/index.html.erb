@@ -1,5 +1,7 @@
 <% provide(:title, 'Home') %>
-
+<div>
+	<h1 style="font-size: 24px"><%= link_to('Public Timeline', :controller => :snippets) %></h1>
+</div>
 <h2>Beta Users</h2>
 <% @users.each do |user| %>
 <h4>

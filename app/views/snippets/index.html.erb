@@ -159,6 +159,21 @@ background: #848D8E;
 		   	<span style="font-weight: normal"><a href='<%= snippet.source_url %>' style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
 		   </span>
 		</div>
+		<div>
+			<% if snippet.tags %>
+				<span>
+					<% snippet.tags.split.each do |tag| %>
+						<span class="tag"><%= tag %><span>
+					<% end %>
+				</span>
+			<% end %>
+			<% unless snippet.description == "" %>
+				<span>
+					<%= snippet.description %>
+				</span>
+				<hr />
+			<% end %>
+	    </div>
 		<div class="snippet-container" style="padding: 5px;" data-sourceurl="<%=h snippet.source_url %>">
 			<%= raw(snippet.content) %>
 			<div class="clearfix"></div>

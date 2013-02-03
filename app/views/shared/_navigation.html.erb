@@ -1,3 +1,4 @@
+<div>
 <% if user_signed_in? %>
   <div>Welcome <%=h current_user.name %></div>
   <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        
@@ -15,10 +16,4 @@
 
 <%= link_to('Get Our Marklet', :controller => :marklet) %>
 <!-- <%= link_to('Notifications', :controller => :notifications) %> -->
-<br />
-<br />
-<br />
-<br />
-<div>
-	<h1 style="font-size: 92px"><%= link_to('Snippets', :controller => :snippets) %></h1>
 </div>
