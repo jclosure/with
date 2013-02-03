@@ -160,18 +160,24 @@ background: #848D8E;
 		   </span>
 		</div>
 		<div>
-			<% if snippet.tags %>
-				<span>
-					<% snippet.tags.split.each do |tag| %>
-						<span class="tag"><%= tag %><span>
-					<% end %>
-				</span>
+			<% unless snippet.tags == "" %>
+				<div style="padding: 5px 5px 2.5px 5px">			
+					<span style="font-size: 18px">Tags: </span>
+					<span>
+						<% snippet.tags.split.each do |tag| %>
+							<span class="tag"><%= tag %><span>
+						<% end %>
+					</span>
+				</div>
 			<% end %>
 			<% unless snippet.description == "" %>
-				<span>
-					<%= snippet.description %>
-				</span>
-				<hr />
+				<div style="padding: 2.5px 5px 5px 5px">			
+					<span style="font-size: 18px">Description: </span>
+					<span>
+						<%= snippet.description %>
+					</span>
+					<hr />
+				</div>
 			<% end %>
 	    </div>
 		<div class="snippet-container" style="padding: 5px;" data-sourceurl="<%=h snippet.source_url %>">
