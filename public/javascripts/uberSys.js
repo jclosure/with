@@ -66,7 +66,7 @@ var uberSystem = function(ui_url) {
 
 					var markup = "\
 							<div id='sysframe'>\
-								<div class='sysframe_veil'>\
+								<div class='sysframe_veil' style='z-index:99998!important;'>\
 									<iframe style='z-index:99999!important;' src='"+document.home+ui_url+"?source="+encodeURIComponent(document.location)+"#"+encodeURIComponent(document.location.protocol+"//"+document.location.host)+"' onload=\"window.initUberFrame()\">Enable iFrames.</iframe>\
 								</div>\
 								<style type='text/css'>\

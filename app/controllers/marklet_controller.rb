@@ -20,7 +20,13 @@ class MarkletController < ApplicationController
   def capture
     @text = params[:text] || "<div>Text not sent.</div>"
     @text = strip_script_tags(@text)
-    @tags = %w{java ruby javascript c# c++}.sort
+    
+    #todo: make this more effecient with a diff tags sln
+    #@tags = %w{java ruby javascript c# c++}.sort
+    @tags = []
+    Snippet.all.each {|snippet| @tags.concat snippet.tags.split(',')}
+    @tags = @tags.uniq.sort
+
     @url = params[:source] || "Source not sent."
     render :layout => 'marklet_uber' 
   end
