@@ -20,7 +20,7 @@ class MarkletController < ApplicationController
   def capture
     @text = params[:text] || "<div>Text not sent.</div>"
     @text = strip_script_tags(@text)
-
+    @tags = %w{java ruby javascript c# c++}.sort
     @url = params[:source] || "Source not sent."
     render :layout => 'marklet_uber' 
   end

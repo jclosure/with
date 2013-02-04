@@ -1,3 +1,6 @@
 [submodule "public/javascripts/selectorgadget"]
 	path = public/javascripts/selectorgadget
 	url = https://github.com/jclosure/selectorgadget.git
+[submodule "public/javascripts/select2"]
+	path = public/javascripts/select2
+	url = https://github.com/jclosure/select2.git

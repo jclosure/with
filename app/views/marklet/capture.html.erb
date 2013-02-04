@@ -127,7 +127,13 @@
 					</div>
 					<div class = "metadata-info rounded-box">
 						<h2>Add tags:</h2>
-						<textarea id="snippet_tags" name="snippet[tags]" wrap="physical" style="width: 300px; margin-right: 6px; height: 100px"></textarea>
+						<p>
+							
+							<input type="hidden" id="snippet_tags" name="snippet[tags]" style="width: 300px; display: none;" value="<%= '' %>" />
+						</p>
+
+							
+						
 					</div>
 				</td>
 			</tr>
@@ -135,3 +141,16 @@
 		<div style="clear: both"></div>
 	</div>
 </form>	
+<link href="/javascripts/select2/select2.css" rel="stylesheet">
+<script src="/javascripts/select2/select2.js"></script>
+
+
+<script type="text/javascript">
+	$(function(){
+		$("#snippet_tags").select2({
+                tags: <%= @tags.to_json.html_safe %>,
+                tokenSeparators: [",", " "]});
+	});
+	
+
+</script>
