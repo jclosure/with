@@ -10,6 +10,7 @@ class Snippet
 
   field :source_url, :type => String
   field :tags, :type => String
+  field :access_specifier, :type => String
   #property :tags,         :default => [], :analyzer => 'keyword'
   field :description, :type => String
   field :content, :type => String
