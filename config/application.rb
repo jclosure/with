@@ -67,3 +67,5 @@ module With
     end
   end
 end
+#LOADED FROM Application.yml
+FACEBOOK_APP_ID = ENV['FACEBOOK_APP_ID']

@@ -18,3 +18,5 @@ with.tmproj
 
 solr/data/
 solr/pids/
+# Ignore application configuration
+/config/application.yml

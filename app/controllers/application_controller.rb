@@ -2,8 +2,9 @@ class ApplicationController < ActionController::Base
   	#note: temporarily disabled to prevent this from tearing down auth on post from remote site during snippet collection
     #todo: look into overrideing forgery_whitelisted? method in  File actionpack/lib/action_dispatch/http/request.rb, line 126 by stashing uri or fqdn, and then session lookup of current remote site as fix => http://zadasnotes.blogspot.com/2010/11/rails-3-forgery-csrf-protection-for.html
     #protect_from_forgery
-
-  	before_filter :cor
+    
+    before_filter :cor
+  	before_filter :set_fb_app
 
   	#before_filter :sign_in_redirect_hack
 	  #before_filter :store_location
@@ -14,6 +15,10 @@ class ApplicationController < ActionController::Base
 		headers["Access-Control-Allow-Headers"] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(",")
 		head(:ok) if request.request_method == "OPTIONS"
 	end
+
+  def set_fb_app
+    @fb_app_id = FACEBOOK_APP_ID
+  end
 
 
   def after_sign_in_path_for(resource)                                                                                                                      
