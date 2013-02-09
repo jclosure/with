@@ -75,13 +75,11 @@ class User
     user
   end
 
-  # def self.persisted?
-  #   return if User.where(:email => auth.info.email).first
-  # end
-
 
   def send_instructions
     Notifier.instructions(self).deliver
   end
+
+
 
 end

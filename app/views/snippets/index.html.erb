@@ -124,12 +124,124 @@ background: #848D8E;
 
 </div>
 
-
-
 <div style='height: 20px'></div>
 
 <% end %>
 
+<!-- FB Integration -->
+<div>
+	<h2>FB Integration</h2>
+
+	<div id="fb-root"></div>
+	<script>
+	  (function() {
+	    var e = document.createElement('script'); e.async = true;
+	        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+	        document.getElementById('fb-root').appendChild(e);
+	        }());
+	</script>
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({ appId: '444577382272758', 
+	      status: true, 
+	      cookie: true,
+	      xfbml: true,
+	      oauth: true});
+
+	      FB.Event.subscribe('auth.authResponseChange', handleResponseChange);  
+	    };
+	</script>
+	 <script>
+	 function handleResponseChange(response) {
+	   document.body.className = response.authResponse ? 'connected' : 'not_connected';
+
+	   if (response.authResponse) {
+	     console.log(response);
+	   }
+	   updateUserInfo(response);
+	 }
+
+	 </script>
+	  <div id="login">
+	   <p><button onClick="loginUser();">Login</button></p>
+	 </div>
+	 <div id="logout">
+	   <p><button  onClick="logoutUser();">Logout</button></p>
+	 </div>
+
+	 <script>
+	   function loginUser() {    
+	     FB.login(function(response) { }, {scope:'email'});     
+	   }
+	   function logoutUser() {
+	   	 var logoutUrl = "/users/logout";
+	   	 FB.logout();
+	   }
+	 </script>
+	  <div id="user-info"></div>
+	 <script>
+	   function updateUserInfo(response) {
+	     FB.api('/me', function(response) {
+	       document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+	     });
+	   }
+	 </script>
+
+	 <a href="#" onclick="getUserFriends();">Get friends</a><br>
+	 <div id="user-friends"></div>
+	 <script>
+	  function getUserFriends() {
+	   FB.api("/me/friends?fields=name,picture", function(response) {
+	     console.log('Got friends: ', response);
+
+	     if (!response.error) {
+	       var markup = '';
+
+	       var friends = response.data;
+
+	       for (var i=0; i < friends.length && i < 25; i++) {
+	         var friend = friends[i];
+
+	         markup += '<img src="' + friend.picture.data.url + '"> ' + friend.name + '<br>';
+	       }
+
+	       document.getElementById('user-friends').innerHTML = markup;
+	     }
+	   });
+	 }
+	 </script>
+
+	<a href="#" onclick="sendRequest();">Send request</a><br>
+	<script>
+	function sendRequest() {
+	  FB.ui({
+	    method: 'apprequests',
+	    message: 'Six Degrees of Keven Bacon Using Neo4j and Ruby: http://ruby.dzone.com/articles/six-degrees-kevin-bacon-using',
+	  }, 
+	  function(response) {
+	    console.log('sendRequest response: ', response);
+	  });
+	}
+	</script>
+
+	
+	<script>
+	function publishStory(url) {
+	  FB.ui({
+	    method: 'feed',
+	    name: 'Snippets API testing FB GRAPH API',
+	    caption: "I just collected a new bit of joy",
+	    description: 'Check out this Snippet',
+	    link: document.location.href,
+	    picture: 'http://immediatenet.com/t/m?Size=1024x768&URL=' + url
+	  }, 
+	  function(response) {
+	    console.log('publishStory response: ', response);
+	  });
+	  return false;
+	}
+	</script>
+</div>
 
 
 <% if @filter_user %>
@@ -181,7 +293,9 @@ background: #848D8E;
 			<% else %>
 				<hr />
 			<% end %>
+			<a href="#" onclick=<%= "publishStory('#{snippet.source_url}');" %> >Publish feed story</a><br>
 	    </div>
+	    <hr />
 		<div class="snippet-container" style="padding-left: 10px; padding-top: 5px;" data-sourceurl="<%=h snippet.source_url %>">
 			<%= raw(snippet.content) %>
 			<div class="clearfix"></div>

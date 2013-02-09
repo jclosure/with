@@ -67,5 +67,8 @@ gem "better_errors", ">= 0.3.2", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development
 
 
-
+# #social stream
+# gem 'social_stream', '>= 1.0.0'
+# gem 'social_stream-documents'
+# gem 'social_stream-linkser'
 
