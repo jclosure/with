@@ -8,7 +8,9 @@ gem 'rails', '3.2.11'
 gem 'jquery-rails'
 
 gem "nokogiri"
-gem "figaro", ">= 0.5.3"
+
+gem "heroku"
+gem "figaro"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
