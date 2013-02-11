@@ -5,11 +5,9 @@ class MarkletController < ApplicationController
   
 
   def index
-    unless ([80, 443].include? request.port) 
-      @url_base = "//#{request.host}:#{request.port}" #assume protocol that link was created from (recommend creating under ssl)
-    end
-    @url_base ||= "//#{request.host}" #assume protocol that link was created from (recommend creating under ssl)
+    #my view relies on before_filter :set_url_base
   end
+
   def playground
     @users = User.all
   end
