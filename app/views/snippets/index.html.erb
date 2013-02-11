@@ -226,14 +226,14 @@ background: #848D8E;
 
 	
 	<script>
-	function publishStory(url) {
+	function publishStory(url, description) {
 	  FB.ui({
 	    method: 'feed',
 	    name: 'Snippets API testing FB GRAPH API',
 	    caption: "I just collected a new bit of joy",
-	    description: 'Check out this Snippet',
+	    description: description,
 	    link: document.location.href,
-	    picture: 'http://immediatenet.com/t/m?Size=1024x768&URL=' + url
+	    picture: 'http://ec2-50-16-17-73.compute-1.amazonaws.com:3000/' + url
 	  }, 
 	  function(response) {
 	    console.log('publishStory response: ', response);
@@ -293,7 +293,7 @@ background: #848D8E;
 			<% else %>
 				<hr />
 			<% end %>
-			<a href="#" onclick=<%= "publishStory('#{snippet.source_url}');" %> >Publish feed story</a><br>
+			<a href="#" onclick=<%= "publishStory('#{snippet.source_url}', '#{snippet.description}');" %> >Publish feed story</a><br>
 	    </div>
 	    <hr />
 		<div class="snippet-container" style="padding-left: 10px; padding-top: 5px;" data-sourceurl="<%=h snippet.source_url %>">
