@@ -130,7 +130,6 @@ background: #848D8E;
 
 <!-- FB Integration -->
 <div>
-	<h2>FB Integration</h2>
 
 	<div id="fb-root"></div>
 	<script>
@@ -160,15 +159,16 @@ background: #848D8E;
 	   }
 	   updateUserInfo(response);
 	 }
-
 	 </script>
-	  <div id="login">
+	  
+	<!-- FB JS LOGIN/LOGOUT -->
+	<!--
+	<div id="login">
 	   <p><button onClick="loginUser();">Login</button></p>
 	 </div>
 	 <div id="logout">
 	   <p><button  onClick="logoutUser();">Logout</button></p>
 	 </div>
-
 	 <script>
 	   function loginUser() {    
 	     FB.login(function(response) { }, {scope:'email'});     
@@ -178,7 +178,9 @@ background: #848D8E;
 	   	 FB.logout();
 	   }
 	 </script>
-	  <div id="user-info"></div>
+	 -->
+
+	 <div id="user-info"></div>
 	 <script>
 	   function updateUserInfo(response) {
 	     FB.api('/me', function(response) {
@@ -227,7 +229,7 @@ background: #848D8E;
 	
 	<script>
 	function publishStory(url, description) {
-	  debugger;
+	  //debugger;
 	  FB.ui({
 	    method: 'feed',
 	    name: 'Snippets API testing FB GRAPH API',
