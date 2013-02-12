@@ -128,6 +128,9 @@ background: #848D8E;
 
 <% end %>
 
+<!-- back button to list -->
+<a href="/" alt="Home">&lt;&lt;&lt;</a>
+
 <!-- FB Integration -->
 <div>
 
@@ -163,12 +166,13 @@ background: #848D8E;
 	  
 	<!-- FB JS LOGIN/LOGOUT -->
 	
-	<div id="login">
+	<span id="login" style="float:left">
 	   <p><button onClick="loginUser();">Login</button></p>
-	 </div>
-	 <div id="logout">
+	 </span>
+	 <span id="logout" style="float:left">
 	   <p><button  onClick="logoutUser();">Logout</button></p>
-	 </div>
+	 </span>
+	 <div style="clear:both"></div>
 	 <script>
 	   function loginUser() {    
 	     FB.login(function(response) { }, {scope:'email'});     
@@ -204,8 +208,15 @@ background: #848D8E;
 	       for (var i=0; i < friends.length && i < 25; i++) {
 	         var friend = friends[i];
 
-	         markup += '<img src="' + friend.picture.data.url + '"> ' + friend.name + '<br>';
+	         markup += '<div style="border: 1px solid black; float:left; margin-left: 10px; margin-top: 10px;">';
+	         markup += '<img src="' + friend.picture.data.url + '" />';
+	         markup += '<div>' + friend.name + '</div>';
+	         markup += '</div>';
+
 	       }
+
+	 
+	       markup += '<div style="clear:both"></div>';
 
 	       document.getElementById('user-friends').innerHTML = markup;
 	     }
