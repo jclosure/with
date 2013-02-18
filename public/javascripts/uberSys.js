@@ -193,7 +193,7 @@ var uberSystem = function(ui_url) {
 			return s;
 		},
 		options: {
-			withStyle: false
+			withStyle: true
 		}
 	};
 
