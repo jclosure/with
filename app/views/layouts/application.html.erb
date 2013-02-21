@@ -36,15 +36,15 @@
 
     <style type="text/css">  
     .scrollspy-example {  
-    height: 900px;
+
     overflow: auto;  
-    position: relative;  
+     
     }  
     </style> 
   </head>
   <body>
 
-    <div class="navbar navbar-fluid-top">
+    <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
@@ -74,7 +74,7 @@
     <%= bootstrap_flash %>
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
+        <div class="span3"  data-spy="affix" >
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
@@ -110,7 +110,7 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div data-spy="scroll" data-target="#navbarExample" data-offset="50" class="span9 scrollspy-example">
+        <div data-offset="50" class="span9 scrollspy-example offset3">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

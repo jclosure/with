@@ -9,5 +9,12 @@
 
 body
 {
-	background:url(http://carechoice.org.uk/ESW/Images/Webpage_Background_Logo.jpg?xcache=1099) top right no-repeat; background-position:fixed;
+
+	padding-top: 60px;
+
+	background-image:url(http://carechoice.org.uk/ESW/Images/Webpage_Background_Logo.jpg?xcache=1099);
+    background-repeat:no-repeat;
+    background-position: top;
+    background-attachment:fixed;
 }
+
