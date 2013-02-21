@@ -33,6 +33,14 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <style type="text/css">  
+    .scrollspy-example {  
+    height: 900px;
+    overflow: auto;  
+    position: relative;  
+    }  
+    </style> 
   </head>
   <body>
 
@@ -47,11 +55,11 @@
           <a class="brand" href="#">With</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/snippets"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Public Timeline", "/snippets"  %></li>
+              <li><%= link_to "Friends", "/snippets/friends"  %></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Databases<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class=""><a href="#mysql">MySQL</a></li>
                   <li class=""><a href="#pgsql">PostgreSQL</a></li>
@@ -70,20 +78,57 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to image_tag("https://secure.gravatar.com/avatar/aab5bcf3573f923f01af6ecfae077a5c?s=140&d=https://github.com/images/gravatars/gravatar-140.png", :border => 0), "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Dive In", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Wander", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Tours", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Cruise Control", "/snippets/?user=#{current_user.email}"  %></li>
+            </ul>
+          </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Feature Box</li>
+              <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Dive In", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Wander", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Tours", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Cruise Control", "/snippets/?user=#{current_user.email}"  %></li>
+            </ul>
+          </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Ads</li>
+              <li><p>
+                Less uses a slightly different syntax than Sass: “@linkColor” instead of “$linkColor”. Also we don’t see the “!default” directive we had earlier. Most importantly, changing the value of a variable in Less works differently than it does in Sass; there’s no concept of a default value and overriding it. In fact, in Less variables are actually implemented as constants. See lesscss.org for more details. This means once you define a value for a variable it cannot be changed.
+
+At first glance, this might mean that the only way to change the Twitter Bootstrap settings would be to edit the Twitter Less code directly, right inside of Less-Rails-Bootstrap. But this would be very ugly: every time I updated Less-Rails-Bootstrap I would lose my changes. While it might be possible to track my changes in a branch using git somehow, re-merging every time I got a newer version, this would be an obvious maintenance problem and an ongoing headache.
+
+Actually, it turns out there’s a simpler way to do it. Because of a bug in the Less compiler, you can override the “constant” value of a variable by changing it after it is initially declared. That is, the value of the variable constant will be whatever its last assigned value is. It seems that the Less compiler first evaluates the values of all constants, and then evaluates the rest of the Less script, substituting the value for each variable.
+
+
+              </p></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-        <div class="span9">
+        <div data-spy="scroll" data-target="#navbarExample" data-offset="50" class="span9 scrollspy-example">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
       </div><!--/row-->
 
+
       <footer>
-        <p>&copy; Company 2013</p>
+        <div class="navbar navbar-fluid-top">
+        <div class="navbar-inner">
+        <div class="container-fluid">
+          <p>&copy; Company 2013</p>
+        </div>
+        </div>
+        </div>
+      </footer>
+
+      <footer>
+        
       </footer>
 
     </div> <!-- /container -->

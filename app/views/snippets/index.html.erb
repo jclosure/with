@@ -1,54 +1,78 @@
 <%- model_class = Snippet -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_snippet_path,
+            :class => 'btn btn-primary' %>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:_type) %></th>
-      <th><%= model_class.human_attribute_name(:_id) %></th>
-      <th><%= model_class.human_attribute_name(:votes) %></th>
-      <th><%= model_class.human_attribute_name(:source_url) %></th>
-      <th><%= model_class.human_attribute_name(:tags) %></th>
-      <th><%= model_class.human_attribute_name(:access_specifier) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:text) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @snippets.each do |snippet| %>
-      <tr>
-        <td><%= link_to snippet.id, snippet_path(snippet) %></td>
-        <td><%= snippet._type %></td>
-        <td><%= snippet._id %></td>
-        <td><%= snippet.votes %></td>
-        <td><%= snippet.source_url %></td>
-        <td><%= snippet.tags %></td>
-        <td><%= snippet.access_specifier %></td>
-        <td><%= snippet.description %></td>
-        <td><%= snippet.content %></td>
-        <td><%= snippet.text %></td>
-        <td><%= snippet.user_id %></td>
-        
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+
+
+
+  <% @snippets.each do |snippet| %>
+
+      <div class="box shadow">
+      
+      <div style="background: #cccccc; min-height: 25px; border-bottom: 1px solid black; padding: 10px 10px;">
+        <span>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_snippet_path(snippet), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       snippet_path(snippet),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </span>
+        <span style="vertical-align: middle; font-weight: bold"> 
+          (<%= pluralize snippet.up_votes_count.to_i, "vote" %>)
+          <% if current_user %>
+          <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Up.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "up"), method: "post" %>
+          | <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Down.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "down"), method: "post" %>
+          | <%= link_to "Show", snippet %>
+          <% if @mode == 'admin' || current_user.id == snippet.user_id %>
+          | <%= link_to 'Edit', edit_snippet_path(snippet) %>
+            | <%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %>
+          <% end %>
+        <% end %>
+          <span><img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' /><span>
+          <span style="font-weight: normal"><a href='<%= snippet.source_url %>' style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
+         </span>
+      </div>
+      <div>
+        <% unless snippet.tags == "" %>
+          <div style="padding: 5px 5px 2.5px 5px">      
+            <span style="font-size: 18px">Tags: </span>
+            <span>
+              <% snippet.tags.split.each do |tag| %>
+                <span class="tag"><%= tag %><span>
+              <% end %>
+            </span>
+          </div>
+        <% end %>
+        <% unless snippet.description == "" %>
+          <div style="padding: 2.5px 5px 5px 5px">      
+            <span style="font-size: 18px">Description: </span>
+            <span>
+              <%= snippet.description %>
+            </span>
+            <hr />
+          </div>
+        <% else %>
+          <hr />
+        <% end %>
+        <a href="#" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>');" >Publish feed story</a><br>
+        </div>
+        <hr />
+      <div class="snippet-container" style="padding-left: 10px; padding-top: 5px;" data-sourceurl="<%=h snippet.source_url %>">
+        <%= raw(snippet.content) %>
+        <div class="clearfix"></div>
+      </div>
+    </div>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_snippet_path,
-            :class => 'btn btn-primary' %>
+    <br />
+    
+  <% end %>
+
+
+
+
+
