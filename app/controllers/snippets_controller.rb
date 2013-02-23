@@ -1,7 +1,8 @@
 class SnippetsController < ApplicationController
 
 
- 
+
+  add_breadcrumb :index, :snippets_path
 
 
 

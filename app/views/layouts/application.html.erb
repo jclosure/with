@@ -58,7 +58,7 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">
-            <div class="shape" id="shape1">With</div>
+            With
           </a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
@@ -96,7 +96,7 @@
             <ul class="nav nav-list">
               <li class="nav-header">Feature Box</li>
               <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Dive In", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= render_breadcrumbs %></li>
               <li><%= link_to "Wander", "/snippets/?user=#{current_user.email}"  %></li>
               <li><%= link_to "Tours", "/snippets/?user=#{current_user.email}"  %></li>
               <li><%= link_to "Cruise Control", "/snippets/?user=#{current_user.email}"  %></li>
@@ -120,7 +120,6 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
         <div data-offset="50" class="span9 scrollspy-example offset3">
           <%= bootstrap_flash %>
           <%= yield %>
-        
         </div>
       </div><!--/row-->
 
