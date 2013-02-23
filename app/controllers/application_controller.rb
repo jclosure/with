@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-  	
-    add_breadcrumb :index, :root_path
+
+
+    
+
 
     #note: temporarily disabled to prevent this from tearing down auth on post from remote site during snippet collection
     #todo: look into overrideing forgery_whitelisted? method in  File actionpack/lib/action_dispatch/http/request.rb, line 126 by stashing uri or fqdn, and then session lookup of current remote site as fix => http://zadasnotes.blogspot.com/2010/11/rails-3-forgery-csrf-protection-for.html
@@ -41,6 +43,7 @@ class ApplicationController < ActionController::Base
   end 
                
      
+    add_breadcrumb :index, :root_path
 
 end
 
