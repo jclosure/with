@@ -1,21 +1,6 @@
 <%- model_class = Snippet -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-  <table>
-    <tr>
-      <td>
-        
-      </td>
-      <td>
-        
-      </td>
-    </tr>
-    </table>
-
-    <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_snippet_path,
-            :class => 'btn btn-primary' %>
-
 </div>
 
   
@@ -73,7 +58,7 @@
         <% end %>
 
         <a href="#" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>');" >Publish feed story</a>
-        
+
 
         <br>
         </div>
