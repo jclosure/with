@@ -41,6 +41,11 @@
      
     }  
     </style> 
+
+     <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
   </head>
   <body>
 
@@ -52,7 +57,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">With</a>
+          <a class="brand" href="#">
+            <div class="shape" id="shape1">With</div>
+          </a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
@@ -133,10 +140,7 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
 
     </div> <!-- /container -->
 
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
+   
 
   </body>
 </html>
