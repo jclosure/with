@@ -79,9 +79,15 @@
       </div>
     </div>
     <%= bootstrap_flash %>
+
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3"  data-spy="affix" >
+
+          <div>
+          <%= render_breadcrumbs %>   
+          </div>
+
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
@@ -96,7 +102,6 @@
             <ul class="nav nav-list">
               <li class="nav-header">Feature Box</li>
               <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= render_breadcrumbs %></li>
               <li><%= link_to "Wander", "/snippets/?user=#{current_user.email}"  %></li>
               <li><%= link_to "Tours", "/snippets/?user=#{current_user.email}"  %></li>
               <li><%= link_to "Cruise Control", "/snippets/?user=#{current_user.email}"  %></li>
@@ -118,6 +123,8 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
           </div><!--/.well -->
         </div><!--/span-->
         <div data-offset="50" class="span9 scrollspy-example offset3">
+
+
           <!-- FB Integration -->
           <div>
 
@@ -211,43 +218,15 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
                }
                </script>
 
-              <a href="#" onclick="sendRequest();">Send request</a><br>
-              <script>
-              function sendRequest() {
-                FB.ui({
-                  method: 'apprequests',
-                  message: 'Six Degrees of Keven Bacon Using Neo4j and Ruby: http://ruby.dzone.com/articles/six-degrees-kevin-bacon-using',
-                }, 
-                function(response) {
-                  console.log('sendRequest response: ', response);
-                });
-              }
-              </script>
-
-
-              <script>
-              function publishStory(url, description) {
-                //debugger;
-                FB.ui({
-                  method: 'feed',
-                  name: 'Snippets API testing FB GRAPH API',
-                  caption: "I just collected a new bit of joy",
-                  description: "" + description,
-                  link: document.location.href,
-                  picture: 'http://ec2-50-16-17-73.compute-1.amazonaws.com:3000/' + url
-                }, 
-                function(response) {
-                  console.log('publishStory response: ', response);
-                });
-                return false;
-              }
-              </script>
+              
             </div>
           <!-- FB JS END-->
 
 
 
-
+        
+           
+          
 
           <%= bootstrap_flash %>
           <%= yield %>

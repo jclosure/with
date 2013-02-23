@@ -71,7 +71,11 @@
         <% else %>
           <hr  class="hr" />
         <% end %>
-        <a href="#" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>');" >Publish feed story</a><br>
+
+        <a href="#" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>');" >Publish feed story</a>
+        
+
+        <br>
         </div>
         <hr class="hr" />
       <div class="snippet-container" style="padding-left: 10px; padding-top: 5px;" data-sourceurl="<%=h snippet.source_url %>">
