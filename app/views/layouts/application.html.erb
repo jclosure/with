@@ -62,7 +62,9 @@
           </a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
+              <% if user_signed_in? %>
+                <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
+              <% end %>
               <li><%= link_to "Public Timeline", "/snippets"  %></li>
               <li><%= link_to "Friends", "/snippets/friends"  %></li>
               <li class="dropdown">
@@ -94,20 +96,33 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
-              <li><%= link_to image_tag("https://secure.gravatar.com/avatar/aab5bcf3573f923f01af6ecfae077a5c?s=140&d=https://github.com/images/gravatars/gravatar-140.png", :border => 0), "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Dive In", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Wander", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Tours", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Cruise Control", "/snippets/?user=#{current_user.email}"  %></li>
+              <li>
+               
+              
+                <% if user_signed_in? %>
+                     <%= link_to image_tag("https://secure.gravatar.com/avatar/aab5bcf3573f923f01af6ecfae077a5c?s=140&d=https://github.com/images/gravatars/gravatar-140.png", :border => 0), "/snippets/?user=#{current_user.email}"  %>
+                    <div>Welcome <%=h current_user.name %></div>
+                    <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        
+                   
+                    <%= link_to('Manage Account', edit_user_registration_path) %>
+                  <% else %>
+                    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+                    <%= link_to('Sign in', new_user_session_path)  %>
+                    <%= link_to('Sign up', new_user_registration_path)  %>
+                <% end %>
+              </li>
+              <li><%= link_to "Dive In", "/snippets/"  %></li>
+              <li><%= link_to "Wander", "/snippets/"  %></li>
+              <li><%= link_to "Tours", "/snippets/"  %></li>
+              <li><%= link_to "Cruise Control", "/snippets/"  %></li>
             </ul>
           </div><!--/.well -->
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Feature Box</li>
-              <li><%= link_to "#{current_user.name}", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Wander", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Tours", "/snippets/?user=#{current_user.email}"  %></li>
-              <li><%= link_to "Cruise Control", "/snippets/?user=#{current_user.email}"  %></li>
+              <li><%= link_to "Wander", "/snippets/"  %></li>
+              <li><%= link_to "Tours", "/snippets/"  %></li>
+              <li><%= link_to "Cruise Control", "/snippets/"  %></li>
             </ul>
           </div><!--/.well -->
           <div class="well sidebar-nav">
