@@ -1,9 +1,23 @@
 <%- model_class = Snippet -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
 
+  <% if @filter_user %>
+    <h3><%= "#{@filter_user.name}'s Timeline" %></h3>
+  <% else %>
+    <h3><%= "Everyone's Timeline" %></h3>
+  <% end %>
+
+</div>
   
+  <style type="text/css">
+    body
+    {
+
+      padding-top: 60px;
+      background-image: url('');
+    }
+  </style>  
 
   <% @snippets.each do |snippet| %>
 
