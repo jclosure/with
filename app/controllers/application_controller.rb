@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
 
+   #add_breadcrumb :index, :root_path
     
 
 
@@ -43,7 +44,6 @@ class ApplicationController < ActionController::Base
   end 
                
      
-    add_breadcrumb :index, :root_path
 
 end
 
