@@ -1,5 +1,13 @@
 class SnippetsController < ApplicationController
 
+
+  add_breadcrumb :index, :snippets_path
+
+
+
+
+
+
   before_filter :detect_mode
 
   def detect_mode
@@ -41,6 +49,10 @@ class SnippetsController < ApplicationController
   end
 
 
+
+
+
+
   # GET /snippets
   # GET /snippets.json
   def index
@@ -74,6 +86,8 @@ class SnippetsController < ApplicationController
   # GET /snippets/1.json
   def show
     @snippet = Snippet.find(params[:id])
+
+    add_breadcrumb :show, snippet_path(@snippet.id)
 
     respond_to do |format|
       format.html # show.html.erb

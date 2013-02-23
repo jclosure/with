@@ -1,0 +1,48 @@
+<%= javascript_include_tag "jquery.qrcode.min" %>
+<script type="text/javascript" src="/javascripts/fixupPath.js"></script>
+<p id="notice"><%= notice %></p>
+<div id="sharing">
+	<a href="#">Share this snippet</a>
+</div>
+
+<div>
+  <table>
+	<tr>
+	  <td>
+		<b>Source url:</b>
+	  </td>
+	  <td>
+		  <p id="content_url">
+		    <%= @snippet.source_url %>
+		  </p>
+	  </td>
+	</tr>
+  </table>
+</div>
+
+<div>
+  <p id="content">
+    
+  </p>
+  <div class="clearfix"></div>
+  <input type="hidden" id="content_holder" name="content_holder" value="<%= @snippet.content %>" />
+</div>
+
+<div>
+	<div id="qrcode"></div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//generate and show qr
+		var codeContent = $('#content_url').text();
+		$('#qrcode').qrcode(codeContent);
+
+		//site content
+		var content = $('#content_holder');
+		var html = content.val();
+		$('#content').html(html);
+	});
+</script>
+
+<%= link_to 'Edit', edit_snippet_path(@snippet) %> |
+<%= link_to 'Back', snippets_path %>

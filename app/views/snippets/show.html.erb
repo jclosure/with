@@ -1,48 +1,84 @@
+<%- model_class = Snippet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+
+
 <%= javascript_include_tag "jquery.qrcode.min" %>
 <script type="text/javascript" src="/javascripts/fixupPath.js"></script>
-<p id="notice"><%= notice %></p>
+
 <div id="sharing">
-	<a href="#">Share this snippet</a>
+  <a href="#">Share this snippet</a>
 </div>
 
-<div>
-  <table>
-	<tr>
-	  <td>
-		<b>Source url:</b>
-	  </td>
-	  <td>
-		  <p id="content_url">
-		    <%= @snippet.source_url %>
-		  </p>
-	  </td>
-	</tr>
-  </table>
+
+
+  <dl class="dl-horizontal">
+  
+  
+  <dt><strong><%= model_class.human_attribute_name(:votes) %>:</strong></dt>
+  <dd><%= @snippet.votes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:source_url) %>:</strong></dt>
+  <dd><%= @snippet.source_url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tags) %>:</strong></dt>
+  <dd><%= @snippet.tags %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:access_specifier) %>:</strong></dt>
+  <dd><%= @snippet.access_specifier %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @snippet.description %></dd>
+  
+  <dd>
+    <div>
+    <input type="hidden" id="content_holder" name="content_holder" value="<%= @snippet.content %>" />
+    <p id="content">
+      
+    </p>  
+   </div>
+  </dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @snippet.user_id %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              snippets_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_snippet_path(@snippet), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              snippet_path(@snippet),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
 </div>
 
-<div>
-  <p id="content">
-    
-  </p>
-  <div class="clearfix"></div>
-  <input type="hidden" id="content_holder" name="content_holder" value="<%= @snippet.content %>" />
-</div>
+
+
 
 <div>
-	<div id="qrcode"></div>
+  <div id="qrcode"></div>
 </div>
 <script type="text/javascript">
-	$(document).ready(function(){
-		//generate and show qr
-		var codeContent = $('#content_url').text();
-		$('#qrcode').qrcode(codeContent);
+  $(document).ready(function(){
+    //generate and show qr
+    var codeContent = $('#content_url').text();
+    $('#qrcode').qrcode(codeContent);
 
-		//site content
-		var content = $('#content_holder');
-		var html = content.val();
-		$('#content').html(html);
-	});
+    //site content
+    var content = $('#content_holder');
+    var html = content.val();
+    $('#content').html(html);
+  });
 </script>
 
-<%= link_to 'Edit', edit_snippet_path(@snippet) %> |
-<%= link_to 'Back', snippets_path %>
+
+
+
+
+
+
+
+
+
+
+

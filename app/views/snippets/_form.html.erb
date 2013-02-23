@@ -1,4 +1,6 @@
-<%= form_for @snippet do |f| %>
+
+<%= form_for @snippet, :html => { :class => 'form-horizontal' } do |f| %>
+
   <% if @snippet.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@snippet.errors.count, "error") %> prohibited this snippet from being saved:</h2>
@@ -11,27 +13,48 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %>: <%= @user.name %>
+  <%= f.hidden_field :_id %>
+
+  <div class="control-group">
+    <%= f.label :source_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :source_url, :class => 'text_field' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :source_url %><br />
-    <%= f.text_field :source_url, { :style => "width: 100%;"} %>
+  <div class="control-group">
+    <%= f.label :tags, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :tags, :class => 'text_field' %>
+    </div>
   </div>
-  <%= f.label :content %><br />
-  <div class="field" style="border: 2px solid black">
-	<div class="capture-container rounded-box">
-		<p id="uberText"><%= @text %></p>
-	</div>
+  <div class="control-group">
+    <%= f.label :access_specifier, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :access_specifier, :class => 'text_field' %>
+    </div>
   </div>
-  Edit<br />
-  <div class="field">
-	<%= f.text_area :content, { :style => "width: 100%;"} %>
+
+  <div class="control-group">
+    <div class="field" style="border-top: 2px solid black">
+  <div class="capture-container rounded-box">
+    <p id="uberText"><%= @text %></p>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  </div>
+    <div>
+      <%= f.text_area :content, :class => 'text_area', :style => "width: 100%;" %>
+    </div>
+  </div>
+
+
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                snippets_path, :class => 'btn' %>
   </div>
 <% end %>
+
+
 <script type="text/javascript">
 var source = $('#snippet_content');
 var content = source.val();

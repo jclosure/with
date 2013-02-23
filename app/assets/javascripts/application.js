@@ -12,4 +12,30 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require_tree .
+
+
+#= require jquery
+#= require jquery_ujs
+#= require twitter/bootstrap/bootstrap-transition
+#= require twitter/bootstrap/bootstrap-alert
+#= require twitter/bootstrap/bootstrap-modal
+#= require twitter/bootstrap/bootstrap-button
+#= require twitter/bootstrap/bootstrap-collapse
+
+$(document).scroll(function(){
+    // If has not activated (has no attribute "data-top"
+    if (!$('.subnav').attr('data-top')) {
+        // If already fixed, then do nothing
+        if ($('.subnav').hasClass('subnav-fixed')) return;
+        // Remember top position
+        var offset = $('.subnav').offset()
+        $('.subnav').attr('data-top', offset.top);
+    }
+
+    if ($('.subnav').attr('data-top') - $('.subnav').outerHeight() <= $(this).scrollTop())
+        $('.subnav').addClass('subnav-fixed');
+    else
+        $('.subnav').removeClass('subnav-fixed');
+});

@@ -1,0 +1,40 @@
+<%= form_for @snippet do |f| %>
+  <% if @snippet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@snippet.errors.count, "error") %> prohibited this snippet from being saved:</h2>
+
+      <ul>
+      <% @snippet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>: <%= @user.name %>
+  </div>
+  <div class="field">
+    <%= f.label :source_url %><br />
+    <%= f.text_field :source_url, { :style => "width: 100%;"} %>
+  </div>
+  <%= f.label :content %><br />
+  <div class="field" style="border: 2px solid black">
+	<div class="capture-container rounded-box">
+		<p id="uberText"><%= @text %></p>
+	</div>
+  </div>
+  Edit<br />
+  <div class="field">
+	<%= f.text_area :content, { :style => "width: 100%;"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<script type="text/javascript">
+var source = $('#snippet_content');
+var content = source.val();
+var target_visual = $('#uberText');
+target_visual.html(content);
+</script>
