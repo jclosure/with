@@ -100,7 +100,7 @@
                
               
                 <% if user_signed_in? %>
-                     <%= link_to image_tag("https://secure.gravatar.com/avatar/aab5bcf3573f923f01af6ecfae077a5c?s=140&d=https://github.com/images/gravatars/gravatar-140.png", :border => 0), "/snippets/?user=#{current_user.email}"  %>
+                     <%= link_to image_tag("https://graph.facebook.com/me?fields=id,name,picture.type(large)", :border => 0), "/snippets/?user=#{current_user.email}"  %>
                     <div>Welcome <%=h current_user.name %></div>
                     <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        
                    
@@ -236,7 +236,23 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
                }
                </script>
 
-              
+              <script>
+              function publishStory(url, description) {
+                //debugger;
+                FB.ui({
+                  method: 'feed',
+                  name: 'Snippets API testing FB GRAPH API',
+                  caption: "I just collected a new bit of joy",
+                  description: "" + description,
+                  link: document.location.href,
+                  picture: 'http://ec2-50-16-17-73.compute-1.amazonaws.com:3000/' + url
+                }, 
+                function(response) {
+                  console.log('publishStory response: ', response);
+                });
+                return false;
+              }
+              </script>
             </div>
           <!-- FB JS END-->
 

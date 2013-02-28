@@ -71,7 +71,7 @@
           <hr  class="hr" />
         <% end %>
 
-        <a href="#" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>');" >Publish feed story</a>
+        <a href="/" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Publish feed story</a>
 
 
         <br>
