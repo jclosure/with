@@ -91,6 +91,12 @@
 
           <div>
           <%= render_breadcrumbs %>   
+          <div>
+            <p>
+              here's ur pic
+            </p>
+            <%= current_user.to_yaml %>
+          </div>
           </div>
 
           <div class="well sidebar-nav">
@@ -100,7 +106,7 @@
                
               
                 <% if user_signed_in? %>
-                     <%= link_to image_tag("https://graph.facebook.com/me?fields=id,name,picture.type(large)", :border => 0), "/snippets/?user=#{current_user.email}"  %>
+                     <%= link_to image_tag("https://graph.facebook.com/1116472965?fields=id,name,picture.type(large).url", :border => 0), "/snippets/?user=#{current_user.email}"  %>
                     <div>Welcome <%=h current_user.name %></div>
                     <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        
                    

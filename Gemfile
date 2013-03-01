@@ -75,7 +75,8 @@ gem "binding_of_caller", ">= 0.6.8", :group => :development
 
 
 
-
+#FB
+gem 'fb_graph'
 
 # #social stream
 # gem 'social_stream', '>= 1.0.0'

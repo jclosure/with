@@ -3,7 +3,17 @@ class ApplicationController < ActionController::Base
 
     add_breadcrumb :index, :root_path
     
+    #FB_GRAPH
+    rescue_from FbGraph::Exception, :with => :fb_graph_exception
 
+    def fb_graph_exception(e)
+      flash[:error] = {
+        :title   => e.class,
+        :message => e.message
+      }
+      current_user.try(:destroy)
+      redirect_to root_url
+    end
 
     #note: temporarily disabled to prevent this from tearing down auth on post from remote site during snippet collection
     #todo: look into overrideing forgery_whitelisted? method in  File actionpack/lib/action_dispatch/http/request.rb, line 126 by stashing uri or fqdn, and then session lookup of current remote site as fix => http://zadasnotes.blogspot.com/2010/11/rails-3-forgery-csrf-protection-for.html
