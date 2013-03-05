@@ -91,12 +91,6 @@
 
           <div>
           <%= render_breadcrumbs %>   
-          <div>
-            <p>
-              here's ur pic
-            </p>
-            <%= current_user.to_yaml %>
-          </div>
           </div>
 
           <div class="well sidebar-nav">
@@ -106,7 +100,8 @@
                
               
                 <% if user_signed_in? %>
-                     <%= link_to image_tag("https://graph.facebook.com/1116472965?fields=id,name,picture.type(large).url", :border => 0), "/snippets/?user=#{current_user.email}"  %>
+                <!-- https://graph.facebook.com/1116472965?fields=id,name,picture.type(large).url -->
+                     <%= link_to image_tag("http://profile.ak.fbcdn.net/hprofile-ak-ash3/49308_1116472965_8480_n.jpg", :border => 0), "/snippets/?user=#{current_user.email}"  %>
                     <div>Welcome <%=h current_user.name %></div>
                     <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        
                    

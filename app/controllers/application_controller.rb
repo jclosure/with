@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 	end
 
   def set_fb_app
-    @fb_app_id = FACEBOOK_APP_ID
+    @fb_app_id = FACEBOOK_APP_ID #note this assumes that the key is found on this constant
   end
 
   def set_url_base

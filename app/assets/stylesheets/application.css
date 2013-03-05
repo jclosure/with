@@ -94,3 +94,84 @@ filter:alpha(opacity=40); /* For IE8 and earlier */
 opacity:1.0;
 filter:alpha(opacity=100); /* For IE8 and earlier */
 }
+
+
+/* !!!!!!! listing styles !!!!!!!! */
+
+ul.shadow-curl {
+		position: relative;
+		z-index: 1; /* prevent shadows falling behind containers with backgrounds */
+		list-style: none;
+		margin: 0;
+		padding: 0; 
+	}
+	ul.shadow-curl li {
+		position: relative;
+		float: left;
+		width: 312px;
+		padding: 0;
+		margin: 0 0 30px 0;
+		background: #fff;
+		
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27); 
+	}
+	ul.shadow-curl.mini-listing li {
+		width:148px;
+		margin-right:17px;
+	}
+	ul.shadow-curl.mini-listing li:last-child { margin-right:0px; }
+	ul.shadow-curl.mini-listing li:last-child:after {
+		display:block;clear:both;	content:"";
+	}
+	ul.shadow-curl.mini-listing {
+		vertical-align:bottom;display:block;	
+	}
+	ul.shadow-curl.mini-listing img.thmb {
+		width:148px;	
+	}
+	ul.shadow-curl.mini-listing a.thmb {
+		width:148px;height:104px;overflow:hidden;display:block;
+	}
+
+
+	ul.shadow-curl li:before,
+	ul.shadow-curl li:after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		left: 15px;
+		bottom: 11px;
+		width: 70%;
+		max-width: 300px; /* avoid rotation causing ugly appearance at large container widths */
+		max-height: 100px;
+		height: 55%;
+		-webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+		-moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+		-webkit-transform: skew(-15deg) rotate(-6deg);
+		-moz-transform: skew(-15deg) rotate(-6deg);
+		-ms-transform: skew(-15deg) rotate(-6deg);
+		-o-transform: skew(-15deg) rotate(-6deg);
+		transform: skew(-15deg) rotate(-6deg); 
+	}
+
+
+	ul.shadow-curl li:after {
+		left: auto;
+		right: 15px;
+		-webkit-transform: skew(15deg) rotate(6deg);
+		-moz-transform: skew(15deg) rotate(6deg);
+		-ms-transform: skew(15deg) rotate(6deg);
+		-o-transform: skew(15deg) rotate(6deg);
+		transform: skew(15deg) rotate(6deg); 
+	}
+
+	.boxy {
+		margin: 0px 3px;
+		width: 312px;
+		display: inline-block;
+		padding: 0px;
+		vertical-align: top;
+		
+	}
+	ul.shadow-curl.mini-listing h3 { font-size:12px;  min-height:90px;}
