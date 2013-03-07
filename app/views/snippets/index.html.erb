@@ -15,17 +15,17 @@
     {
 
       padding-top: 60px;
-      background-image: url('');
+
     }
   </style>  
 
   <% @snippets.each do |snippet| %>
 
-      <div>
+      <div style="margin-right: 20px">
 
      
 
-          <div style="background: #cccccc; min-height: 25px; border-bottom: 1px solid black; padding: 10px 10px;">
+          <div class="well" style="min-height: 25px; margin-bottom: 0px" >
             <span>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                           edit_snippet_path(snippet), :class => 'btn btn-mini' %>
@@ -50,6 +50,7 @@
               <span style="font-weight: normal"><a href='<%= snippet.source_url %>' style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
              </span>
           </div>
+        <div >
           <div>
             <% unless snippet.tags == nil or snippet.tags == "" %>
               <div style="padding: 5px 5px 2.5px 5px">      
@@ -67,19 +68,19 @@
                 <span>
                   <%= snippet.description %>
                 </span>
-                <hr class="hr" />
               </div>
-            <% else %>
-              <hr  class="hr" />
             <% end %>
 
             <a href="/" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Publish feed story</a>
 
 
             <br>
+           
             </div>
-            <hr class="hr" />
-          <div class="snippet-container" style="padding-left: 10px; padding-top: 5px;" data-sourceurl="<%=h snippet.source_url %>">
+            
+
+          </div>
+          <div class="snippet-container box shadow" style="padding-left: 10px; padding-top: 10px;" data-sourceurl="<%=h snippet.source_url %>">
             <%= raw(snippet.content) %>
             <div class="clearfix"></div>
           </div>
