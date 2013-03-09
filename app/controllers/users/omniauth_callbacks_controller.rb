@@ -6,8 +6,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     @user.remember_me = true
 
-    p "@user.persisted? is " + (@user.persisted? ? "true" : "false")
-
+    # # this part is where token is stored
+    # auth = request.env['omniauth.auth']
+    # token = auth['credentials']['token']
+    # session[:fb_access_token] = token
 
     # if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated

@@ -80,6 +80,8 @@ class User
     Notifier.instructions(self).deliver
   end
 
-
+  # def profile
+  #   @profile ||= FbGraph::User.me(self.uid).fetch
+  # end
 
 end

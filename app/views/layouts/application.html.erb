@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+  <meta property="fb:app_id" content="<%= FACEBOOK_APP_ID %>" />
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -46,6 +48,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+
+    <%= yield :head %>
   </head>
   <body>
 
@@ -92,6 +96,9 @@
           <div>
           <%= render_breadcrumbs %>   
           </div>
+
+
+          
 
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
@@ -145,16 +152,10 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
 
 
           <!-- FB Integration -->
-          <div>
+         
 
             <div id="fb-root"></div>
-            <script>
-              (function() {
-                var e = document.createElement('script'); e.async = true;
-                    e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-                    document.getElementById('fb-root').appendChild(e);
-                    }());
-            </script>
+            <script src="http://connect.facebook.net/en_US/all.js"></script>
             <script>
               window.fbAsyncInit = function() {
                 FB.init({ appId: '<%= "#{@fb_app_id}"  %>', 
@@ -177,7 +178,14 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
              }
              </script>
 
-              <!-- FB JS LOGIN/LOGOUT -->
+             <div class="avatar">
+                <fb:profile-pic uid="<%= current_user.try(:uid) %>" size="small" facebook-logo="true"></fb:profile-pic>
+              </div>
+
+
+              <!-- ORIGINAL FB CODE -->
+
+              <!-- <div>
 
               <span id="login" style="float:left">
                  <p><button onClick="loginUser();">Login</button></p>
@@ -255,10 +263,10 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
               }
               </script>
             </div>
-          <!-- FB JS END-->
+          
+ -->
 
-
-
+            <!-- FB JS END-->
         
            
           
