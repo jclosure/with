@@ -11,10 +11,12 @@ body
 {
 
 	padding-top: 60px;
-
+  background-color: lightblue;
+  /*
 	background-image:url(/images/Webpage_Background_Logo.jpg);
     background-repeat:no-repeat;
-    background-position: top right;
+    background-position: top left;
     background-attachment:fixed;
+  */
 }
 

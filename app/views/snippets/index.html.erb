@@ -21,7 +21,7 @@
 
   <% @snippets.each do |snippet| %>
 
-      <div style="margin-right: 20px">
+      <div >
 
      
 
@@ -80,7 +80,8 @@
             
 
           </div>
-          <div class="snippet-container box shadow" style="padding-left: 10px; padding-top: 10px;" data-sourceurl="<%=h snippet.source_url %>">
+
+          <div class="snippet-container box shadow" style="padding: 10px 0px 10px 10px" data-sourceurl="<%=h snippet.source_url %>">
             <%= raw(snippet.content) %>
             <div class="clearfix"></div>
           </div>
