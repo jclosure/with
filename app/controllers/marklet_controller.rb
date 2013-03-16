@@ -22,7 +22,9 @@ class MarkletController < ApplicationController
     #todo: make this more effecient with a diff tags sln
     #@tags = %w{java ruby javascript c# c++}.sort
     @tags = []
-    Snippet.all.each {|snippet| @tags.concat snippet.tags.split(',')}
+    Snippet.all.each do |snippet| 
+      @tags.concat snippet.tags.split(',') if snippet.tags
+    end
     @tags = @tags.uniq.sort
 
     @url = params[:source] || "Source not sent."
