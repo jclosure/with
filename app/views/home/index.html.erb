@@ -2,7 +2,9 @@
 <div>
 	<h1 style="font-size: 24px"><%= link_to('Public Timeline', :controller => :snippets) %></h1>
 </div>
-
+<h2>
+	<%= @auth.to_yaml %>
+</h2>
 <!-- BEGIN: LISTINGS -->
 <ul class="shadow-curl">
 	<li>
