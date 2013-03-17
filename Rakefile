@@ -3,7 +3,6 @@ require 'bundler'
 require File.expand_path('../config/application', __FILE__)
 
 With::Application.load_tasks
-Bundler::GemHelper.install_tasks
 
 desc "Bundle the gem"
 task :bundle  => [:bundle_install, :build_static_stylesheets] do
