@@ -179,10 +179,17 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
              }
              </script>
 
-             <div class="avatar">
+             <div class="avatar" style="float: left">
                 <fb:profile-pic uid="<%= current_user.try(:uid) %>" size="small" facebook-logo="true"></fb:profile-pic>
              </div>
-
+             <div class="avatar" style="float: left">
+              &nbsp;
+            </div>
+             <div class="avatar" style="float: left">
+            <iframe src="http://files.bannersnack.com/iframe/embed.html?hash=bdtpfxut&wmode=transparent&t=1363487396" width="728" height="90" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+            </div>
+            <div style="clear: both"></div>
+            
              <script>
               function publishStoryToFacebook(url, description) {
                 //debugger;
