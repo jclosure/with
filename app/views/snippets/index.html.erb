@@ -21,8 +21,7 @@
 
   <% @snippets.each do |snippet| %>
 
-      <div >
-
+      <div style="margin-right: 20px">
      
 
           <div class="well" style="min-height: 25px; margin-bottom: 0px" >
@@ -71,7 +70,7 @@
               </div>
             <% end %>
 
-            <a href="/" onclick="publishStory('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Publish feed story</a>
+            <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
 
 
             <br>

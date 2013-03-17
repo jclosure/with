@@ -49,7 +49,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
 
-    <!-- NOTE MAY HIDE ERRORS IN HEROKU -->
+    <!-- NOTE MAY HIDE ERRORS IN -->
     <%= yield :head %>
   </head>
   <body>
@@ -75,9 +75,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li class=""><a href="#mysql">MySQL</a></li>
-                  <li class=""><a href="#pgsql">PostgreSQL</a></li>
-                 <li class=""><a href="#mgdb">MongoDB</a></li>
+                  <li class=""><a href="#mysql">Study Group</a></li>
+                  <li class=""><a href="#pgsql">Project Group</a></li>
+                 <li class=""><a href="#mgdb">Play Group</a></li>
                 </ul>
               </li>
               <li>
@@ -175,7 +175,7 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
                if (response.authResponse) {
                  console.log(response);
                }
-               updateUserInfo(response);
+               //updateUserInfo(response);
              }
              </script>
 
@@ -183,6 +183,23 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
                 <fb:profile-pic uid="<%= current_user.try(:uid) %>" size="small" facebook-logo="true"></fb:profile-pic>
              </div>
 
+             <script>
+              function publishStoryToFacebook(url, description) {
+                //debugger;
+                FB.ui({
+                  method: 'feed',
+                  name: 'Snippets API testing FB GRAPH API',
+                  caption: "I just collected a new bit of joy",
+                  description: "" + description,
+                  link: document.location.href,
+                  picture: 'http://ec2-50-16-17-73.compute-1.amazonaws.com:3000/' + url
+                }, 
+                function(response) {
+                  console.log('publishStory response: ', response);
+                });
+                return false;
+              }
+              </script>
 
               <!-- ORIGINAL FB CODE -->
 
