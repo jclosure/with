@@ -236,6 +236,8 @@ var uberSystem = function(ui_url) {
 				this.current = this.current.parentNode;
 			}
 
+			fixupStyles(styles);
+
 			var strStyles = "";
 			for (name in styles){
 				var style = styles[name];
@@ -253,7 +255,10 @@ var uberSystem = function(ui_url) {
 		return setting;
 	}
 
-
+	function fixupStyles(styles) {
+		if (styles['position'] && styles['position'] == 'absolute')
+			styles['position'] = 'relative'
+	}
 
 	function toggleSelectorGadget(baseUrl){
 	  window.selectorGadgetLoaded = !window.selectorGadgetLoaded;
