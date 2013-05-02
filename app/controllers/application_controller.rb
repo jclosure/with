@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     before_filter :cor
     before_filter :set_url_base
   	before_filter :set_fb_app
+    before_filter :set_referer
 
   	#before_filter :sign_in_redirect_hack
 	  #before_filter :store_location
@@ -40,7 +41,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_bare
-    @bare = params[:bare] || false  
+    #@bare = params[:bare] || false  
+    #TODO: FIX THIS HACK!!
+    @bare = true
   end
 
   def set_params
@@ -52,6 +55,10 @@ class ApplicationController < ActionController::Base
       @url_base = "//#{request.host}:#{request.port}" #assume protocol that link was created from (recommend creating under ssl)
     end
     @url_base ||= "//#{request.host}" #assume protocol that link was created from (recommend creating under ssl)
+  end
+
+  def set_referer
+    session['referer'] = request.env["HTTP_REFERER"] || 'none' unless session['referer']
   end
 
 
