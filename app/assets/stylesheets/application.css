@@ -13,6 +13,10 @@
 	border-color: #DCDCDC;
 }
 
+.hidden
+{
+	display: none;
+}
 
 .rounded-box {
 	-webkit-border-radius: 10px;

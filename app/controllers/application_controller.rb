@@ -19,9 +19,9 @@ class ApplicationController < ActionController::Base
     #todo: look into overrideing forgery_whitelisted? method in  File actionpack/lib/action_dispatch/http/request.rb, line 126 by stashing uri or fqdn, and then session lookup of current remote site as fix => http://zadasnotes.blogspot.com/2010/11/rails-3-forgery-csrf-protection-for.html
     #protect_from_forgery
     
-    before_filter :cor
     before_filter :set_params
     before_filter :set_bare
+    before_filter :cor
     before_filter :set_url_base
   	before_filter :set_fb_app
 
