@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     #protect_from_forgery
     
     before_filter :cor
+    before_filter :set_bare
     before_filter :set_url_base
   	before_filter :set_fb_app
 
@@ -37,12 +38,18 @@ class ApplicationController < ActionController::Base
     @fb_app_id = FACEBOOK_APP_ID #note this assumes that the key is found on this constant
   end
 
+  def set_bare
+    @bare = params[:bare] || false  
+  end
+
   def set_url_base
     unless ([80, 443].include? request.port) 
       @url_base = "//#{request.host}:#{request.port}" #assume protocol that link was created from (recommend creating under ssl)
     end
     @url_base ||= "//#{request.host}" #assume protocol that link was created from (recommend creating under ssl)
   end
+
+
 
   def after_sign_in_path_for(resource)                                                                                                                      
     sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')                                            

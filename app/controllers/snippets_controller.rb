@@ -7,8 +7,6 @@ class SnippetsController < ApplicationController
 
 
 
-
-
   before_filter :detect_mode
 
   def detect_mode
