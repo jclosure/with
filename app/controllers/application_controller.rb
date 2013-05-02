@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     #protect_from_forgery
     
     before_filter :cor
+    before_filter :set_params
     before_filter :set_bare
     before_filter :set_url_base
   	before_filter :set_fb_app
@@ -40,6 +41,10 @@ class ApplicationController < ActionController::Base
 
   def set_bare
     @bare = params[:bare] || false  
+  end
+
+  def set_params
+    @params = params || []  
   end
 
   def set_url_base

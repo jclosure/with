@@ -90,6 +90,12 @@
     </div>
     <%= bootstrap_flash %>
 
+    <% if @params[:show_params] %>
+      <pre>
+        <%=h @params.to_yaml %>
+      </pre>
+    <% end %>
+
     <div class="container-fluid">
       <div class="row-fluid">
         <% if @bare %>
