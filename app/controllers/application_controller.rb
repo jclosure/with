@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_bare
-    @bare = session[:bare] = params[:bare].present? ? (params[:bare] != "off") || false : session[:bare]
+    @bare = session[:bare] = params[:bare].present? ? (params[:bare] != "false") || false : session[:bare]
   end
 
   def set_params
@@ -69,16 +69,30 @@ class ApplicationController < ActionController::Base
   #TODO: FIX HACK - ALL GOING TO /SNIPPETS NOW             
   def bare
     #session[:bare] = true
+    p "groko"
+    fb_data = base64_url_decode params[:signed_request]
+    p fb_data.to_yaml
     redirect_to "/snippets"
     # redirect_to request.url[/\/bare/] = '' #=> broken resolves to /  
   end
 
   def bare_referrers
-    if (request.referer)
-      if (request.referer[/\/facebook.com/])
-        @bare = true
-      end
+    if (request.referer && (request.referer.include? "://apps.facebook.com"))
+      @bare = session[:bare] = true
     end
+  end
+
+  #helpers
+
+  def base64_url_decode str
+   encoded_str = str.gsub('-','+').gsub('_','/')
+   encoded_str += '=' while !(encoded_str.size % 4).zero?
+   Base64.decode64(encoded_str)
+  end
+
+  def decode_data str
+   encoded_sig, payload = str.split('.')
+   data = ActiveSupport::JSON.decode base64_url_decode(payload)
   end
 
 end
