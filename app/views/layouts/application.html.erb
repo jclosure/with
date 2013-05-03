@@ -147,19 +147,18 @@
             <ul class="nav nav-list">
               <li class="nav-header">Ads</li>
               <li><p>
-                Less uses a slightly different syntax than Sass: “@linkColor” instead of “$linkColor”. Also we don’t see the “!default” directive we had earlier. Most importantly, changing the value of a variable in Less works differently than it does in Sass; there’s no concept of a default value and overriding it. In fact, in Less variables are actually implemented as constants. See lesscss.org for more details. This means once you define a value for a variable it cannot be changed.
+                <h5>Critical Rationalism (Fallibilism) says:</h5>
 
-At first glance, this might mean that the only way to change the Twitter Bootstrap settings would be to edit the Twitter Less code directly, right inside of Less-Rails-Bootstrap. But this would be very ugly: every time I updated Less-Rails-Bootstrap I would lose my changes. While it might be possible to track my changes in a branch using git somehow, re-merging every time I got a newer version, this would be an obvious maintenance problem and an ongoing headache.
-
-Actually, it turns out there’s a simpler way to do it. Because of a bug in the Less compiler, you can override the “constant” value of a variable by changing it after it is initially declared. That is, the value of the variable constant will be whatever its last assigned value is. It seems that the Less compiler first evaluates the values of all constants, and then evaluates the rest of the Less script, substituting the value for each variable.
-
+                <pre>
+                  “…that knowledge needs neither to be justified nor to be true, but only needs to survive our best efforts at criticism, testing, and evaluation […] we test competing knowledge claims”
+                </pre>
 
               </p></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <%if @bare %>
-          <div data-offset="50" class="span10 scrollspy-example offset1">
+          <div class="span10 scrollspy-example offset1">
         <% else %>
           <div data-offset="50" class="span9 scrollspy-example offset3">
         <% end %>
@@ -319,7 +318,7 @@ Actually, it turns out there’s a simpler way to do it. Because of a bug in the
         <div class="navbar-inner">
         <div class="container-fluid">
           <p>&copy; Company 2013</p>
-          
+
         </div>
         </div>
         </div>
