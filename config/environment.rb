@@ -1,5 +1,5 @@
 # Load the rails application
-require File.expand_
+require File.expand_path('../application', __FILE__)
 
 #NOTE: THIS FIXES THE ISSUE WITH HEROKU AND BONSAI'S ELASTICESEARCH NOT PROPERLY INITIALIZING WHEN DEPLOYING VIA GIT
 #      MUST BE HERE IN ENVIRONMENT.RB BEFORE INITIALIZE
