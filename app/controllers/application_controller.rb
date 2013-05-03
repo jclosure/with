@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   
   #TODO: FIX HACK - ALL GOING TO /SNIPPETS NOW             
   def bare
-    session[:bare] = true
+    #session[:bare] = true
     redirect_to "/snippets"
     # redirect_to request.url[/\/bare/] = '' #=> broken resolves to /  
   end
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
   def bare_referrers
     if (request.referer)
       if (request.referer[/\/facebook.com/])
-        @bare = session[:bare] = true
+        @bare = true
       end
     end
   end
