@@ -20,7 +20,8 @@ With::Application.routes.draw do
   resources :users, :only => :show
 
   get "snippets/search"
-  get "snippets/bare"
+  match ':controller(/:action(/bare))(.:format)'
+  match ':controller(/:action(/:id(/bare)))(.:format)'
 
 
   resources :snippets do

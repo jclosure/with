@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     before_filter :cor
     before_filter :set_url_base
   	before_filter :set_fb_app
-    before_filter :set_referer
+    before_filter :bare_referrers
 
   	#before_filter :sign_in_redirect_hack
 	  #before_filter :store_location
@@ -41,9 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_bare
-    #@bare = params[:bare] || false  
-    #TODO: FIX THIS HACK!!
-    @bare = true
+    @bare = session[:bare] = params[:bare].present? ? (params[:bare] != "off") || false : session[:bare]
   end
 
   def set_params
@@ -57,10 +55,6 @@ class ApplicationController < ActionController::Base
     @url_base ||= "//#{request.host}" #assume protocol that link was created from (recommend creating under ssl)
   end
 
-  def set_referer
-    session['referer'] = request.env["HTTP_REFERER"] || 'none' unless session['referer']
-  end
-
 
 
   def after_sign_in_path_for(resource)                                                                                                                      
@@ -71,49 +65,20 @@ class ApplicationController < ActionController::Base
       stored_location_for(resource) || request.referer || root_path                                                                                         
     end                                                                                                                                                     
   end 
-               
-     
+  
+  #TODO: FIX HACK - ALL GOING TO /SNIPPETS NOW             
+  def bare
+    session[:bare] = true
+    redirect_to "/snippets"
+    # redirect_to request.url[/\/bare/] = '' #=> broken resolves to /  
+  end
+
+  def bare_referrers
+    if (request.referer)
+      if (request.referer[/\/facebook.com/])
+        @bare = session[:bare] = true
+      end
+    end
+  end
 
 end
-
-
-## working with local auth
-# class ApplicationController < ActionController::Base
-#   	protect_from_forgery
-
-#   	before_filter :cor
-
-#   	before_filter :sign_in_redirect_hack
-# 	before_filter :store_location
-
-# 	def cor
-# 		headers["Access-Control-Allow-Origin"] = "*"
-# 		headers["Access-Control-Allow-Methods"] = %w{GET POST PUT DELETE}.join(",")
-# 		headers["Access-Control-Allow-Headers"] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(",")
-# 		head(:ok) if request.request_method == "OPTIONS"
-# 	end
-
-# 	def sign_in_redirect_hack 
-#       #if controller_name == 'snippets' and action_name == 'new' and not current_user.blank? 
-#       if controller_name == 'snippets' and not user_signed_in?
-# 	      #redirect_to '/users/sign_in?passthru=' + request.fullpath
-# 	      redirect_to :controller => "users", :action => "sign_in", :passthru => request.fullpath	
-# 	  end 
-# 	end
-
-# 	def store_location
-# 	  session[:passthru] = params[:passthru] if params[:passthru]
-# 	end
-
-
-
-# 	#devise methods
-	
-# 	def redirect_back_or_default(default)
-# 	  session[:passthru] || root_path
-# 	end
-
-# 	def after_sign_in_path_for(resource_or_scope)
-# 	  redirect_back_or_default(resource_or_scope)
-# 	end
-# end
