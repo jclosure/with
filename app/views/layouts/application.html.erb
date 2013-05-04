@@ -90,6 +90,7 @@
     </div>
     <%= bootstrap_flash %>
 
+    <!-- DUMPS THE PARAMS OUT TO SCREEN -->
     <% if @params[:show_params] %>
       <pre>
         <%=h @params.to_yaml %>
@@ -167,7 +168,7 @@
          
 
             <div id="fb-root"></div>
-            <script src="http://connect.facebook.net/en_US/all.js"></script>
+            <script src="https://connect.facebook.net/en_US/all.js"></script>
             <script>
               window.fbAsyncInit = function() {
                 FB.init({ appId: '<%= "#{@fb_app_id}"  %>', 
