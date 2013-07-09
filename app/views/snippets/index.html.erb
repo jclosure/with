@@ -22,10 +22,13 @@
 
   <% @snippets.each do |snippet| %>
 
-      <div style="margin-right: 20px">
-     
+  
 
-          <div class="well" style="min-height: 25px; margin-bottom: 0px" >
+      <div style="margin-right: 20px; overflow-x:auto;">
+        <div class="snippet-container box shadow" style="padding: 10px 0px 10px 10px; overflow-x:auto;" data-sourceurl="<%=h snippet.source_url %>">
+        
+
+          <div class="well" style="min-height: 25px; margin-bottom: 0px; margin-right: 10px;" >
             <span>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                           edit_snippet_path(snippet), :class => 'btn btn-mini' %>
@@ -81,7 +84,6 @@
 
           </div>
 
-          <div class="snippet-container box shadow" style="padding: 10px 0px 10px 10px" data-sourceurl="<%=h snippet.source_url %>">
             <%= raw(snippet.content) %>
             <div class="clearfix"></div>
           </div>
