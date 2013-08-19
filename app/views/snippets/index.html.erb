@@ -1,24 +1,93 @@
 <%- model_class = Snippet -%>
-<div class="page-header">
+<div >
   <!-- <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1> -->
 
-<div>
+
+<!-- TITLE START HERE -->
+
+<style type="text/css">
+    body {
+      background: #233a40; 
+      color: #fff;
+      font: 16px/1.8 sans-serif;
+    }
+    .headline-container {
+      width: 84%;
+      margin:0 auto;
+      max-width:1140px;
+    }
+    header {
+      width: 100%;
+      margin:0px auto;
+    }
+    h1 {
+      background: rgba(0,0,0,0.2);
+      text-align: center;
+      color:#fff;
+      font: 95px/1 "Impact";
+      text-transform: uppercase;
+      display: block;
+      text-shadow:#253e45 -1px 1px 0,
+      #253e45 -2px 2px 0,
+      #d45848 -3px 3px 0,
+      #d45848 -4px 4px 0;
+      margin: 5% auto 5%;
+    }
+  </style>
+
+
+<script type="text/javascript">
+  (function( $ ){
+
+      $.fn.fitText = function( kompressor, options ) {
+
+        // Setup options
+        var compressor = kompressor || 1,
+            settings = $.extend({
+              'minFontSize' : Number.NEGATIVE_INFINITY,
+              'maxFontSize' : Number.POSITIVE_INFINITY
+            }, options);
+
+        return this.each(function(){
+
+          // Store the object
+          var $this = $(this);
+
+          // Resizer() resizes items based on the object width divided by the compressor * 10
+          var resizer = function () {
+            $this.css('font-size', Math.max(Math.min($this.width() / (compressor*10), parseFloat(settings.maxFontSize)), parseFloat(settings.minFontSize)));
+          };
+
+          // Call once to set.
+          resizer();
+
+          // Call on resize. Opera debounces their resize by default.
+          $(window).on('resize.fittext orientationchange.fittext', resizer);
+
+        });
+
+      };
+
+    })( jQuery );
+</script>
+
+<!-- TITLE END HERE -->
+
+
+<div class="headline-container">
   <% if @filter_user %>
-    <h1 class="shadow_title"><%= "#{@filter_user.name}'s Timeline" %></h1>
+    <h1 id="responsive_headline"><%= "#{@filter_user.name}'s Timeline" %></h1>
   <% else %>
-    <h1 class="shadow_title"><%= "Public Timeline" %></h1>
+    <h1 id="responsive_headline"><%= "Public Timeline" %></h1>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  jQuery("#responsive_headline").fitText();
+</script>
+
 </div>
-  
-  <style type="text/css">
-    body
-    {
-
-      padding-top: 60px;
-
-    }
-  </style>  
+   
 
   <% @snippets.each do |snippet| %>
 

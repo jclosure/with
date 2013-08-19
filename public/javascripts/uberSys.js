@@ -1,3 +1,16 @@
+//fix older browsers without the .keys api
+if (!Object.keys) {
+    Object.keys = function (obj) {
+        var keys = [],
+            k;
+        for (k in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, k)) {
+                keys.push(k);
+            }
+        }
+        return keys;
+    };
+}
 
 function initUberFrame() {
 	var frame = __uber.$('#sysframe iframe');
@@ -187,7 +200,10 @@ var uberSystem = function(ui_url) {
 				span.appendChild(content);
 				var htmlContent = __uber.$(span).html();//.innerHTML;
 
-				s = "<div>" + htmlContent + "</div>";
+
+
+
+				s = "<div style='all: initial;'>" + htmlContent + "</div>";
 
 			}
 			return s;
@@ -210,19 +226,40 @@ var uberSystem = function(ui_url) {
 
 
 	//HELPERS
-	function setStylesRecursive(node, content){
+	function setStylesRecursive(node, content, ascendantStyles){
+		var styles = node.styles = __uber.$(node).getStyleObject();
+
+		//TODO: revisit this approach. improve/replace
+		//THIS STANZA REDUCES THE NUMBER OF NESTED STYLE ATTRIBUTES THAT ARE WRITTEN TO CHILDREN OF PARENTS WITH SAME ATTR SET TO SAME VALUE
+		//(note: causes inheritance from hosting dom in our site to bleed into visual appearance. noted that capturing code)
+		var t = {};
+		// t.ascendantStyles = ascendantStyles || styles;
+		// t.ascendantStyles = __uber.$.extend(true, {}, t.ascendantStyles); //working with a deep copy leaves the parent's ascendantStyles intact.
+		// for (name in styles){
+		// 	if (t.ascendantStyles[name] == styles[name]){
+		// 		delete styles[name];
+		// 	}
+		// 	else {
+		// 		t.ascendantStyles[name] = styles[name];
+		// 	}
+		// }
+
+
+
+
+
+
 		if (!!node.childNodes && node.childNodes.length > 0){
 			for(var i=0; i<node.childNodes.length; i++){
 				var set = {};
 				set.nodeChild = node.childNodes[i];
 				set.contentChild = content.childNodes[i];
 				if (set.nodeChild && set.contentChild)
-				setStylesRecursive(set.nodeChild, set.contentChild);
+				setStylesRecursive(set.nodeChild, set.contentChild, t.ascendantStyles);
 			}
 		}
-		if (content.setAttribute){
-			var styles = __uber.$(node).getStyleObject();
 
+		if (content.setAttribute){
 			//transparent background workaround
 			//todo: make more efficient
 			this.current = node;
@@ -238,13 +275,30 @@ var uberSystem = function(ui_url) {
 
 			fixupStyles(styles);
 
+
 			var strStyles = "";
 			for (name in styles){
-				var style = styles[name];
-				strStyles += name + ":" + style + ";" 
-			}
+				var value = styles[name];
+				strStyles += name + ":" + value + ";" 
+			}	
 			content.setAttribute('style', strStyles);
 		}
+	}
+
+	function harvestParentsStyleHashes(node, styleName){
+		var $node = __uber.$(node);
+		
+		var upStyleHashes = [];
+		
+		if ($node.parent().get(0).styles){
+			$node.parents('[styles]').each(function(i, ancestor){
+				if (ancestor.styles[styleName]){
+					upStyleHashes.push(ancestor.styles);
+				}
+			});
+		}
+		
+		return upStyleHashes;
 	}
 
 	function getStyle(el,styleProp) {
