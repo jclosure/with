@@ -29,6 +29,8 @@ class SnippetsController < ApplicationController
 
   ## tire setup
   def search
+
+    @supress_social_bar = true
     @searching = true;
 
     if (params[:user].present?)
@@ -55,6 +57,9 @@ class SnippetsController < ApplicationController
   # GET /snippets
   # GET /snippets.json
   def index
+
+    @supress_social_bar = true
+
     ## per user
     if (user_signed_in?)
       @user = current_user
@@ -97,6 +102,8 @@ class SnippetsController < ApplicationController
   # GET /snippets/new
   # GET /snippets/new.json
   def new
+
+    @supress_social_bar = true
     @snippet = Snippet.new
 
     @snippet.source_url = params[:source] || "source url not sent"
@@ -111,6 +118,8 @@ class SnippetsController < ApplicationController
 
   # GET /snippets/1/edit
   def edit
+
+    @supress_social_bar = true
     @snippet = Snippet.find(params[:id])
     @user = User.first
   end

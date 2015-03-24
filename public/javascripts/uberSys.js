@@ -231,7 +231,7 @@ var uberSystem = function(ui_url) {
 
 		//TODO: revisit this approach. improve/replace
 		//THIS STANZA REDUCES THE NUMBER OF NESTED STYLE ATTRIBUTES THAT ARE WRITTEN TO CHILDREN OF PARENTS WITH SAME ATTR SET TO SAME VALUE
-		//(note: causes inheritance from hosting dom in our site to bleed into visual appearance. noted that capturing code)
+		//(note: causes inheritance from hosting dom in our site to bleed into visual appearance. noted that capturing code examples from stackoverflow.com)
 		var t = {};
 		// t.ascendantStyles = ascendantStyles || styles;
 		// t.ascendantStyles = __uber.$.extend(true, {}, t.ascendantStyles); //working with a deep copy leaves the parent's ascendantStyles intact.
