@@ -114,6 +114,8 @@
               <% end %>
               -->
             <span>
+            <%= link_to t('.show', :default => t("helpers.links.show")),
+                          snippet_path(snippet), :class => 'btn btn-mini' %>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                           edit_snippet_path(snippet), :class => 'btn btn-mini' %>
               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -151,7 +153,7 @@
             </div>
 
             <% if user_signed_in? %>
-              <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
+              <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>?bare=true', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
 
 
               <br>

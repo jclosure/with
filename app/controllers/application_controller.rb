@@ -42,7 +42,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_bare
-    @bare = session[:bare] = params[:bare].present? ? (params[:bare] != "false") || false : session[:bare]
+    @bare = (params[:bare].present? and (params[:bare] != "false")) ? true : set_bare_session()
+  end
+
+  def set_bare_session
+    @bare = session[:bare] = params[:bare_session].present? ? (params[:bare_session] != "false") || false : session[:bare]
   end
 
   def set_params
