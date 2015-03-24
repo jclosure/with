@@ -1,4 +1,5 @@
 <%- model_class = Snippet -%>
+
 <div >
   <!-- <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1> -->
 
@@ -126,42 +127,46 @@
               <span style="font-weight: normal"><a href='<%= snippet.source_url %>' style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
              </span>
           </div>
-        <div >
           <div>
-            <% unless snippet.tags == nil or snippet.tags == "" %>
-              <div style="padding: 5px 5px 2.5px 5px">      
-                <span style="font-size: 18px">Tags: </span>
-                <span>
-                  <% snippet.tags.split.each do |tag| %>
-                    <span class="tag"><%= tag %><span>
-                  <% end %>
-                </span>
-              </div>
-            <% end %>
-            <% unless snippet.description == "" %>
-              <div style="padding: 2.5px 5px 5px 5px">      
-                <span style="font-size: 18px">Description: </span>
-                <span>
-                  <%= snippet.description %>
-                </span>
-              </div>
-            <% end %>
-
-            <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
-
-
-            <br>
-           
+            <div>
+             <div id="tag_description_container" style="color: #999">
+              <% unless snippet.tags == nil or snippet.tags == "" %>
+                <div style="padding: 5px 5px 2.5px 5px">      
+                  <span style="font-size: 18px">Tags: </span>
+                  <span>
+                    <% snippet.tags.split.each do |tag| %>
+                      <span class="tag"><%= tag %><span>
+                    <% end %>
+                  </span>
+                </div>
+              <% end %>
+              <% unless snippet.description == "" %>
+                <div style="padding: 2.5px 5px 5px 5px">      
+                  <span style="font-size: 18px">Description: </span>
+                  <span>
+                    <%= snippet.description %>
+                  </span>
+                </div>
+              <% end %>
             </div>
-            
+
+            <% if user_signed_in? %>
+              <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
+
+
+              <br>
+            <% end %>
 
           </div>
-
-            <%= raw(snippet.content) %>
-            <div class="clearfix"></div>
-          </div>
+              
 
         </div>
+
+        <%= raw(snippet.content) %>
+        <div class="clearfix"></div>
+      </div>
+
+    </div>
 
      
     <div class="clearfix"></div>

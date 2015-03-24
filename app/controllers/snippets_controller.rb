@@ -31,6 +31,7 @@ class SnippetsController < ApplicationController
   def search
 
     @supress_social_bar = true
+    @bare = true
     @searching = true;
 
     if (params[:user].present?)
@@ -59,6 +60,7 @@ class SnippetsController < ApplicationController
   def index
 
     @supress_social_bar = true
+    @bare = true
 
     ## per user
     if (user_signed_in?)
