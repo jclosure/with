@@ -100,31 +100,32 @@
 
           <div class="well" style="min-height: 25px; margin-bottom: 0px; margin-right: 10px;" >
             
-            <span style="vertical-align: middle; font-weight: bold"> 
-              (<%= pluralize snippet.up_votes_count.to_i, "vote" %>)
+            <span style="vertical-align: middle; font-weight: bold; color: #000"> 
+              <%= pluralize snippet.up_votes_count.to_i, "vote" %>
               | 
               <% if current_user %>
-              <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Up.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "up"), method: "post" %>
-              | <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Down.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "down"), method: "post" %>
-              <!--
-              | <%= link_to "Show", snippet %>
-              <% if @mode == 'admin' || current_user.id == snippet.user_id %>
-              | <%= link_to 'Edit', edit_snippet_path(snippet) %>
-                | <%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %>
-              <% end %>
-              -->
-            <span>
-            <%= link_to t('.show', :default => t("helpers.links.show")),
-                          snippet_path(snippet), :class => 'btn btn-mini' %>
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_snippet_path(snippet), :class => 'btn btn-mini' %>
+                <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Up.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "up"), method: "post" %>
+                | <%= link_to image_tag("http://cdn3.iconfinder.com/data/icons/musthave/128/Stock%20Index%20Down.png", height: 20, width: 20, border: 0), vote_snippet_path(snippet, type: "down"), method: "post" %>
+                <!--
+                | <%= link_to "Show", snippet %>
+                <% if @mode == 'admin' || current_user.id == snippet.user_id %>
+                | <%= link_to 'Edit', edit_snippet_path(snippet) %>
+                  | <%= link_to 'Destroy', snippet, confirm: 'Are you sure?', method: :delete %>
+                <% end %>
+                -->
+                |
+              <span>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                            edit_snippet_path(snippet), :class => 'btn btn-mini' %>
               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          snippet_path(snippet),
-                          :method => :delete,
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                          :class => 'btn btn-mini btn-danger' %>
-            </span>
+                            snippet_path(snippet),
+                            :method => :delete,
+                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                            :class => 'btn btn-mini btn-danger' %>
+              </span>
             <% end %>
+            <%= link_to t('.show', :default => t("helpers.links.show")),
+                            snippet_path(snippet), :class => 'btn btn-mini' %>
               <span><img style='display: inline-block; width:10px; height:10px;' src='/images/double_pointing.png' /><span>
               <span style="font-weight: normal"><a href='<%= snippet.source_url %>' target="_blank" style="word-wrap:break-word"><%=h snippet.source_url %></a></span>
              </span>
