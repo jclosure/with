@@ -5,8 +5,9 @@
   body {
 	
   }
-  .image {
-	max-width: 610px;
+  .image:hover {
+  	max-width: 684px;
+	background-color: #000;
   }
   #instructions {
   	padding: 10px 10px 10px 10px;
@@ -16,22 +17,32 @@
 
 
 <br />
-<br />
-<br />
-<br />
-<br />
-<%= image_tag('cut-and-paste1.jpg', :alt => 'Splash Image2') %> 
-<br />
-<br />
-<br />
+
 <div id="instructions">
+	<div style="width: 50%">
 	<h2>Instructions To Get Marklet</h2>
 	<p>drag this <span style="font-size:1.5em;text-decoration:underline;color:blue"><strong>
-		<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">Capture Content Link</a>
+		<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">
+			Capture Content
+		</a>
 		</strong></span> into the toolbar of your browser.  Congratulations you are done.  Now you're ready to begin harvesting the web to build your very own stream of important content.  Welcome to your mind's life's journey.
 	</p>
+	</div>
 
-	<br />
+	<style type="text/css">
+
+	</style>
+	<div  class="image">
+	<h3>Drag The Scissors Into Your Bookmarks Bar...</h3>
+	<a href="javascript:(function(win){document.home='<%= @url_base %>'; if(window.ubermarklet!==undefined){ubermarklet();}else{document.body.appendChild(document.createElement('script')).src='<%= @url_base %>/javascripts/uberBootstrapper.js?';}})(window);">
+
+		<%= image_tag('snippet1.png', :alt => 'Capture Content') %> 
+	
+	</a>
+	</div>
+
+
+
 	<h2>Instructions for Capture</h2>
 	<ul>
 		<li>go to any interesting web page</li>
