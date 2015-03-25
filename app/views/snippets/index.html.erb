@@ -151,21 +151,18 @@
                   </span>
                 </div>
               <% end %>
+              <!-- fb timeline post -->
+              <% if user_signed_in? %>
+                <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>?bare=true', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
+              <% end %>
               <!-- snippet heading seperator -->
               <div style="padding-right: 10px;">
                 <hr />
               </div> 
             </div>
 
-            <% if user_signed_in? %>
-              <a href="/" onclick="publishStoryToFacebook('<%= @url_base.gsub("//","") %>/snippets/<%= snippet.id %>?bare=true', '<%= snippet.description %>'); return false;" >Send To Your Facebook Feed</a>
-            <% end %>
-
-
-          
           </div>
               
-
         </div>
 
         <%= raw(snippet.content) %>
