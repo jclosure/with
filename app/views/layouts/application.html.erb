@@ -207,15 +207,17 @@
             <div style="clear: both"></div>
             
              <script>
+
+
+
               function publishStoryToFacebook(url, description) {
-                //debugger;
                 FB.ui({
                   method: 'feed',
                   name: 'Snippets API testing FB GRAPH API',
-                  caption: "I just collected a new bit of joy",
+                  caption: "Here's a snippet from WITH",
                   description: "" + description,
                   link: document.location.href,
-                  picture: 'http://ec2-50-16-17-73.compute-1.amazonaws.com:3000/' + url + "/bare"
+                  picture: "<%= SCREENSHOT_URL %>/" + url + "/bare"
                 }, 
                 function(response) {
                   console.log('publishStory response: ', response);
