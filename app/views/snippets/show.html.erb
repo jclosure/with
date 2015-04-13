@@ -8,37 +8,45 @@
 <%= javascript_include_tag "jquery.qrcode.min" %>
 <script type="text/javascript" src="/javascripts/fixupPath.js"></script>
 
-<div id="sharing">
-  <a href="#">Share this snippet</a>
+<style type="text/css">
+  #detail-wrapper {
+    background-color: white;
+    padding: 20px 20px 20px 20px;
+  }
+</style>
+
+<div id="detail-wrapper">
+
+
+    <dl class="dl-horizontal">
+    
+    
+    <dt><strong><%= model_class.human_attribute_name(:votes) %>:</strong></dt>
+    <dd><%= @snippet.votes %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:source_url) %>:</strong></dt>
+    <dd><%= @snippet.source_url %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:tags) %>:</strong></dt>
+    <dd><%= @snippet.tags %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:access_specifier) %>:</strong></dt>
+    <dd><%= @snippet.access_specifier %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+    <dd><%= @snippet.description %></dd>
+    
+    <dd>
+      <div>
+      <input type="hidden" id="content_holder" name="content_holder" value="<%= @snippet.content %>" />
+      <p id="content">
+        
+      </p>  
+     </div>
+    </dd>
+    <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+    <dd><%= @snippet.user_id %></dd>
+  </dl>
+
 </div>
 
-
-
-  <dl class="dl-horizontal">
-  
-  
-  <dt><strong><%= model_class.human_attribute_name(:votes) %>:</strong></dt>
-  <dd><%= @snippet.votes %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:source_url) %>:</strong></dt>
-  <dd><%= @snippet.source_url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tags) %>:</strong></dt>
-  <dd><%= @snippet.tags %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:access_specifier) %>:</strong></dt>
-  <dd><%= @snippet.access_specifier %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @snippet.description %></dd>
-  
-  <dd>
-    <div>
-    <input type="hidden" id="content_holder" name="content_holder" value="<%= @snippet.content %>" />
-    <p id="content">
-      
-    </p>  
-   </div>
-  </dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @snippet.user_id %></dd>
-</dl>
+<br />
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

@@ -37,8 +37,9 @@ With::Application.routes.draw do
 
 
   #BARE ROUTES
-  match ':controller(/:action(/bare))(.:format)'
-  match ':controller(/:action(/:id(/bare)))(.:format)'
+  match ':controller/:id/bare' => ':controller#show'
+  #match ':controller(/:action(/:id(/bare)))(.:format)'
+ #get '/:controller/:id/bare', to: ':controller/:action/:id'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

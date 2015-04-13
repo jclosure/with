@@ -42,7 +42,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_bare
-    @bare = (params[:bare].present? and (params[:bare] != "false")) ? true : set_bare_session()
+    @bare = request.original_url[/\/bare$/]
+    @bare = @bare || (params[:bare].present? and (params[:bare] != "false")) ? true : set_bare_session()
   end
 
   def set_bare_session
