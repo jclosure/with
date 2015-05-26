@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+#ruby "1.9.3"
+ruby "2.1.4"
 
 #required to force bundler @ heroku to use ruby 1.9.3
 #gem install bundler -pre
@@ -13,15 +14,31 @@ gem "heroku"
 gem "figaro"
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '>= 3.2.3'
+  gem 'coffee-rails', '>= 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
+# using v 2 of bootstrap because of responsive.css.less now fully integrated - todo: upgrade
+#gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+
+
+gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
+gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
+gem "database_cleaner", ">= 0.8.0", :group => :test
+gem "email_spec", ">= 1.2.1", :group => :test
+gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
+gem "launchy", ">= 2.1.2", :group => :test
+
+gem "devise", ">= 2.1.2"
+gem 'omniauth'
+gem 'oauth2'
+gem 'omniauth-facebook'
+'2.2.8'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
 gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
 gem "database_cleaner", ">= 0.8.0", :group => :test
@@ -35,7 +52,6 @@ gem 'oauth2'
 gem 'omniauth-facebook'
 
 gem "mongoid", ">= 3.0.3"
-#gem 'voteable_mongo'
 gem 'voteable_mongo', :git => 'https://github.com/dementrock/voteable_mongo.git'
 gem "will_paginate_mongoid"
 gem "mongoid-rspec", ">= 1.4.6", :group => :test
@@ -57,16 +73,16 @@ group :test, :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'growl'
-  gem 'capybara', '1.1.2'
+  gem 'capybara', '>= 1.1.2'
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
-  gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'rb-readline'
-  gem 'guard-spork', '1.2.0'
-  gem 'spork', '0.9.2'
-  gem "debugger"
+  gem 'guard-spork', '>= 1.2.0'
+  gem 'spork', '>= 0.9.2'
+  gem 'byebug'
+  #gem "debugger"
 end
 
 #gem "psych"

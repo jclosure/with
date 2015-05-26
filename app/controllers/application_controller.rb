@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
 
-    add_breadcrumb :index, :root_path
+    #add_breadcrumb :index, :root_path
     
     #FB_GRAPH
     rescue_from FbGraph::Exception, :with => :fb_graph_exception

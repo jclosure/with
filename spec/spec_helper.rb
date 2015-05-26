@@ -135,3 +135,5 @@ RSpec.configure do |config|
   end
 end
 
+# pulls in devise controller macros - shouldn't be nec because of above devise setup
+include ControllerMacros

@@ -2,7 +2,7 @@ class SnippetsController < ApplicationController
 
 
 
-  add_breadcrumb :index, :snippets_path
+  #add_breadcrumb :index, :snippets_path
 
 
 
@@ -93,7 +93,7 @@ class SnippetsController < ApplicationController
   def show
     @snippet = Snippet.find(params[:id])
 
-    add_breadcrumb :show, snippet_path(@snippet.id)
+    # add_breadcrumb :show, snippet_path(@snippet.id)
 
     respond_to do |format|
       format.html # show.html.erb
